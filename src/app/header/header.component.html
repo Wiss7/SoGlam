@@ -1,0 +1,132 @@
+<nav
+  class="navbar navbar-expand-md navbar-light main-menu"
+  style="box-shadow: none"
+>
+  <div class="container-md">
+    <button
+      type="button"
+      id="sidebarCollapse"
+      class="btn btn-link d-block d-md-none"
+      (click)="ToggleMobileMenu()"
+    >
+      <span class="material-icons"> menu </span>
+    </button>
+
+    <a class="navbar-brand" href="#" class="d-none d-md-block mr-auto">
+      <img
+        src="../../assets/images/SoGlamLogo.png"
+        alt="So Glam"
+        width="80px"
+        height="80px"
+      />
+      <img
+        src="../../assets/images/SoGlamSlogan.png"
+        alt="So Glam"
+        height="37px"
+        width="138px"
+      />
+    </a>
+    <a class="navbar-brand" href="#" class="d-block d-md-none mr-auto">
+      <img
+        src="../../assets/images/SoGlamLogo.png"
+        alt="So Glam"
+        width="40px"
+        height="40px"
+      />
+      <img
+        src="../../assets/images/SoGlamSlogan.png"
+        alt="So Glam"
+        height="24px"
+        width="80px"
+      />
+    </a>
+    <div class="header-icons">
+      <a> <span class="material-icons md-48"> person </span> </a>
+      <a> <span class="material-icons"> shopping_cart </span> </a>
+      <a>
+        <span class="material-icons"> favorite </span>
+      </a>
+      <div class="d-inline d-md-none">
+        <a (click)="ToggleSearchBar()">
+          <span class="material-icons"> search </span>
+        </a>
+        <div class="mobile-search-box" #searchBox>
+          <button class="prev-btn btn-transparent" (click)="ToggleSearchBar()">
+            <span class="material-icons">keyboard_backspace</span>
+          </button>
+          <form class="mobile-search-form">
+            <input
+              type="text"
+              value=""
+              name="search"
+              placeholder="Search"
+              style="width: calc(100% - 61px); height: 80px; border: none"
+            />
+            <button class="btn-transparent">
+              <span class="material-icons"> search </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <form class="search-box d-md-inline d-none">
+      <input type="text" value="" name="search" placeholder="Search" />
+      <button class="search-icon-btn">
+        <span class="material-icons"> search </span>
+      </button>
+    </form>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sub-menu">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Admin</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+<nav id="sidebar" #sideBar>
+  <ul class="list-unstyled components links">
+    <li class="active">
+      <a href="#"><span class="material-icons">home</span> Home</a>
+    </li>
+    <li>
+      <a href="#"><span class="material-icons">shopping_basket</span> Shop</a>
+    </li>
+    <li>
+      <a href="#"><span class="material-icons"> person </span>Account</a>
+    </li>
+    <li>
+      <a href="#"><span class="material-icons">shopping_cart</span> Cart</a>
+    </li>
+    <li>
+      <a href="#"> <span class="material-icons"> favorite </span> Wishlist</a>
+    </li>
+    <li>
+      <a href="#"> <span class="material-icons"> info </span> About Us</a>
+    </li>
+    <li>
+      <a href="#"
+        ><span class="material-icons"> contact_mail </span> Contact Us</a
+      >
+    </li>
+  </ul>
+</nav>
