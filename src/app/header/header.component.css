@@ -1,6 +1,12 @@
 .btn {
   box-shadow: none !important;
 }
+.search-box-input {
+  width: calc(100% - 61px);
+  height: 75px;
+  border: none;
+  outline: none;
+}
 .material-icons {
   color: #000;
 }
@@ -17,21 +23,22 @@
 .mobile-search-box {
   background-color: #fff;
   position: absolute;
-  width: 100%;
+  width: 300px;
   top: 0;
-  left: -100%;
+  height: 75px;
+  right: -100%;
   background: white;
   transition: 0.3s ease-in-out;
 }
 .mobile-search-box.active {
-  left: 0;
+  right: 0;
 }
 .mobile-search-form {
   width: calc(100% - 61px);
   display: inline-block;
 }
 .btn-transparent {
-  background: transparent;
+  background: white;
   border: none;
   height: 80px;
   padding-left: 15px;
@@ -69,22 +76,6 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
 }
 
 .sub-menu.navbar-light .navbar-nav .active > .nav-link,
@@ -192,4 +183,20 @@ ul.social-icons {
 }
 .btn-link {
   color: #000;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
