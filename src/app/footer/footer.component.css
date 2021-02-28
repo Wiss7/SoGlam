@@ -1,0 +1,49 @@
+.whatsapp-div {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  height: 60px;
+  width: 60px;
+  z-index: 9999;
+  background-image: url("../../assets/images/whatsappIcon.svg");
+  background-size: 60px 60px;
+}
+
+.footer-top {
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+.footer-top a {
+  color: #fff;
+}
+
+.logo-footer {
+  height: 80px;
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-size: 20px;
+  font-family: "Material Icons";
+  font-style: oblique;
+}
+
+.copyright {
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+.iconify {
+  color: white;
+  font-size: 36px;
+  width: 30%;
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-space {
+    margin-top: 50px;
+  }
+}

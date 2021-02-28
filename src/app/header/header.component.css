@@ -22,7 +22,7 @@
 }
 .mobile-search-box {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   width: 300px;
   top: 0;
   height: 75px;
