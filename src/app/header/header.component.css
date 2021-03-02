@@ -111,6 +111,10 @@
   .sub-menu.navbar-expand-md .navbar-nav .nav-link {
     padding: 1rem 1.5rem;
   }
+
+  #sidebar.active {
+    left: -100% !important;
+  }
 }
 
 .navbar.bg-light {
