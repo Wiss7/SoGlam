@@ -1,0 +1,48 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 7002;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.btnNext {
+  left: 100%;
+  top: 50%;
+  height: 30px;
+  width: 30px;
+  background: none;
+  display: block;
+  position: absolute;
+  color: #fff;
+  z-index: 5000;
+  cursor: pointer;
+}
+
+.btnPrev {
+  left: -10%;
+  top: 50%;
+  width: 30px;
+  background: none;
+  display: block;
+  position: absolute;
+  height: 30px;
+  color: #fff;
+  z-index: 5000;
+  cursor: pointer;
+}
+.material-icons {
+  font-size: 32px;
+}
+.imgContainer {
+  position: fixed;
+  top: calc(50% - 170px);
+  background-color: #fff;
+  width: 320px;
+  left: calc(50% - 195px);
+  z-index: 9999;
+  height: 370px;
+  padding: 10px 10px 10px 10px;
+}

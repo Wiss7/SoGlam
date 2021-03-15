@@ -1,0 +1,19 @@
+<div class="card" (click)="ShowDetails()">
+  <div class="imgContainer">
+    <img class="card-img-top" #productImg alt="Card image cap" />
+    <div class="overlay" (click)="ShowDetails()"></div>
+    <div class="btnView" (click)="ShowDetails()">View</div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ product.type }}</p>
+    <h5 class="card-title">{{ product.name }}</h5>
+    <div *ngIf="product.isOnSale" style="width: 100%">
+      <p class="old-price-text">{{ product.price }} LBP</p>
+      <p style="width: 50%; display: inline-block" class="price-text">
+        {{ product.discountPrice }} LBP
+      </p>
+    </div>
+
+    <p class="price-text" *ngIf="!product.isOnSale">{{ product.price }} LBP</p>
+  </div>
+</div>

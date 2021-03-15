@@ -12,7 +12,7 @@
       <span class="material-icons"> menu </span>
     </button>
 
-    <a class="navbar-brand" href="#" class="d-none d-md-block mr-auto">
+    <a class="navbar-brand" routerLink="/" class="d-none d-md-block mr-auto">
       <img
         src="../../assets/images/SoGlamLogo.png"
         alt="So Glam"
@@ -26,7 +26,7 @@
         width="138px"
       />
     </a>
-    <a class="navbar-brand" href="#" class="d-block d-md-none mr-auto">
+    <a class="navbar-brand" class="d-block d-md-none mr-auto">
       <img
         src="../../assets/images/SoGlamLogo.png"
         alt="So Glam"
@@ -82,20 +82,36 @@
   <div class="container">
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/shop">Shop</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/aboutus">About Us</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/contactus">Contact Us</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Admin</a>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/admin">Admin</a>
         </li>
       </ul>
     </div>
@@ -105,26 +121,30 @@
 <!-- Sidebar -->
 <nav id="sidebar" #sideBar>
   <ul class="list-unstyled components links">
-    <li class="active">
-      <a href="#"><span class="material-icons">home</span> Home</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/"><span class="material-icons">home</span> Home</a>
     </li>
-    <li>
-      <a href="#"><span class="material-icons">shopping_basket</span> Shop</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/shop"
+        ><span class="material-icons">shopping_basket</span> Shop</a
+      >
     </li>
-    <li>
-      <a href="#"><span class="material-icons"> person </span>Account</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a><span class="material-icons"> person </span>Account</a>
     </li>
-    <li>
-      <a href="#"><span class="material-icons">shopping_cart</span> Cart</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a><span class="material-icons">shopping_cart</span> Cart</a>
     </li>
-    <li>
-      <a href="#"> <span class="material-icons"> favorite </span> Wishlist</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a> <span class="material-icons"> favorite </span> Wishlist</a>
     </li>
-    <li>
-      <a href="#"> <span class="material-icons"> info </span> About Us</a>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/aboutus">
+        <span class="material-icons"> info </span> About Us</a
+      >
     </li>
-    <li>
-      <a href="#"
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/contactus"
         ><span class="material-icons"> contact_mail </span> Contact Us</a
       >
     </li>
