@@ -15,6 +15,8 @@ import { AdminComponent } from './admin/admin.component';
 import { ProductCardComponent } from './shop/product-card/product-card.component';
 import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { ProductService } from './shop/product.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +31,10 @@ import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
     ProductCardComponent,
     ProductDetailComponent,
     ImageGalleryComponent,
+    SearchResultsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

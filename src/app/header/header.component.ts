@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductService } from '../shop/product.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,15 @@ export class HeaderComponent {
   @ViewChild('sideBar') sideBar: ElementRef;
   @ViewChild('searchBox') searchBox: ElementRef;
   className: String = '';
-  constructor() {}
+  constructor(private productService: ProductService, private router: Router) {}
+
+  searchProducts(searchInput: string) {
+    debugger;
+    searchInput = searchInput.replace(/[^a-zA-Z ]/g, '').trim();
+    if (searchInput == '') return;
+    this.router.navigate(['search']);
+    this.productService.searchProducts(searchInput);
+  }
 
   ToggleMobileMenu() {
     this.className = this.sideBar.nativeElement.className;

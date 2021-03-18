@@ -61,8 +61,12 @@
               name="search"
               placeholder="Search"
               class="search-box-input"
+              #mobileSearchText
             />
-            <button class="btn-transparent">
+            <button
+              class="btn-transparent"
+              (click)="searchProducts(mobileSearchText.value)"
+            >
               <span class="material-icons"> search </span>
             </button>
           </form>
@@ -70,8 +74,18 @@
       </div>
     </div>
     <form class="search-box d-md-inline d-none">
-      <input type="text" value="" name="search" placeholder="Search" />
-      <button class="search-icon-btn">
+      <input
+        type="text"
+        value=""
+        name="search"
+        placeholder="Search"
+        #SearchText
+      />
+
+      <button
+        class="search-icon-btn"
+        (click)="searchProducts(SearchText.value)"
+      >
         <span class="material-icons"> search </span>
       </button>
     </form>

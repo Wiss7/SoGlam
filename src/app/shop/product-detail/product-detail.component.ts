@@ -8,7 +8,6 @@ import { ProductService } from '../product.service';
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  providers: [ProductService],
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   product: Product;

@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
 import { ShopComponent } from './shop/shop.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'search', component: SearchResultsComponent },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
 ];

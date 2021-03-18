@@ -33,6 +33,6 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
   }
 
   ShowDetails() {
-    this.router.navigate([this.index], { relativeTo: this.route });
+    this.router.navigate(['shop', this.index]);
   }
 }

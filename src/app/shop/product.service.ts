@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { Product } from './product.model';
 
 export class ProductService {
@@ -55,6 +55,10 @@ export class ProductService {
   ];
 
   toggleGallerySubject = new Subject<Boolean>();
+  searchProductsSubject = new ReplaySubject<{
+    products: Product[];
+    input: string;
+  }>(1);
 
   getProductsList() {
     return this.products.slice();
@@ -64,7 +68,31 @@ export class ProductService {
     return this.products[index];
   }
 
+  getFilteredProductsList(searchInput: string) {
+    return this.products.slice();
+  }
+
   toggleGallery(isOpen: Boolean) {
     this.toggleGallerySubject.next(isOpen);
+  }
+
+  searchProducts(searchInput: string) {
+    let searchedProd: Product[];
+    searchedProd = this.products.filter(this.search(searchInput)).slice();
+    this.searchProductsSubject.next({
+      products: searchedProd,
+      input: searchInput,
+    });
+  }
+
+  search(searchInput: string) {
+    return function (element: Product) {
+      return (
+        element.name.toLowerCase().indexOf(searchInput.toLowerCase()) >= 0 ||
+        element.type.toLowerCase().indexOf(searchInput.toLowerCase()) >= 0 ||
+        element.ingredients.toLowerCase().indexOf(searchInput.toLowerCase()) >=
+          0
+      );
+    };
   }
 }
