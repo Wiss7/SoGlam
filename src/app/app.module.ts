@@ -17,6 +17,10 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { ProductService } from './shop/product.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './carousel/carousel.component';
+import { MultiItemCarouselComponent } from './multi-item-carousel/multi-item-carousel.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +36,10 @@ import { ProductService } from './shop/product.service';
     ProductDetailComponent,
     ImageGalleryComponent,
     SearchResultsComponent,
+    CarouselComponent,
+    MultiItemCarouselComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, NgbModule],
   providers: [ProductService],
   bootstrap: [AppComponent],
 })

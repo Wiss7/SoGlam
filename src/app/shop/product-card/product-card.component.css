@@ -49,6 +49,7 @@
 
 .card {
   cursor: pointer;
+  min-width: 250px;
 }
 .card-img-top {
   min-height: 337px;

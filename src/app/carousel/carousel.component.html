@@ -1,0 +1,17 @@
+<ngb-carousel *ngIf="images" [showNavigationArrows]="false">
+  <ng-template ngbSlide *ngFor="let image of images">
+    <div class="wrapper">
+      <img
+        routerLink="/shop"
+        [src]="'../../assets/images/HomePage/' + image"
+        alt="Shop So Glam..."
+        class="carouselImg"
+      />
+    </div>
+    <div class="carousel-caption">
+      <a routerLink="/shop" style="color: #fff; text-decoration: underline"
+        ><h3>Shop Now</h3></a
+      >
+    </div>
+  </ng-template>
+</ngb-carousel>

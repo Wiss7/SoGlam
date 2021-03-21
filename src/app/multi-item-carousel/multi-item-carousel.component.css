@@ -1,0 +1,17 @@
+.custom-slider-main {
+  display: inline-flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  width: calc(100vw - 130px);
+}
+
+.info-box {
+  margin-right: 50px;
+}
+
+.material-icons {
+  font-size: 48px;
+  color: #000;
+  text-decoration: none !important;
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+<a class="d-inline ml-1" (click)="scrollLeft()"
+  ><span class="material-icons">navigate_before</span></a
+>
+<div #widgetsContent class="custom-slider-main">
+  <div class="info-box" *ngFor="let product of products; let i = index">
+    <app-product-card [product]="product" [index]="i"></app-product-card>
+  </div>
+</div>
+<a class="material-icons d-inline mr-1" (click)="scrollRight()"
+  >navigate_next</a
+>

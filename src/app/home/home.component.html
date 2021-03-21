@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="mb-5">
+  <app-carousel></app-carousel>
+</div>
+<div class="section" *ngIf="bestSellerProducts.length > 0">
+  <h3>Our Best Sellers</h3>
+  <app-multi-item-carousel
+    [products]="bestSellerProducts"
+  ></app-multi-item-carousel>
+</div>
+<div class="section" *ngIf="newProducts.length > 0">
+  <h3>New Arrivals</h3>
+  <app-multi-item-carousel [products]="newProducts"></app-multi-item-carousel>
+</div>
+<div class="section" *ngIf="saleProducts.length > 0">
+  <h3>Products On Sale</h3>
+  <app-multi-item-carousel [products]="saleProducts"></app-multi-item-carousel>
+</div>
