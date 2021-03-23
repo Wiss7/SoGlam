@@ -1,1 +1,151 @@
-<p>contact-us works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <span class="material-icons"> email </span>
+      <div class="info-text">so_glam@outlook.com</div>
+    </div>
+    <div class="col-md-6">
+      <span class="material-icons"> phone </span>
+      <div class="info-text">+961 76 739 911</div>
+    </div>
+  </div>
+  <form #f="ngForm" (ngSubmit)="SendMessage()" class="mt-5 mb-5">
+    <div class="form-group row">
+      <label for="Name*" class="col-sm-2 col-form-label">Name*</label>
+      <div class="col-sm-10 col-md-6">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          #name="ngModel"
+          ngModel
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label
+        for="E
+      email"
+        class="col-sm-2 col-form-label"
+        >Email*</label
+      >
+      <div class="col-sm-10 col-md-6">
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          ngModel
+          #email="ngModel"
+          required
+          email
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-10 col-md-6">
+        <input
+          class="form-control"
+          id="phone"
+          name="phone"
+          ngModel
+          #Phone="ngModel"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="message" class="col-sm-2 col-form-label">Your Message*</label>
+      <div class="col-sm-10 col-md-6">
+        <textarea
+          class="form-control"
+          id="message"
+          name="message"
+          ngModel
+          #message="ngModel"
+          required
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 col-md-8 mt-3">
+        <button
+          *ngIf="!isSendingMessage"
+          style="float: right"
+          type="submit"
+          [disabled]="!f.valid"
+          class="btn btn-primary mt-2 m-auto"
+        >
+          Send Message
+        </button>
+        <button
+          *ngIf="isSendingMessage"
+          class="btn btn-primary mt-2 m-auto"
+          type="button"
+          style="float: right"
+          disabled
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Message Sent Successfully
+    </h4>
+    <br />
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Thank you for contacting us. We'll reply as soon as possible!!</b>
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #errorContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Something went wrong. Please try again later! </b>
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
