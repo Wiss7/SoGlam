@@ -1,6 +1,5 @@
 export class Product {
   constructor(
-    public id: number,
     public name: string,
     public description: string,
     public type: string,
@@ -14,6 +13,7 @@ export class Product {
     public isNewArrival: Boolean,
     public isBestSeller: Boolean,
     public images: { name: string; isDefault: boolean }[],
-    public feedback: { review: string; stars: number }[]
+    public feedback: { review: string; stars: number }[],
+    public id?: string
   ) {}
 }

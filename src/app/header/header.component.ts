@@ -1,5 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CartService } from '../cart/cart.service';
 import { ProductService } from '../shop/product.service';
 
 @Component({
@@ -7,14 +15,27 @@ import { ProductService } from '../shop/product.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('sideBar') sideBar: ElementRef;
   @ViewChild('searchBox') searchBox: ElementRef;
+  cartCountSubscription: Subscription;
   className: String = '';
-  constructor(private productService: ProductService, private router: Router) {}
-
+  cartCount: number = 0;
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private router: Router
+  ) {}
+  ngOnInit() {
+    this.cartCount = this.cartService.getCartItemsListCount();
+    this.cartCountSubscription = this.cartService.cartItemsChanged.subscribe(
+      (cartItems) => (this.cartCount = cartItems.length)
+    );
+  }
+  ngOnDestroy() {
+    this.cartCountSubscription.unsubscribe();
+  }
   searchProducts(searchInput: string) {
-    debugger;
     searchInput = searchInput.replace(/[^a-zA-Z ]/g, '').trim();
     if (searchInput == '') return;
     this.router.navigate(['search']);

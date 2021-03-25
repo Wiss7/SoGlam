@@ -1,6 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/cart/cart.service';
 import { Product } from '../product.model';
 import { ProductService } from '../product.service';
 
@@ -18,7 +25,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   images: { name: string; isDefault: boolean }[];
   isGalleryOpen: Boolean = false;
   gallerySubsription: Subscription;
+  isAddingCart: Boolean = false;
+  isAddingWishlist: Boolean = false;
+  @ViewChild('qty') qty: ElementRef;
   constructor(
+    private cartService: CartService,
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router
@@ -28,6 +39,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.isGalleryOpen = isOpen;
       }
     );
+  }
+
+  AddToCart(productId?: string) {
+    this.isAddingCart = true;
+    if (!productId) productId = '0';
+    var quantity = this.qty.nativeElement.value;
+    this.cartService.addToCart(productId, quantity);
+    this.isAddingCart = false;
   }
 
   ngOnInit() {

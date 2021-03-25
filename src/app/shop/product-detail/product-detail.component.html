@@ -32,7 +32,7 @@
         <h1>{{ product.name }}</h1>
         <small class="ml-1">{{ product.type }}</small>
         <br /><br />
-        <p>{{ product.description }}</p>
+        <div>{{ product.description }}</div>
         <br />
         <h4>Ingredients</h4>
         <p>{{ product.ingredients }}</p>
@@ -47,10 +47,27 @@
         <p class="price-text" *ngIf="!product.isOnSale">
           {{ product.price }} LBP
         </p>
-        <button class="btn btn-danger btn-sm btn-cart">
+        <button
+          class="btn btn-danger btn-sm btn-cart"
+          *ngIf="!isAddingWishlist"
+        >
           <span class="material-icons" style="color: #fff">favorite</span>
           Add to Wishlist
         </button>
+        <button
+          class="btn btn-danger btn-sm btn-cart"
+          type="button"
+          disabled
+          *ngIf="isAddingWishlist"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+
         <hr />
         <br /><br />
         <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
@@ -62,9 +79,27 @@
           min="1"
           placeholder="Quantity"
           class="txtquantity"
+          #qty
         />
-        <button class="btn btn-dark btn-lg btn-cart">
+        <button
+          class="btn btn-dark btn-lg btn-cart"
+          (click)="AddToCart(product.id)"
+          *ngIf="!isAddingCart"
+        >
           <span class="material-icons">shopping_cart</span> Add to Cart
+        </button>
+        <button
+          *ngIf="isAddingCart"
+          class="btn btn-dark btn-lg btn-cart"
+          type="button"
+          disabled
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
         </button>
       </div>
     </div>

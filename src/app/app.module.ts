@@ -20,6 +20,8 @@ import { ProductService } from './shop/product.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
 import { MultiItemCarouselComponent } from './multi-item-carousel/multi-item-carousel.component';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart/cart.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { MultiItemCarouselComponent } from './multi-item-carousel/multi-item-car
     SearchResultsComponent,
     CarouselComponent,
     MultiItemCarouselComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { MultiItemCarouselComponent } from './multi-item-carousel/multi-item-car
     NgbModule,
     HttpClientModule,
   ],
-  providers: [ProductService],
+  providers: [ProductService, CartService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

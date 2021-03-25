@@ -52,7 +52,8 @@
   min-width: 250px;
 }
 .card-img-top {
-  min-height: 337px;
+  height: 337px;
+  width: 255px;
 }
 .card-body {
   text-align: center;
