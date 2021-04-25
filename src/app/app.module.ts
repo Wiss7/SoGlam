@@ -22,7 +22,12 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { MultiItemCarouselComponent } from './multi-item-carousel/multi-item-carousel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart/cart.service';
-
+import { AuthComponent } from './auth/auth.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { WishlistComponent } from './wishlist/wishlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +46,8 @@ import { CartService } from './cart/cart.service';
     CarouselComponent,
     MultiItemCarouselComponent,
     CartComponent,
+    AuthComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,9 @@ import { CartService } from './cart/cart.service';
     FormsModule,
     NgbModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [ProductService, CartService],
   bootstrap: [AppComponent],

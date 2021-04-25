@@ -13,16 +13,24 @@ export class HomeComponent implements OnInit {
   newProducts: Product[];
   saleProducts: Product[];
   constructor(private productService: ProductService) {
-    this.products = productService.getProductsList();
-    this.bestSellerProducts = this.products
-      .filter((product) => product.isBestSeller === true)
-      .slice();
-    this.newProducts = this.products
-      .filter((product) => product.isNewArrival === true)
-      .slice();
-    this.saleProducts = this.products
-      .filter((product) => product.isOnSale === true)
-      .slice();
+    this.productService.getProductsList().subscribe((data) => {
+      this.products = data.map((e) => {
+        return {
+          ...(e.payload.doc.data() as Product),
+          id: e.payload.doc.id,
+        };
+      });
+
+      this.bestSellerProducts = this.products
+        .filter((product) => product.isBestSeller === true)
+        .slice();
+      this.newProducts = this.products
+        .filter((product) => product.isNewArrival === true)
+        .slice();
+      this.saleProducts = this.products
+        .filter((product) => product.isOnSale === true)
+        .slice();
+    });
   }
 
   ngOnInit(): void {}

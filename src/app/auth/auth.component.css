@@ -1,0 +1,8 @@
+h3 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

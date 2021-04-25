@@ -48,26 +48,22 @@
           {{ product.price }} LBP
         </p>
         <button
-          class="btn btn-danger btn-sm btn-cart"
-          *ngIf="!isAddingWishlist"
+          class="btn btn-sm btn-cart btn-wishlist"
+          (click)="AddToWishlist()"
+          *ngIf="!isInWishlist || !isLoggedIn"
         >
-          <span class="material-icons" style="color: #fff">favorite</span>
+          <span class="material-icons">favorite_border</span>
           Add to Wishlist
         </button>
         <button
-          class="btn btn-danger btn-sm btn-cart"
+          class="btn btn-sm btn-cart btn-wishlist"
+          (click)="RemoveFromWishlist()"
+          *ngIf="isInWishlist && isLoggedIn"
           type="button"
-          disabled
-          *ngIf="isAddingWishlist"
         >
-          <span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          Loading...
+          <span class="material-icons" style="color: #000">favorite</span>
+          Remove from Wishlist
         </button>
-
         <hr />
         <br /><br />
         <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
@@ -81,9 +77,20 @@
           class="txtquantity"
           #qty
         />
+
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="logout()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+
         <button
           class="btn btn-dark btn-lg btn-cart"
           (click)="AddToCart(product.id)"
+          type="button"
           *ngIf="!isAddingCart"
         >
           <span class="material-icons">shopping_cart</span> Add to Cart
@@ -110,3 +117,93 @@
   [images]="product.images"
   [selectedImgName]="selectedImgName"
 ></app-image-gallery>
+
+<ng-template #signInModal let-modal>
+  <div class="modal-header">
+    <p class="modal-title" id="modal-basic-title">Sign In</p>
+    <button
+      id="closeModal"
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form #signinForm="ngForm" (ngSubmit)="SignIn(signinForm)" class="mb-5">
+      <div class="form-group row">
+        <label for="email" class="col-2 col-form-label">Email</label>
+        <div class="col-10">
+          <input
+            class="form-control"
+            id="email"
+            name="email"
+            ngModel
+            #email="ngModel"
+            required
+            email
+          />
+          <span *ngIf="!isUserVerified" style="color: red; font-size: 16px">
+            please verify your email to login
+          </span>
+          <span *ngIf="isWrongEmail" style="color: red; font-size: 16px">
+            Email is not registered
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="password" class="col-2 col-form-label">Password</label>
+        <div class="col-10">
+          <input
+            class="form-control"
+            id="password"
+            name="password"
+            type="password"
+            ngModel
+            #password="ngModel"
+            required
+            password
+          />
+          <span *ngIf="isWrongPassword" style="color: red; font-size: 16px">
+            Incorrect Password
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-12 mt-3" style="text-align: left">
+          <button
+            type="submit"
+            [disabled]="!signinForm.valid"
+            class="btn btn-dark mt-2 m-auto"
+            *ngIf="!isSigningIn"
+          >
+            Sign in
+          </button>
+          <button
+            [disabled]
+            class="btn btn-dark mt-2 m-auto"
+            *ngIf="isSigningIn"
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Loading...
+          </button>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-12 m-auto" style="cursor: pointer; font-size: 16px">
+          Don't have an account?
+          <a routerLink="/auth" class="ml-2" (click)="modal.dismiss()">
+            Register
+          </a>
+        </div>
+      </div>
+    </form>
+
+    <br />
+  </div>
+</ng-template>

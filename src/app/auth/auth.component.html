@@ -1,0 +1,319 @@
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-12 col-lg-5">
+      <h3>Sign In</h3>
+      <form #signinForm="ngForm" (ngSubmit)="SignIn(signinForm)" class="mb-5">
+        <div class="form-group row">
+          <label for="email" class="col-2 col-form-label">Email</label>
+          <div class="col-10">
+            <input
+              class="form-control"
+              id="email"
+              name="email"
+              ngModel
+              #email="ngModel"
+              required
+              email
+            />
+            <span *ngIf="!isUserVerified" style="color: red; font-size: 16px">
+              please verify your email to login
+            </span>
+            <span *ngIf="isWrongEmail" style="color: red; font-size: 16px">
+              Email is not registered
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-2 col-form-label">Password</label>
+          <div class="col-10">
+            <input
+              class="form-control"
+              id="password"
+              name="password"
+              type="password"
+              ngModel
+              #password="ngModel"
+              required
+              password
+            />
+            <span *ngIf="isWrongPassword" style="color: red; font-size: 16px">
+              Incorrect Password
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12" style="text-align: right; cursor: pointer">
+            <a class="mr-2" style="color: #666666" (click)="ResetPassword()">
+              Forgot Your Password?
+            </a>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12 mt-3" style="text-align: center">
+            <button
+              type="submit"
+              [disabled]="!signinForm.valid"
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="!isSigningIn"
+            >
+              Sign in
+            </button>
+            <button
+              [disabled]
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="isSigningIn"
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <h3>Sign Up</h3>
+      <form #signupForm="ngForm" (ngSubmit)="SignUp(signupForm)" class="mb-5">
+        <div class="form-group row">
+          <label for="firstname*" class="col-3 col-form-label"
+            >First Name*</label
+          >
+          <div class="col-9">
+            <input
+              type="text"
+              class="form-control"
+              id="firstname"
+              name="firstname"
+              #firstname="ngModel"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lastname*" class="col-3 col-form-label">Last Name*</label>
+          <div class="col-9">
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              name="lastname"
+              #lastname="ngModel"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="signupemail" class="col-3 col-form-label">Email*</label>
+          <div class="col-9">
+            <input
+              class="form-control"
+              id="signupemail"
+              name="signupemail"
+              ngModel
+              #signupemail="ngModel"
+              required
+              email
+            />
+            <span *ngIf="isSignUpUserExist" style="color: red; font-size: 16px">
+              This email is already in use
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phone" class="col-3 col-form-label">Phone*</label>
+          <div class="col-9">
+            <input
+              class="form-control"
+              id="phone"
+              name="phone"
+              ngModel
+              #Phone="ngModel"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="signuppassword" class="col-3 col-form-label"
+            >Password*</label
+          >
+          <div class="col-9">
+            <input
+              class="form-control"
+              id="signuppassword"
+              name="signuppassword"
+              type="password"
+              ngModel
+              #signuppassword="ngModel"
+              required
+              password
+              minlength="6"
+            />
+            <p
+              *ngIf="!signuppassword.valid && signuppassword.touched"
+              style="color: red; font-size: 10px"
+            >
+              Password should have at least six characters
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="confirmpassword" class="col-3 col-form-label"
+            >Confirm Password*</label
+          >
+          <div class="col-9">
+            <input
+              class="form-control"
+              id="confirmpassword"
+              name="confirmpassword"
+              type="password"
+              ngModel
+              #password="ngModel"
+              required
+              password
+            />
+            <p *ngIf="!passwordMatch" style="color: red; font-size: 10px">
+              Confirm Password & Password should match.
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12 mt-3" style="text-align: center">
+            <button
+              type="submit"
+              [disabled]="!signupForm.valid"
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="!isSigningUp"
+            >
+              Sign Up
+            </button>
+            <button
+              [disabled]
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="isSigningUp"
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Welcome to So Glam</h4>
+    <br />
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b
+      >You have been registered successfully, please check your email for
+      validation link</b
+    >
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #errorContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Something went wrong. Please try again later! </b>
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #resetpassword let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Reset Password</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Password reset email sent, check your inbox.</b>
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<ng-template #emailNotFound let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>
+      This email is not registered in our system. make sure to enter the correct
+      email.
+    </b>
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

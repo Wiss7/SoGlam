@@ -14,6 +14,6 @@ export class Product {
     public isBestSeller: Boolean,
     public images: { name: string; isDefault: boolean }[],
     public feedback: { review: string; stars: number }[],
-    public id?: string
+    public id: string
   ) {}
 }

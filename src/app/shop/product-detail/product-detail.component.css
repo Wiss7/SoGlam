@@ -48,6 +48,11 @@ p {
   color: #be4151;
   text-decoration: line-through;
 }
+.btn-wishlist {
+  color: #000;
+  background-color: transparent;
+  border: none !important;
+}
 .price-text {
   font-size: 1.2rem;
   font-weight: 500;
