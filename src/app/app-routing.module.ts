@@ -11,7 +11,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
 import { ShopComponent } from './shop/shop.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
-
+import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -23,9 +23,10 @@ const routes: Routes = [
   { path: 'search', component: SearchResultsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'wishlist', component: WishlistComponent },
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
+  { path: 'auth', component: AuthComponent },
 ];
 
 @NgModule({

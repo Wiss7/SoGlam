@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -53,7 +52,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private firestore: AngularFirestore,
     private wishlistService: WishlistService,
     private firebaseAuth: AngularFireAuth,
     private modalService: NgbModal

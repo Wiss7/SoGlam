@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './auth.service';
 
@@ -16,7 +17,7 @@ export class AuthComponent implements OnInit {
   isWrongEmail: boolean = false;
   isSigningIn: Boolean = false;
   isSigningUp: Boolean = false;
-
+  redirectURL: UrlTree;
   @ViewChild('content') successContent: ElementRef;
   @ViewChild('errorContent') errorContent: ElementRef;
   @ViewChild('emailNotFound') emailNotFoundContent: ElementRef;
@@ -25,7 +26,9 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ResetPassword() {
@@ -57,6 +60,18 @@ export class AuthComponent implements OnInit {
           } else {
             this.authService.setLoggedInUserData(res.user);
             this.isSigningIn = false;
+            let params = this.route.snapshot.queryParams;
+            if (params['redirectURL']) {
+              this.redirectURL = params['redirectURL'];
+            }
+
+            if (this.redirectURL) {
+              this.router
+                .navigateByUrl(this.redirectURL)
+                .catch(() => this.router.navigate(['homepage']));
+            } else {
+              this.router.navigate(['home']);
+            }
           }
       },
       (err) => {

@@ -47,7 +47,7 @@
         <span class="cart-count" *ngIf="cartCount > 0">({{ cartCount }})</span>
       </a>
       <a>
-        <span class="material-icons"> favorite </span>
+        <span class="material-icons" routerLink="/wishlist"> favorite </span>
       </a>
       <div class="d-inline d-md-none">
         <a (click)="ToggleSearchBar()">
@@ -157,7 +157,9 @@
       <a><span class="material-icons">shopping_cart</span> Cart</a>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a> <span class="material-icons"> favorite </span> Wishlist</a>
+      <a routerLink="/wishlist">
+        <span class="material-icons"> favorite </span> Wishlist</a
+      >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/aboutus">
