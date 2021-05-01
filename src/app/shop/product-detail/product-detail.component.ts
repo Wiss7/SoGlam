@@ -45,6 +45,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   isLoading: Boolean = true;
   @ViewChild('qty') qty: ElementRef;
   @ViewChild('signInModal') signInModal: ElementRef;
+  @ViewChild('cartModal') cartModal: ElementRef;
   @ViewChild('email') email: NgModel;
   @ViewChild('closeModal') closeModal: ElementRef;
   constructor(
@@ -64,11 +65,26 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   AddToCart(productId?: string) {
-    this.isAddingCart = true;
-    if (!productId) productId = '0';
-    var quantity = this.qty.nativeElement.value;
-    this.cartService.addToCart(productId, quantity);
-    this.isAddingCart = false;
+    if (this.isLoggedIn) {
+      this.isAddingCart = true;
+      if (!productId) {
+        this.isAddingCart = false;
+        return;
+      }
+      var quantity = this.qty.nativeElement.value;
+      this.cartService.addToCartDB(productId, quantity);
+      this.isAddingCart = false;
+    } else {
+      this.isAddingCart = true;
+      if (!productId) {
+        this.isAddingCart = false;
+        return;
+      }
+      var quantity = this.qty.nativeElement.value;
+      this.cartService.addToCartStorage(productId, quantity);
+      this.isAddingCart = false;
+      this.open(this.cartModal);
+    }
   }
 
   AddToWishlist() {

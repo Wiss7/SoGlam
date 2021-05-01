@@ -137,7 +137,9 @@
       class="close"
       aria-label="Close"
       (click)="modal.dismiss()"
-    ></button>
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="modal-body">
     <form #signinForm="ngForm" (ngSubmit)="SignIn(signinForm)" class="mb-5">
@@ -215,5 +217,59 @@
     </form>
 
     <br />
+  </div>
+</ng-template>
+
+<ng-template #cartModal let-modal>
+  <div class="modal-header">
+    <p class="modal-title" id="modal-basic-title">Successfully added to cart</p>
+    <button
+      id="btncloseModal"
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="album" style="margin: auto; width: 50%">
+      <img class="default-image" [src]="defaultImagePath" />
+    </div>
+    <h3 style="text-align: center">{{ product.name }}</h3>
+    <div>{{ product.description }}</div>
+    <p style="width: 100%" class="price-text" *ngIf="!product.isOnSale">
+      {{ product.price }} LBP
+    </p>
+    <div
+      *ngIf="product.isOnSale"
+      style="width: 100%; display: inline-block; text-align: center"
+    >
+      <p class="old-price-text">{{ product.price }} LBP</p>
+      <p class="price-text">{{ product.discountPrice }} LBP</p>
+    </div>
+    <div style="display: inline-block; width: 50%; text-align: center">
+      <button
+        id="btnCart"
+        type="button"
+        class="btn btn-dark"
+        routerLink="/cart"
+        (click)="modal.dismiss()"
+      >
+        View Shopping Cart
+      </button>
+    </div>
+    <div style="display: inline-block; width: 50%; text-align: center">
+      <button
+        id="btnClose"
+        type="button"
+        class="btn btn-dark"
+        (click)="modal.dismiss()"
+        style="margin: auto"
+      >
+        Continue Shopping
+      </button>
+    </div>
   </div>
 </ng-template>
