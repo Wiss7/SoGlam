@@ -1,123 +1,133 @@
-<div class="container mb-5">
-  <div class="row flex-row">
-    <div class="col-12 col-lg-5">
-      <div style="width: 100%" class="mt-5">
-        <div class="d-flex flex-lg-row">
-          <div class="album-thumbnails">
-            <div
-              class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
-            >
-              <div class="thumbnail-column" *ngFor="let image of images">
-                <img
-                  (click)="setSelectedImg(image.name)"
-                  class="thumbnail-image"
-                  [src]="'../../../assets/images/products/' + image.name"
-                />
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container mb-5">
+    <div class="row flex-row">
+      <div class="col-12 col-lg-5">
+        <div style="width: 100%" class="mt-5">
+          <div class="d-flex flex-lg-row">
+            <div class="album-thumbnails">
+              <div
+                class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
+              >
+                <div class="thumbnail-column" *ngFor="let image of images">
+                  <img
+                    (click)="setSelectedImg(image.name)"
+                    class="thumbnail-image"
+                    [src]="'../../../assets/images/products/' + image.name"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="album mt-3">
-            <img
-              class="default-image"
-              [src]="defaultImagePath"
-              (click)="setSelectedImg(defaultImageName)"
-            />
+            <div class="album mt-3">
+              <img
+                class="default-image"
+                [src]="defaultImagePath"
+                (click)="setSelectedImg(defaultImageName)"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-12 col-lg-7 mt-5">
-      <div style="width: 100%" class="mt-3">
-        <h1>{{ product.name }}</h1>
-        <small class="ml-1">{{ product.type }}</small>
-        <br /><br />
-        <div>{{ product.description }}</div>
-        <br />
-        <h4>Ingredients</h4>
-        <p>{{ product.ingredients }}</p>
-        <br />
-        <h4>How To Use</h4>
-        <p>{{ product.howToUse }}</p>
-        <br />
-        <div *ngIf="product.isOnSale" style="width: 60%; display: inline-block">
-          <p class="old-price-text">{{ product.price }} LBP</p>
-          <p class="price-text">{{ product.discountPrice }} LBP</p>
+      <div class="col-12 col-lg-7 mt-5">
+        <div style="width: 100%" class="mt-3">
+          <h1>{{ product.name }}</h1>
+          <small class="ml-1">{{ product.type }}</small>
+          <br /><br />
+          <div>{{ product.description }}</div>
+          <br />
+          <h4>Ingredients</h4>
+          <p>{{ product.ingredients }}</p>
+          <br />
+          <h4>How To Use</h4>
+          <p>{{ product.howToUse }}</p>
+          <br />
+          <div
+            *ngIf="product.isOnSale"
+            style="width: 60%; display: inline-block"
+          >
+            <p class="old-price-text">{{ product.price }} LBP</p>
+            <p class="price-text">{{ product.discountPrice }} LBP</p>
+          </div>
+          <p class="price-text" *ngIf="!product.isOnSale">
+            {{ product.price }} LBP
+          </p>
+          <button
+            class="btn btn-sm btn-cart btn-wishlist"
+            (click)="AddToWishlist()"
+            *ngIf="!isInWishlist || !isLoggedIn"
+          >
+            <span class="material-icons">favorite_border</span>
+            Add to Wishlist
+          </button>
+          <button
+            class="btn btn-sm btn-cart btn-wishlist"
+            (click)="RemoveFromWishlist()"
+            *ngIf="isInWishlist && isLoggedIn"
+            type="button"
+          >
+            <span class="material-icons" style="color: #000">favorite</span>
+            Remove from Wishlist
+          </button>
+          <hr />
+          <br /><br />
+          <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
+          <input
+            type="number"
+            id="txtQuantity"
+            value="1"
+            onkeypress="return event.charCode >= 48"
+            min="1"
+            placeholder="Quantity"
+            class="txtquantity"
+            #qty
+          />
+
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="logout()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+          <button
+            class="btn btn-dark btn-lg btn-cart"
+            (click)="AddToCart(product.id)"
+            type="button"
+            *ngIf="!isAddingCart"
+          >
+            <span class="material-icons">shopping_cart</span> Add to Cart
+          </button>
+          <button
+            *ngIf="isAddingCart"
+            class="btn btn-dark btn-lg btn-cart"
+            type="button"
+            disabled
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Loading...
+          </button>
         </div>
-        <p class="price-text" *ngIf="!product.isOnSale">
-          {{ product.price }} LBP
-        </p>
-        <button
-          class="btn btn-sm btn-cart btn-wishlist"
-          (click)="AddToWishlist()"
-          *ngIf="!isInWishlist || !isLoggedIn"
-        >
-          <span class="material-icons">favorite_border</span>
-          Add to Wishlist
-        </button>
-        <button
-          class="btn btn-sm btn-cart btn-wishlist"
-          (click)="RemoveFromWishlist()"
-          *ngIf="isInWishlist && isLoggedIn"
-          type="button"
-        >
-          <span class="material-icons" style="color: #000">favorite</span>
-          Remove from Wishlist
-        </button>
-        <hr />
-        <br /><br />
-        <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
-        <input
-          type="number"
-          id="txtQuantity"
-          value="1"
-          onkeypress="return event.charCode >= 48"
-          min="1"
-          placeholder="Quantity"
-          class="txtquantity"
-          #qty
-        />
-
-        <button
-          type="button"
-          class="close"
-          aria-label="Close"
-          (click)="logout()"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-
-        <button
-          class="btn btn-dark btn-lg btn-cart"
-          (click)="AddToCart(product.id)"
-          type="button"
-          *ngIf="!isAddingCart"
-        >
-          <span class="material-icons">shopping_cart</span> Add to Cart
-        </button>
-        <button
-          *ngIf="isAddingCart"
-          class="btn btn-dark btn-lg btn-cart"
-          type="button"
-          disabled
-        >
-          <span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          Loading...
-        </button>
       </div>
     </div>
   </div>
+  <app-image-gallery
+    *ngIf="isGalleryOpen"
+    [images]="product.images"
+    [selectedImgName]="selectedImgName"
+  ></app-image-gallery>
 </div>
-<app-image-gallery
-  *ngIf="isGalleryOpen"
-  [images]="product.images"
-  [selectedImgName]="selectedImgName"
-></app-image-gallery>
-
 <ng-template #signInModal let-modal>
   <div class="modal-header">
     <p class="modal-title" id="modal-basic-title">Sign In</p>

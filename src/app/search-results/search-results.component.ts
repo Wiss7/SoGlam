@@ -12,11 +12,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   searchInput: string = '';
   filteredProducts: Product[] = [];
   searchSubscription: Subscription;
+  isLoading: Boolean = true;
   constructor(private productService: ProductService) {
     this.searchSubscription = this.productService.searchProductsSubject.subscribe(
       (searchObj) => {
         this.filteredProducts = searchObj.products;
         this.searchInput = searchObj.input;
+        this.isLoading = false;
       }
     );
   }

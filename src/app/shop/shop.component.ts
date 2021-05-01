@@ -10,7 +10,7 @@ import { ProductService } from './product.service';
 })
 export class ShopComponent implements OnInit {
   products: Product[];
-
+  isLoading: Boolean = true;
   constructor(
     private productService: ProductService,
     private firestore: AngularFirestore
@@ -24,6 +24,7 @@ export class ShopComponent implements OnInit {
           id: e.payload.doc.id,
         };
       });
+      this.isLoading = false;
     });
   }
 }

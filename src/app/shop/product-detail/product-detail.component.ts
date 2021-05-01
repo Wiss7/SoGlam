@@ -43,7 +43,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   isWrongEmail: boolean = false;
   isLoggedIn: Boolean = false;
   isSigningIn: Boolean = false;
-
+  isLoading: Boolean = true;
   @ViewChild('qty') qty: ElementRef;
   @ViewChild('signInModal') signInModal: ElementRef;
   @ViewChild('email') email: NgModel;
@@ -120,10 +120,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.images = this.product.images.filter(
           (image) => image.isDefault === false
         );
+        this.isLoading = false;
       });
 
       this.firebaseAuth.onAuthStateChanged((user) => {
-        if (user) {
+        if (user && user.emailVerified) {
           this.isLoggedIn = true;
           localStorage.setItem('userId', user.uid);
           this.wishlistSubscription = this.wishlistService

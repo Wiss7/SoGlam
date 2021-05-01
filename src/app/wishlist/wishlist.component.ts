@@ -13,7 +13,7 @@ export class WishlistComponent implements OnInit {
   WishlistItems: Product[] = [];
   wishlist: Wishlist[] = [];
   products: Product[] = [];
-
+  isLoading: Boolean = true;
   constructor(
     private productService: ProductService,
     private wishlistService: WishlistService
@@ -42,6 +42,7 @@ export class WishlistComponent implements OnInit {
           );
         });
       });
+      this.isLoading = false;
     });
   }
 }

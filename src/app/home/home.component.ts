@@ -9,10 +9,13 @@ import { ProductService } from '../shop/product.service';
 })
 export class HomeComponent implements OnInit {
   products: Product[];
-  bestSellerProducts: Product[];
-  newProducts: Product[];
-  saleProducts: Product[];
-  constructor(private productService: ProductService) {
+  bestSellerProducts: Product[] = [];
+  newProducts: Product[] = [];
+  saleProducts: Product[] = [];
+  isLoading: Boolean = true;
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
     this.productService.getProductsList().subscribe((data) => {
       this.products = data.map((e) => {
         return {
@@ -31,7 +34,6 @@ export class HomeComponent implements OnInit {
         .filter((product) => product.isOnSale === true)
         .slice();
     });
+    this.isLoading = false;
   }
-
-  ngOnInit(): void {}
 }

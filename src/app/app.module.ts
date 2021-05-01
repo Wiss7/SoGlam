@@ -28,6 +28,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     CartComponent,
     AuthComponent,
     WishlistComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
