@@ -68,7 +68,7 @@ export class AuthComponent implements OnInit {
             if (this.redirectURL) {
               this.router
                 .navigateByUrl(this.redirectURL)
-                .catch(() => this.router.navigate(['homepage']));
+                .catch(() => this.router.navigate(['home']));
             } else {
               this.router.navigate(['home']);
             }
