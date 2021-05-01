@@ -16,8 +16,9 @@ export class CartService {
   getCartItem(index: number) {
     return this.cartItems[index];
   }
+  addToCartDB(productId: string, qty: number) {}
 
-  addToCart(productId: string, qty: number) {
+  addToCartStorage(productId: string, qty: number) {
     const index = this.cartItems.findIndex((item) => {
       return item.productID === productId;
     });
