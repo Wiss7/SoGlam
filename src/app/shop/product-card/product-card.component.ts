@@ -21,6 +21,11 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {}
+  getRoute() {
+    if (this.router.url === '/home' || this.router.url === '/')
+      return 'homecard card';
+    else return 'card';
+  }
   ngAfterViewInit() {
     let imagePath: string = '../../../assets/images/products/';
     const defaultImg = this.product.images.filter(

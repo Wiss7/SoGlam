@@ -139,35 +139,41 @@
 <nav id="sidebar" #sideBar>
   <ul class="list-unstyled components links">
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/"><span class="material-icons">home</span> Home</a>
+      <a routerLink="/" (click)="ToggleMobileMenu()"
+        ><span class="material-icons">home</span> Home</a
+      >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/shop"
+      <a routerLink="/shop" (click)="ToggleMobileMenu()"
         ><span class="material-icons">shopping_basket</span> Shop</a
       >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a><span class="material-icons"> person </span>Account</a>
+      <a (click)="ToggleMobileMenu()"
+        ><span class="material-icons"> person </span>Account</a
+      >
     </li>
     <li
       routerLink="/cart"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
     >
-      <a><span class="material-icons">shopping_cart</span> Cart</a>
+      <a (click)="ToggleMobileMenu()"
+        ><span class="material-icons">shopping_cart</span> Cart</a
+      >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/wishlist">
+      <a routerLink="/wishlist" (click)="ToggleMobileMenu()">
         <span class="material-icons"> favorite </span> Wishlist</a
       >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/aboutus">
+      <a routerLink="/aboutus" (click)="ToggleMobileMenu()">
         <span class="material-icons"> info </span> About Us</a
       >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/contactus"
+      <a routerLink="/contactus" (click)="ToggleMobileMenu()"
         ><span class="material-icons"> contact_mail </span> Contact Us</a
       >
     </li>

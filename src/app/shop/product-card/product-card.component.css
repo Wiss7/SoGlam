@@ -49,8 +49,13 @@
 
 .card {
   cursor: pointer;
-  width: 250px;
+  max-width: 250px;
 }
+
+.homecard {
+  width: 250px !important;
+}
+
 .card-img-top {
   height: 337px;
   width: 255px;
@@ -65,4 +70,10 @@
   font-weight: 400;
   color: #be4151;
   text-decoration: line-through;
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    max-width: unset;
+  }
 }
