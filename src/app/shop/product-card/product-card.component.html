@@ -1,4 +1,4 @@
-<div class="card" (click)="ShowDetails()">
+<div [ngClass]="getRoute(router)" (click)="ShowDetails()">
   <div class="imgContainer">
     <img
       class="card-img-top"
