@@ -33,6 +33,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   isGalleryOpen: Boolean = false;
   gallerySubscription: Subscription;
   wishlistSubscription: Subscription;
+  productSubscription: Subscription;
   isAddingCart: Boolean = false;
   isAddingWishlist: Boolean = false;
   isInWishlist: Boolean = false;
@@ -72,7 +73,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         return;
       }
       var quantity = this.qty.nativeElement.value;
-      this.cartService.addToCartDB(productId, quantity);
+      this.cartService.addToCartDB(productId, quantity)?.then((res) => {
+        this.open(this.cartModal);
+      });
       this.isAddingCart = false;
     } else {
       this.isAddingCart = true;
@@ -118,24 +121,26 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params: Params) => {
       this.index = +params['id'];
 
-      this.productService.getProductsList().subscribe((data) => {
-        this.products = data.map((e) => {
-          return {
-            ...(e.payload.doc.data() as Product),
-            id: e.payload.doc.id,
-          };
+      this.productSubscription = this.productService
+        .getProductsList()
+        .subscribe((data) => {
+          this.products = data.map((e) => {
+            return {
+              ...(e.payload.doc.data() as Product),
+              id: e.payload.doc.id,
+            };
+          });
+          this.product = this.products[this.index];
+          this.defaultImageName = this.product.images.filter(
+            (image) => image.isDefault === true
+          )[0].name;
+          this.defaultImagePath =
+            '../../../assets/images/products/' + this.defaultImageName;
+          this.images = this.product.images.filter(
+            (image) => image.isDefault === false
+          );
+          this.isLoading = false;
         });
-        this.product = this.products[this.index];
-        this.defaultImageName = this.product.images.filter(
-          (image) => image.isDefault === true
-        )[0].name;
-        this.defaultImagePath =
-          '../../../assets/images/products/' + this.defaultImageName;
-        this.images = this.product.images.filter(
-          (image) => image.isDefault === false
-        );
-        this.isLoading = false;
-      });
 
       this.firebaseAuth.onAuthStateChanged((user) => {
         if (user && user.emailVerified) {
@@ -150,7 +155,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
                   id: e.payload.doc.id,
                 };
               });
-
               this.isInWishlist =
                 this.wishlist.filter((item) => {
                   return (
@@ -174,7 +178,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     if (this.gallerySubscription) this.gallerySubscription.unsubscribe();
-    if (this.wishlistSubscription) this.gallerySubscription.unsubscribe();
+    if (this.wishlistSubscription) this.wishlistSubscription.unsubscribe();
+    if (this.productSubscription) this.productSubscription.unsubscribe();
   }
 
   open(content: any) {

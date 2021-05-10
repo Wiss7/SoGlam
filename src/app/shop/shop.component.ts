@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 
@@ -11,20 +12,27 @@ import { ProductService } from './product.service';
 export class ShopComponent implements OnInit {
   products: Product[];
   isLoading: Boolean = true;
+  productSubscription: Subscription;
   constructor(
     private productService: ProductService,
     private firestore: AngularFirestore
   ) {}
 
   ngOnInit() {
-    this.productService.getProductsList().subscribe((data) => {
-      this.products = data.map((e) => {
-        return {
-          ...(e.payload.doc.data() as Product),
-          id: e.payload.doc.id,
-        };
+    this.productSubscription = this.productService
+      .getProductsList()
+      .subscribe((data) => {
+        this.products = data.map((e) => {
+          return {
+            ...(e.payload.doc.data() as Product),
+            id: e.payload.doc.id,
+          };
+        });
+        this.isLoading = false;
       });
-      this.isLoading = false;
-    });
+  }
+
+  ngOnDestroy() {
+    if (this.productSubscription) this.productSubscription.unsubscribe();
   }
 }

@@ -21,9 +21,7 @@ export class AuthService {
     localStorage.setItem('user', this.userData);
     localStorage.setItem('userId', user.uid);
   }
-  //  getLoggedInStatus() {
-  //  return this.firebaseAuth.onAuthStateChanged(function);
-  //}
+
   SignUp(email: string, password: string) {
     return this.firebaseAuth.createUserWithEmailAndPassword(email, password);
   }

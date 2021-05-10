@@ -3,6 +3,6 @@ export class CartItem {
     public quantity: number,
     public userID: string,
     public productID: string,
-    public id?: number
+    public id?: string
   ) {}
 }

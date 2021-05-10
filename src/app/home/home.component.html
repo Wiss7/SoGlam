@@ -12,16 +12,21 @@
     <h3>Our Best Sellers</h3>
     <app-multi-item-carousel
       [products]="bestSellerProducts"
+      [allProducts]="products"
     ></app-multi-item-carousel>
   </div>
   <div class="section" *ngIf="newProducts.length > 0">
     <h3>New Arrivals</h3>
-    <app-multi-item-carousel [products]="newProducts"></app-multi-item-carousel>
+    <app-multi-item-carousel
+      [products]="newProducts"
+      [allProducts]="products"
+    ></app-multi-item-carousel>
   </div>
   <div class="section" *ngIf="saleProducts.length > 0">
     <h3>Products On Sale</h3>
     <app-multi-item-carousel
       [products]="saleProducts"
+      [allProducts]="products"
     ></app-multi-item-carousel>
   </div>
 </div>

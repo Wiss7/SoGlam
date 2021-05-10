@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Product } from './product.model';
 @Injectable()
-export class ProductService {
+export class ProductService implements OnDestroy {
   products: Product[] = [];
   toggleGallerySubject = new Subject<Boolean>();
   searchProductsSubject = new ReplaySubject<{
     products: Product[];
     input: string;
   }>(1);
-
+  searchSubscription: Subscription;
   constructor(private firestore: AngularFirestore) {}
 
   getProductsList() {
@@ -24,7 +24,7 @@ export class ProductService {
   searchProducts(searchInput: string) {
     let searchedProd: Product[];
 
-    this.firestore
+    this.searchSubscription = this.firestore
       .collection('Products')
       .snapshotChanges()
       .subscribe((data) => {
@@ -51,5 +51,8 @@ export class ProductService {
           0
       );
     };
+  }
+  ngOnDestroy() {
+    if (this.searchSubscription) this.searchSubscription.unsubscribe();
   }
 }
