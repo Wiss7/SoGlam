@@ -17,9 +17,7 @@ export class CartService implements OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
   }
-  addToCartAfterSignIn() {
-    alert('Hi');
-  }
+
   getCartItemsList() {
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user && user.emailVerified) {
@@ -37,6 +35,7 @@ export class CartService implements OnDestroy {
             const storageItems: CartItem[] = JSON.parse(
               localStorage.getItem('cart') || '[]'
             );
+            this.cartItemsChanged.next(this.cartItems.slice());
             if (storageItems.length > 0) {
               storageItems.forEach((element) => {
                 this.addToCartDB(element.productID, element.quantity);
@@ -104,19 +103,66 @@ export class CartService implements OnDestroy {
     this.cartItemsChanged.next(this.cartItems.slice());
   }
 
-  deleteFromCart(index: number) {
-    this.cartItems.splice(index, 1);
+  updateQuantityDBFromCart(id: string, index: number, qty: number) {
+    this.cartItems[index].quantity = +qty;
+    return this.firestore
+      .doc('Cart/' + this.cartItems[index].id)
+      .update(this.cartItems[index])
+      .then((res) => {
+        this.cartItemsChanged.next(this.cartItems.slice());
+      });
+  }
+  updateQuantityFromCart(index: number, qty: number) {
+    this.cartItems[index].quantity = +qty;
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.cartItemsChanged.next(this.cartItems.slice());
   }
 
-  updateCount() {
-    this.cartItems = [];
-    this.cartItemsChanged.next(this.cartItems.slice());
+  updateQtyFromCart(index: number, qty: number) {
+    this.firebaseAuth.currentUser.then((user) => {
+      if (user) {
+        var id = this.cartItems[index].id || '';
+        this.updateQuantityDBFromCart(id, index, qty);
+      } else {
+        this.updateQuantityFromCart(index, qty);
+      }
+    });
+  }
+
+  deleteFromCart(index: number) {
+    this.firebaseAuth.currentUser.then((user) => {
+      if (user) {
+        const cartid = this.cartItems[index].id;
+        this.firestore
+          .doc('Cart/' + cartid)
+          .delete()
+          .then((res) => {
+            this.cartItemsChanged.next(this.cartItems.slice());
+          });
+      } else {
+        this.cartItems.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
+        this.cartItemsChanged.next(this.cartItems.slice());
+      }
+    });
   }
 
   clearCart() {
-    this.cartItems = [];
-    this.cartItemsChanged.next(this.cartItems.slice());
+    this.firebaseAuth.currentUser.then((user) => {
+      if (user) {
+        this.cartItems.forEach((element) => {
+          this.firestore
+            .doc('Cart/' + element.id)
+            .delete()
+            .then((res) => {
+              this.cartItemsChanged.next(this.cartItems.slice());
+            });
+        });
+      } else {
+        this.cartItems = [];
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
+        this.cartItemsChanged.next(this.cartItems.slice());
+      }
+    });
   }
 }

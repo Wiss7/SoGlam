@@ -12,7 +12,12 @@
           <div class="d-flex flex-lg-row">
             <div class="album-thumbnails">
               <div
-                class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
+                class="
+                  gallery-thumbnail-wrapper
+                  d-flex
+                  flex-row flex-lg-column flex-wrap
+                  align-items-center
+                "
               >
                 <div class="thumbnail-column" *ngFor="let image of images">
                   <img
@@ -81,7 +86,7 @@
             type="number"
             id="txtQuantity"
             value="1"
-            onkeypress="return event.charCode >= 48"
+            onkeydown="return false"
             min="1"
             placeholder="Quantity"
             class="txtquantity"

@@ -58,11 +58,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private firebaseAuth: AngularFireAuth,
     private modalService: NgbModal
   ) {
-    this.gallerySubscription = this.productService.toggleGallerySubject.subscribe(
-      (isOpen) => {
+    this.gallerySubscription =
+      this.productService.toggleGallerySubject.subscribe((isOpen) => {
         this.isGalleryOpen = isOpen;
-      }
-    );
+      });
   }
 
   AddToCart(productId?: string) {
