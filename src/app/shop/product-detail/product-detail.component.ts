@@ -215,8 +215,4 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  logout() {
-    this.authService.LogOut();
-  }
 }

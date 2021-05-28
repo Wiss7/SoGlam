@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="mt-5 mb-3 ml-3">
+      <h2>My Account</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-2">
+      <nav class="navbar navbar-dark sub-menu">
+        <div id="navbar">
+          <ul class="navbar-nav mx-auto">
+            <li
+              class="nav-item"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link" routerLink="/account/profile">Profile</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink="/shop">Shop</a>
+            </li>
+            <li
+              class="nav-item"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link" routerLink="/aboutus">About Us</a>
+            </li>
+            <li
+              class="nav-item"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link" routerLink="/contactus">Contact Us</a>
+            </li>
+            <li
+              class="nav-item"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="col-12 col-sm-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

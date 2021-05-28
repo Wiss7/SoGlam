@@ -12,6 +12,10 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { ShopComponent } from './shop/shop.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AccountComponent } from './account/account.component';
+import { ProfileComponent } from './account/profile/profile.component';
+import { AddressComponent } from './account/address/address.component';
+import { OrderHistoryComponent } from './account/order-history/order-history.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -24,6 +28,25 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'addresslist',
+        component: AddressComponent,
+      },
+      {
+        path: 'orderhistory',
+        component: OrderHistoryComponent,
+      },
+    ],
+  },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
   { path: 'auth', component: AuthComponent },

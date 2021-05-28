@@ -195,7 +195,14 @@ ul.social-icons {
 .btn-link {
   color: #000;
 }
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255);
+}
 
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .active > .nav-link {
+  color: rgba(255, 255, 255, 0.6);
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 }

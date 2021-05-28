@@ -41,7 +41,9 @@
       />
     </a>
     <div class="header-icons">
-      <a> <span class="material-icons md-48"> person </span> </a>
+      <a routerLink="/account/profile">
+        <span class="material-icons md-48"> person </span>
+      </a>
       <a routerLink="/cart">
         <span class="material-icons"> shopping_cart </span>
         <span class="cart-count" *ngIf="cartCount > 0">({{ cartCount }})</span>
@@ -149,7 +151,7 @@
       >
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a (click)="ToggleMobileMenu()"
+      <a routerLink="/account/profile" (click)="ToggleMobileMenu()"
         ><span class="material-icons"> person </span>Account</a
       >
     </li>

@@ -36,7 +36,7 @@ export class AuthService {
     return this.firebaseAuth.currentUser.then((user) => {
       if (user) {
         user.updateProfile({ displayName: firstName });
-        this.UpdateUserInfo(userId, email, firstName, lastName, phone);
+        this.AddUserInfo(userId, email, firstName, lastName, phone);
         user.sendEmailVerification();
       }
     });
@@ -54,7 +54,7 @@ export class AuthService {
     return this.firebaseAuth.sendPasswordResetEmail(email);
   }
 
-  UpdateUserInfo(
+  AddUserInfo(
     userId: string,
     email: string,
     firstName: string,
@@ -66,11 +66,24 @@ export class AuthService {
     user.firstName = firstName;
     user.lastName = lastName;
     user.phone = phone;
-    user.id = userId;
+    user.id = '';
+    user.userId = userId;
     this.firestore.collection('Users').add(Object.assign({}, user));
   }
   LogOut() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
+  }
+
+  getUserInfo() {
+    const userId = localStorage.getItem('userId') || '';
+    return this.firestore
+      .collection('Users', (ref) => ref.where('userId', '==', userId))
+      .snapshotChanges();
+  }
+  updateUserInfo(newInfo: User) {
+    return this.firestore
+      .doc('Users/' + newInfo.id)
+      .update(Object.assign({}, newInfo));
   }
 }

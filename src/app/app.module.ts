@@ -29,6 +29,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AccountComponent } from './account/account.component';
+import { ProfileComponent } from './account/profile/profile.component';
+import { AddressComponent } from './account/address/address.component';
+import { OrderHistoryComponent } from './account/order-history/order-history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +54,10 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     AuthComponent,
     WishlistComponent,
     LoadingSpinnerComponent,
+    AccountComponent,
+    ProfileComponent,
+    AddressComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,

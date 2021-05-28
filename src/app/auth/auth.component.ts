@@ -102,7 +102,7 @@ export class AuthComponent implements OnInit {
 
     const firstName = signupForm.value.firstname;
     const lastName = signupForm.value.lastname;
-    const phone = signupForm.value.lastname;
+    const phone = signupForm.value.phone;
     this.isSigningUp = true;
     this.authService.SignUp(email, password).then(
       (resData) => {
