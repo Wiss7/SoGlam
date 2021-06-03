@@ -42,6 +42,10 @@ const routes: Routes = [
         component: AddressComponent,
       },
       {
+        path: 'address/edit/:id',
+        component: AddressComponent,
+      },
+      {
         path: 'orderhistory',
         component: OrderHistoryComponent,
       },
