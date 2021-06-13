@@ -1,1 +1,207 @@
-<p>address works!</p>
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 col-lg-8">
+        <form #infoForm="ngForm" (ngSubmit)="UpdateInfo(infoForm)" class="mb-5">
+          <div class="form-group row">
+            <label for="firstname*" class="col-3 col-form-label"
+              >First Name*</label
+            >
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="firstname"
+                #firstname="ngModel"
+                [(ngModel)]="firstnameVal"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lastname*" class="col-3 col-form-label"
+              >Last Name*</label
+            >
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="lastname"
+                #lastname="ngModel"
+                [(ngModel)]="lastnameVal"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="phone" class="col-3 col-form-label">Phone*</label>
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="phone"
+                name="phone"
+                [(ngModel)]="phoneVal"
+                #phone="ngModel"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="street" class="col-3 col-form-label">Street*</label>
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="street"
+                name="street"
+                [(ngModel)]="streetVal"
+                #street="ngModel"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="building" class="col-3 col-form-label">Building*</label>
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="building"
+                name="building"
+                [(ngModel)]="buildingVal"
+                #building="ngModel"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="province" class="col-3 col-form-label">Province*</label>
+            <div class="col-9">
+              <select
+                class="form-control"
+                id="province"
+                name="province"
+                [(ngModel)]="provinceVal"
+                #province="ngModel"
+                required
+                (ngModelChange)="onProvinceSelected($event)"
+              >
+                <option></option>
+                <option *ngFor="let province of provinces">
+                  {{ province }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="city" class="col-3 col-form-label">City*</label>
+            <div class="col-9">
+              <select
+                class="form-control"
+                id="city"
+                name="city"
+                [(ngModel)]="cityVal"
+                #city="ngModel"
+                required
+              >
+                <option></option>
+                <option *ngFor="let city of provinceCities">
+                  {{ city.CityName }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="postalcode" class="col-3 col-form-label"
+              >Postal Code*</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="postalcode"
+                name="postalcode"
+                [(ngModel)]="postalcodeVal"
+                #postalcode="ngModel"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="deliverynote" class="col-3 col-form-label"
+              >Delivery Note</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="deliverynote"
+                name="deliverynote"
+                [(ngModel)]="deliverynoteVal"
+                #deliverynote="ngModel"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-6 mt-3">
+              <button
+                type="submit"
+                [disabled]="!infoForm.valid"
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="!isUpdating"
+              >
+                Save Address
+              </button>
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isUpdating"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template #errorContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <b>Something went wrong. Please try again later! </b>
+      <br />
+      <button
+        type="button"
+        class="btn btn-outline-dark mt-3"
+        (click)="modal.close('Save click')"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>
+</div>
