@@ -15,7 +15,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { AddressComponent } from './account/address/address.component';
+import { AddresslistComponent } from './account/address/addresslist/addresslist.component';
 import { OrderHistoryComponent } from './account/order-history/order-history.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+
   {
     path: 'account',
     component: AccountComponent,
@@ -39,12 +43,14 @@ const routes: Routes = [
       },
       {
         path: 'addresslist',
-        component: AddressComponent,
+        component: AddresslistComponent,
       },
       {
-        path: 'address/edit/:id',
+        path: 'address/:id',
         component: AddressComponent,
+        pathMatch: 'full',
       },
+
       {
         path: 'orderhistory',
         component: OrderHistoryComponent,

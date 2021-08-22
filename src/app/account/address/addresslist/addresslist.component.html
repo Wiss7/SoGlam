@@ -1,0 +1,62 @@
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8">
+        <div class="ml-3">
+          <h5>ADDRESS LIST</h5>
+        </div>
+      </div>
+      <div class="col-4">
+        <a class="btn btn-dark" [routerLink]="['/account', 'address', '0']"
+          >New Address</a
+        >
+      </div>
+    </div>
+    <div class="row" *ngIf="addresslist.length > 0">
+      <div
+        *ngFor="let address of addresslist"
+        class="col-12 mb-5 mt-3 col-lg-4 col-md-6"
+      >
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ address.title }}</h5>
+            <p class="card-text">{{ address.country }}, {{ address.city }}</p>
+            <p class="card-text">
+              {{ address.street }}, {{ address.building }}
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <a
+                class="text-dark"
+                (click)="editAddress(address.id)"
+                style="text-decoration: underline"
+                >Edit</a
+              >
+              <a
+                class="text-dark"
+                (click)="DeleteAddress(address.id)"
+                style="text-decoration: underline"
+              >
+                Delete</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-5 ml-3 mb-5"
+      *ngIf="addresslist.length === 0"
+      style="text-align: center; color: #666666"
+    >
+      <h2>There is no address in your list</h2>
+    </div>
+  </div>
+</div>

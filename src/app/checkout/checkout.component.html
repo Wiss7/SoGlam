@@ -1,0 +1,155 @@
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="mt-5 mb-5 ml-5" *ngIf="CartItems.length > 0">
+        <h2>Checkout</h2>
+      </div>
+    </div>
+    <!-- Shopping cart table -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <div
+          class="row cart-row"
+          *ngFor="let product of CartItems; let i = index"
+        >
+          <div class="col-3 col-sm-2">
+            <img
+              [src]="getImageUrl(i)"
+              alt=""
+              width="70"
+              class="img-responsive rounded shadow-sm"
+            />
+          </div>
+          <div
+            class="col-12 order-1 order-sm-0 text-left text-sm-center col-sm-3"
+          >
+            <h5 class="mb-0">
+              <p href="#" class="text-dark d-inline-block align-middle">
+                {{ product.name }}
+              </p>
+            </h5>
+            <span class="text-muted font-weight-normal font-italic d-block">{{
+              product.type
+            }}</span>
+
+            <b *ngIf="!product.isOnSale">{{ product.price }} LBP</b>
+            <b *ngIf="product.isOnSale">{{ product.discountPrice }} LBP</b>
+          </div>
+
+          <div class="col-4 col-sm-2">
+            <p>
+              <small>Quantity</small>
+            </p>
+            <p>
+              <b>
+                {{ getQuantity(product.id) }}
+              </b>
+            </p>
+          </div>
+
+          <div class="col-4 col-sm-3">
+            <b *ngIf="!product.isOnSale">
+              {{ product.price * getQuantity(product.id) }} LBP
+            </b>
+            <b *ngIf="product.isOnSale">
+              {{ product.discountPrice * getQuantity(product.id) }} LBP
+            </b>
+            <p><small>Item Total</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END -->
+    <div class="row mb-5">
+      <div class="col-12" style="padding-left: 3%">
+        <b> Payment Method </b> <br /><br />
+        <label>
+          <input type="radio" [(ngModel)]="payment" value="Cash on Delivery" />
+          Cash on Delivery </label
+        ><br />
+        <label>
+          <input type="radio" [(ngModel)]="payment" value="Credit Card" />
+          Credit Card </label
+        ><br /><br /><br />
+        <b>Select an address</b><br />
+
+        <div class="row">
+          <div class="col-lg-6 col-xl-4">
+            <div class="d-flex align-items-center justify-content-between my-3">
+              <div>
+                <select
+                  id="address"
+                  name="address"
+                  [(ngModel)]="address"
+                  style="height: 38px"
+                >
+                  <option
+                    *ngFor="let address of addresslist"
+                    value="{{ address.id }}"
+                  >
+                    {{ address.title }}
+                  </option>
+                </select>
+                <span
+                  id="rfvAddress"
+                  *ngIf="isAddressEmpty"
+                  style="color: red; font-size: 16px"
+                >
+                  Select an address to continue</span
+                >
+              </div>
+
+              <div>
+                <a
+                  class="btn btn-dark"
+                  [routerLink]="['/account', 'address', '0']"
+                  >New Address</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-lg-6 col-xl-4">
+            <div class="d-flex align-items-center justify-content-between my-3">
+              <h5 class="my-0">Subtotal</h5>
+              <h6 class="my-0">{{ getSubtotal() }} LBP</h6>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between my-3">
+              <h5 class="my-0">Discount</h5>
+              <h6 class="my-0">{{ getDiscount() }} LBP</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-between my-3">
+              <h5 class="my-0">Shipping Fee</h5>
+              <h6 class="my-0">{{ getShippingFee() }} LBP</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-between my-3">
+              <h5 class="my-0">Grand Total</h5>
+              <h6 class="my-0">{{ getGrandTotal() }} LBP</h6>
+            </div>
+            <br />
+            <br />
+
+            <div>
+              <a
+                class="btn btn-large btn-dark btn-dark-hover"
+                (click)="placeOrder()"
+              >
+                Checkout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

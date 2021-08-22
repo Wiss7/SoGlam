@@ -1,0 +1,12 @@
+.divCurrency {
+  margin-top: 10px;
+  display: revert;
+  text-align: right;
+  margin-right: 35px;
+}
+
+.btnCurrency {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { SharedService } from '../shared.service';
 import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +10,8 @@ export class AuthService {
   userData: any;
   constructor(
     public firebaseAuth: AngularFireAuth,
-    public firestore: AngularFirestore
+    public firestore: AngularFirestore,
+    private sharedService: SharedService
   ) {}
 
   SignIn(email: string, password: string) {
@@ -18,7 +20,7 @@ export class AuthService {
   setLoggedInUserData(user: any) {
     this.isLoggedin = true;
     this.userData = user;
-    localStorage.setItem('user', this.userData);
+    localStorage.setItem('user', JSON.stringify(this.userData));
     localStorage.setItem('userId', user.uid);
   }
 
@@ -73,6 +75,7 @@ export class AuthService {
   LogOut() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
+    this.sharedService.userCurrency = 'USD';
   }
 
   getUserInfo() {
