@@ -56,11 +56,27 @@
             *ngIf="product.isOnSale"
             style="width: 60%; display: inline-block"
           >
-            <p class="old-price-text">{{ product.price }} LBP</p>
-            <p class="price-text">{{ product.discountPrice }} LBP</p>
+            <p class="old-price-text">
+              {{
+                product.price * sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}
+            </p>
+            <p class="price-text">
+              {{
+                product.discountPrice * sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}
+            </p>
           </div>
           <p class="price-text" *ngIf="!product.isOnSale">
-            {{ product.price }} LBP
+            {{
+              product.price * sharedService.currencyRate +
+                " " +
+                sharedService.userCurrency
+            }}
           </p>
           <button
             class="btn btn-sm btn-cart btn-wishlist"
@@ -236,14 +252,30 @@
     <h3 style="text-align: center">{{ product.name }}</h3>
     <div>{{ product.description }}</div>
     <p style="width: 100%" class="price-text" *ngIf="!product.isOnSale">
-      {{ product.price }} LBP
+      {{
+        product.price * sharedService.currencyRate +
+          " " +
+          sharedService.userCurrency
+      }}
     </p>
     <div
       *ngIf="product.isOnSale"
       style="width: 100%; display: inline-block; text-align: center"
     >
-      <p class="old-price-text">{{ product.price }} LBP</p>
-      <p class="price-text">{{ product.discountPrice }} LBP</p>
+      <p class="old-price-text">
+        {{
+          product.price * sharedService.currencyRate +
+            " " +
+            sharedService.userCurrency
+        }}
+      </p>
+      <p class="price-text">
+        {{
+          product.discountPrice * sharedService.currencyRate +
+            " " +
+            sharedService.userCurrency
+        }}
+      </p>
     </div>
     <div style="display: inline-block; width: 50%; text-align: center">
       <button

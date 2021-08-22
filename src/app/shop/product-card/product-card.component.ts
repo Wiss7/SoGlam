@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService } from 'src/app/shared.service';
 import { Product } from '../product.model';
 
 @Component({
@@ -18,7 +19,11 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
   @Input() product: Product;
   @Input() index: number;
   @ViewChild('productImg') Img: ElementRef;
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public sharedService: SharedService
+  ) {}
 
   ngOnInit() {}
   getRoute() {

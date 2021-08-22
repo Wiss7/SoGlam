@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CartService } from 'src/app/cart/cart.service';
+import { SharedService } from 'src/app/shared.service';
 import { Wishlist } from 'src/app/wishlist/wishlist.model';
 import { WishlistService } from 'src/app/wishlist/wishlist.service';
 import { Product } from '../product.model';
@@ -44,6 +45,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   isLoggedIn: Boolean = false;
   isSigningIn: Boolean = false;
   isLoading: Boolean = true;
+
   @ViewChild('qty') qty: ElementRef;
   @ViewChild('signInModal') signInModal: ElementRef;
   @ViewChild('cartModal') cartModal: ElementRef;
@@ -56,7 +58,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private wishlistService: WishlistService,
     private firebaseAuth: AngularFireAuth,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public sharedService: SharedService
   ) {
     this.gallerySubscription =
       this.productService.toggleGallerySubject.subscribe((isOpen) => {

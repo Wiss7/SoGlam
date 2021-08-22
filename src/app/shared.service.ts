@@ -12,6 +12,7 @@ export class SharedService {
   settingsSubscription: Subscription;
   userSubscription: Subscription;
   userCurrency: string = 'USD';
+  currencyRate: number = 1;
   isSettingsLoading: boolean = true;
   isCurrencyLoading: boolean = true;
   constructor(
@@ -31,6 +32,7 @@ export class SharedService {
             id: e.payload.doc.id,
           };
         });
+        this.getUserCurrency();
         this.isSettingsLoading = false;
       });
   }
@@ -45,14 +47,25 @@ export class SharedService {
     if (!localStorage.getItem('userCurrency')) {
       localStorage.setItem('userCurrency', 'USD');
       this.userCurrency = 'USD';
+      this.currencyRate = 1;
     } else {
       this.userCurrency = localStorage.getItem('userCurrency') || 'USD';
+      if (this.userCurrency === 'USD') {
+        this.currencyRate = 1;
+      } else {
+        this.currencyRate = this.settings[0].currencyRate;
+      }
     }
   }
 
   changeUserCurrency(currency: string) {
     localStorage.setItem('userCurrency', currency);
     this.userCurrency = currency;
+    if (this.userCurrency === 'USD') {
+      this.currencyRate = 1;
+    } else {
+      this.currencyRate = this.settings[0].currencyRate;
+    }
   }
 
   ngOnDestroy() {}

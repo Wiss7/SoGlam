@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(public sharedService: SharedService) {}
 
   ngOnInit() {
-    this.sharedService.getUserCurrency();
     this.sharedService.getSettings();
   }
   title = 'So Glam';

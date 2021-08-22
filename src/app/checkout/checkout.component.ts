@@ -5,6 +5,7 @@ import { Address } from '../account/address/address.model';
 import { AddressService } from '../account/address/address.service';
 import { CartItem } from '../cart/cart.model';
 import { CartService } from '../cart/cart.service';
+import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
 import { ProductService } from '../shop/product.service';
 import { Order } from './order.model';
@@ -31,7 +32,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private cartService: CartService,
     private addressService: AddressService,
-    private router: Router
+    private router: Router,
+    public sharedService: SharedService
   ) {}
   ngOnInit() {
     this.cartService.getCartItemsList();
@@ -106,11 +108,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getDiscount() {
-    return 50000;
+    return 5;
   }
 
   getShippingFee() {
-    return 20000;
+    return 2;
   }
 
   getGrandTotal() {

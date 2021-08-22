@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
 import { ProductService } from '../shop/product.service';
 import { CartItem } from './cart.model';
@@ -19,7 +20,8 @@ export class CartComponent implements OnInit, OnDestroy {
   cart: CartItem[] = [];
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    public sharedService: SharedService
   ) {}
   ngOnInit() {
     this.cartService.getCartItemsList();

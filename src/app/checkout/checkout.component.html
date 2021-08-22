@@ -39,8 +39,16 @@
               product.type
             }}</span>
 
-            <b *ngIf="!product.isOnSale">{{ product.price }} LBP</b>
-            <b *ngIf="product.isOnSale">{{ product.discountPrice }} LBP</b>
+            <b *ngIf="!product.isOnSale">{{
+              product.price * sharedService.currencyRate +
+                " " +
+                sharedService.userCurrency
+            }}</b>
+            <b *ngIf="product.isOnSale">{{
+              product.discountPrice * sharedService.currencyRate +
+                " " +
+                sharedService.userCurrency
+            }}</b>
           </div>
 
           <div class="col-4 col-sm-2">
@@ -56,10 +64,22 @@
 
           <div class="col-4 col-sm-3">
             <b *ngIf="!product.isOnSale">
-              {{ product.price * getQuantity(product.id) }} LBP
+              {{
+                product.price *
+                  getQuantity(product.id) *
+                  sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}
             </b>
             <b *ngIf="product.isOnSale">
-              {{ product.discountPrice * getQuantity(product.id) }} LBP
+              {{
+                product.discountPrice *
+                  getQuantity(product.id) *
+                  sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}
             </b>
             <p><small>Item Total</small></p>
           </div>
@@ -121,20 +141,44 @@
           <div class="col-lg-6 col-xl-4">
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Subtotal</h5>
-              <h6 class="my-0">{{ getSubtotal() }} LBP</h6>
+              <h6 class="my-0">
+                {{
+                  getSubtotal() * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}
+              </h6>
             </div>
 
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Discount</h5>
-              <h6 class="my-0">{{ getDiscount() }} LBP</h6>
+              <h6 class="my-0">
+                {{
+                  getDiscount() * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}
+              </h6>
             </div>
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Shipping Fee</h5>
-              <h6 class="my-0">{{ getShippingFee() }} LBP</h6>
+              <h6 class="my-0">
+                {{
+                  getShippingFee() * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}
+              </h6>
             </div>
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Grand Total</h5>
-              <h6 class="my-0">{{ getGrandTotal() }} LBP</h6>
+              <h6 class="my-0">
+                {{
+                  getGrandTotal() * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}
+              </h6>
             </div>
             <br />
             <br />
