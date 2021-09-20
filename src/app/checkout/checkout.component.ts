@@ -9,7 +9,8 @@ import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
 import { ProductService } from '../shop/product.service';
 import { Order } from './order.model';
-
+import { DatePipe } from '@angular/common';
+import { OrderService } from './order.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './checkout.component.html',
@@ -19,6 +20,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   isLoading: Boolean = true;
   cartSubscription: Subscription;
   productSubscription: Subscription;
+  orderSubscription: Subscription;
   CartItems: Product[] = [];
   products: Product[] = [];
   cart: CartItem[] = [];
@@ -28,12 +30,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   address: string;
   isAddressEmpty: boolean = false;
   order: Order;
+  orders: Order[] = [];
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private addressService: AddressService,
     private router: Router,
-    public sharedService: SharedService
+    public sharedService: SharedService,
+    private orderService: OrderService
   ) {}
   ngOnInit() {
     this.cartService.getCartItemsList();
@@ -66,7 +70,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                     id: e.payload.doc.id,
                   };
                 });
-                this.isLoading = false;
+
+                this.orderSubscription = this.orderService
+                  .getOrders()
+                  .subscribe((data) => {
+                    this.orders = data.map((e) => {
+                      return {
+                        ...(e.payload.doc.data() as Order),
+                        id: e.payload.doc.id,
+                      };
+                    });
+
+                    this.isLoading = false;
+                  });
               });
           });
       }
@@ -86,6 +102,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.productSubscription) this.productSubscription.unsubscribe();
     if (this.cartSubscription) this.cartSubscription.unsubscribe();
+    if (this.orderSubscription) this.orderSubscription.unsubscribe();
   }
   getQuantity(productId: string) {
     const index = this.cart.findIndex((item) => {
@@ -108,7 +125,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getDiscount() {
-    return 5;
+    debugger;
+    if (this.orders.length == 0) {
+      if (
+        this.sharedService.settings[0].discountFirstOrder >
+        this.sharedService.settings[0].discountPct
+      )
+        return (
+          (this.getSubtotal() *
+            this.sharedService.settings[0].discountFirstOrder) /
+          100
+        );
+      else
+        return (
+          (this.getSubtotal() * this.sharedService.settings[0].discountPct) /
+          100
+        );
+    } else
+      return (
+        (this.getSubtotal() * this.sharedService.settings[0].discountPct) / 100
+      );
   }
 
   getShippingFee() {
@@ -126,7 +162,25 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   placeOrder() {
     if (this.address && this.address.length > 0) {
       this.isAddressEmpty = false;
-      // this.order = new Order(this.address,localStorage.getItem('userId') || '','Pending',Date.now,)
+      const orderDate = new Date();
+      this.order = new Order(
+        this.address,
+        localStorage.getItem('userId') || '',
+        'In Progress',
+        orderDate,
+        'COD',
+        this.getShippingFee() * this.sharedService.currencyRate,
+        this.getSubtotal() * this.sharedService.currencyRate,
+        this.sharedService.userCurrency,
+        this.getDiscount() * this.sharedService.currencyRate,
+        this.getGrandTotal() * this.sharedService.currencyRate,
+        this.cart,
+        ''
+      );
+      this.orderService.placeOrder(this.order).then((res) => {
+        this.cartService.clearCart();
+        this.router.navigate(['ordercomplete']);
+      });
     } else this.isAddressEmpty = true;
   }
 }

@@ -18,6 +18,8 @@ import { AddressComponent } from './account/address/address.component';
 import { AddresslistComponent } from './account/address/addresslist/addresslist.component';
 import { OrderHistoryComponent } from './account/order-history/order-history.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderCompleteComponent } from './checkout/ordercomplete.component';
+import { OrderDetailComponent } from './account/order-history/order-detail/order-detail.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -57,6 +59,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'ordercomplete', component: OrderCompleteComponent },
+  { path: 'order/:id', component: OrderDetailComponent },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
   { path: 'auth', component: AuthComponent },
