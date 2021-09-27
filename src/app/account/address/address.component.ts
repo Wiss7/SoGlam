@@ -33,7 +33,7 @@ export class AddressComponent implements OnInit, OnDestroy {
   postalcodeVal: string = '';
   cityVal: string = '';
   deliverynoteVal: string = '';
-
+  floorVal: string = '';
   countries: {
     name: String;
     code: String;
@@ -72,6 +72,7 @@ export class AddressComponent implements OnInit, OnDestroy {
       this.postalcodeVal = addr.postalCode;
       this.deliverynoteVal = addr.deliveryNote;
       this.cityVal = addr.city;
+      this.floorVal = addr.floor;
       this.isLoading = false;
     } else this.isLoading = false;
   }
@@ -95,6 +96,7 @@ export class AddressComponent implements OnInit, OnDestroy {
       this.buildingVal,
       this.postalcodeVal,
       this.deliverynoteVal,
+      this.floorVal,
       ''
     );
     this.isUpdating = true;

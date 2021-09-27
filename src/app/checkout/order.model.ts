@@ -1,8 +1,9 @@
+import { Address } from '../account/address/address.model';
 import { CartItem } from '../cart/cart.model';
 
 export class Order {
   constructor(
-    public addressID: string,
+    public address: Address,
     public userID: string,
     public status: string,
     public date: any,

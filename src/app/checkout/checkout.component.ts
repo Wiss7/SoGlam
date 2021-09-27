@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   isAddressEmpty: boolean = false;
   order: Order;
   orders: Order[] = [];
+  isCheckingOut: boolean = false;
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -125,7 +126,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getDiscount() {
-    debugger;
     if (this.orders.length == 0) {
       if (
         this.sharedService.settings[0].discountFirstOrder >
@@ -160,11 +160,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   placeOrder() {
+    if (this.CartItems.length == 0) return;
     if (this.address && this.address.length > 0) {
+      this.isCheckingOut = true;
+      const addressDet: Address = this.addresslist.find(
+        (a) => (a.id = this.address)
+      )!;
       this.isAddressEmpty = false;
       const orderDate = new Date();
       this.order = new Order(
-        this.address,
+        addressDet,
         localStorage.getItem('userId') || '',
         'In Progress',
         orderDate,
@@ -181,6 +186,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.cartService.clearCart();
         this.router.navigate(['ordercomplete']);
       });
-    } else this.isAddressEmpty = true;
+    } else {
+      this.isAddressEmpty = true;
+      this.isCheckingOut = false;
+    }
   }
 }

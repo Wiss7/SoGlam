@@ -12,6 +12,7 @@ export class Address {
     public building: string,
     public postalCode: string,
     public deliveryNote: string,
+    public floor: string,
     public id: string
   ) {}
 }

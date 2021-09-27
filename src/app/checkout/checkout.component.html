@@ -112,7 +112,7 @@
                 >
                   <option
                     *ngFor="let address of addresslist"
-                    value="{{ address.title }}"
+                    value="{{ address.id }}"
                   >
                     {{ address.title }}
                   </option>
@@ -187,9 +187,23 @@
               <a
                 class="btn btn-large btn-dark btn-dark-hover"
                 (click)="placeOrder()"
+                *ngIf="!isCheckingOut"
               >
                 Checkout
               </a>
+
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isCheckingOut"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
             </div>
           </div>
         </div>

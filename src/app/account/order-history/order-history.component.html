@@ -37,12 +37,12 @@
                       order.date.toDate().toLocaleTimeString()
                   }}
                 </td>
-                <td>{{ order.addressID }}</td>
+                <td>{{ order.address.title }}</td>
                 <td>{{ order.grandTotal + " " + order.currencyPaid }}</td>
                 <td>{{ order.status }}</td>
                 <td class="text-center">
                   <a
-                    [routerLink]="'/order/' + order.id"
+                    (click)="ViewOrder(order.id!)"
                     class="text-dark"
                     style="
                       text-decoration: underline;

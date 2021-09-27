@@ -144,7 +144,19 @@
               />
             </div>
           </div>
-
+          <div class="form-group row">
+            <label for="floor" class="col-3 col-form-label">Floor*</label>
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="floor"
+                name="floor"
+                [(ngModel)]="floorVal"
+                #building="ngModel"
+                required
+              />
+            </div>
+          </div>
           <div class="form-group row">
             <label for="postalcode" class="col-3 col-form-label"
               >Postal Code*</label

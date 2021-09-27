@@ -1,0 +1,17 @@
+.txtquantity {
+  height: 25px;
+  width: 40px;
+  text-align: center;
+}
+.cart-row {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.cart-row img.img-responsive {
+  margin: 0 auto;
+}
+.cart-row div {
+  text-align: center;
+}
