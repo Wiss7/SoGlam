@@ -20,6 +20,9 @@ import { OrderHistoryComponent } from './account/order-history/order-history.com
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderCompleteComponent } from './checkout/ordercomplete.component';
 import { OrderDetailComponent } from './account/order-history/order-detail/order-detail.component';
+import { AdminGuard } from './admin/admin.guard';
+import { MessagesComponent } from './admin/messages/messages.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -27,7 +30,23 @@ const routes: Routes = [
   { path: 'shop/:id', component: ProductDetailComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
-  { path: 'admin', component: AdminComponent },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        canActivate: [AdminGuard],
+      },
+    ],
+  },
   { path: 'search', component: SearchResultsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'auth', component: AuthComponent },

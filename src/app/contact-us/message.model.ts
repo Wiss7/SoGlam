@@ -5,6 +5,7 @@ export class Message {
     public phone: string,
     public message: string,
     public isNew: Boolean,
+    public date: any,
     public id?: string
   ) {}
 }

@@ -61,4 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       );
     else this.searchBox.nativeElement.className = this.className + ' active';
   }
+
+  showadmin() {
+    const userId = localStorage.getItem('userId') || '';
+    return userId === 'oZ6pFWRMKWMbG48SuniMcLut4mt2';
+  }
 }

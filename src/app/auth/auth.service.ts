@@ -75,6 +75,7 @@ export class AuthService {
   LogOut() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
+    localStorage.removeItem('userId');
     this.sharedService.userCurrency = 'USD';
   }
 

@@ -29,6 +29,7 @@ export class ContactUsComponent implements OnInit {
       this.MessageForm.value.phone,
       this.MessageForm.value.message,
       true,
+      new Date(),
       ''
     );
     this.firestore

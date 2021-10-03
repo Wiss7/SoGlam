@@ -1,1 +1,37 @@
-<p>admin works!</p>
+<div class="container-fluid" style="min-height: calc(100vh - 400px)">
+  <div class="row" class="mt-5 mb-3 ml-5">
+    <div class="col-12">
+      <ul class="navbar nav-pills navbar-dark nav-fill list-unstyled">
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/admin/orders">Orders</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/admin/messages">Messages</a>
+        </li>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/admin/product">Products</a>
+        </li>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/admin/settings">Settings</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

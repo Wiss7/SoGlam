@@ -130,7 +130,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <a class="nav-link" routerLink="/admin">Admin</a>
+          <a class="nav-link" routerLink="/admin" *ngIf="showadmin()">Admin</a>
         </li>
       </ul>
     </div>
@@ -177,6 +177,15 @@
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/contactus" (click)="ToggleMobileMenu()"
         ><span class="material-icons"> contact_mail </span> Contact Us</a
+      >
+    </li>
+    <li
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="showadmin()"
+    >
+      <a routerLink="/admin" (click)="ToggleMobileMenu()"
+        ><span class="material-icons"> lock </span> Admin</a
       >
     </li>
   </ul>

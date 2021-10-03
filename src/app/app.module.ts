@@ -36,6 +36,8 @@ import { OrderHistoryComponent } from './account/order-history/order-history.com
 import { AddresslistComponent } from './account/address/addresslist/addresslist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderDetailComponent } from './account/order-history/order-detail/order-detail.component';
+import { MessagesComponent } from './admin/messages/messages.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,8 @@ import { OrderDetailComponent } from './account/order-history/order-detail/order
     AddresslistComponent,
     CheckoutComponent,
     OrderDetailComponent,
+    MessagesComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

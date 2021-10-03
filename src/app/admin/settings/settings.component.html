@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-lg-6 col-sm-12">
+      <form #settingsForm="ngForm" (ngSubmit)="UpdateSettings()" class="mb-5">
+        <div class="form-group row">
+          <label for="currencyRate" class="col-6 col-form-label"
+            >Currency Rate</label
+          >
+          <div class="col-6">
+            <input
+              class="form-control"
+              id="currencyRate"
+              name="currencyRate"
+              #currencyRate="ngModel"
+              [(ngModel)]="currencyRateVal"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="firstOrderDiscount" class="col-6 col-form-label"
+            >Discount on First Order</label
+          >
+          <div class="col-6">
+            <input
+              class="form-control"
+              id="firstOrderDiscount"
+              name="firstOrderDiscount"
+              ngModel
+              #firstOrderDiscount="ngModel"
+              [(ngModel)]="firstOrderDiscountVal"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="totalDiscount" class="col-6 col-form-label"
+            >Discount on Subtotal</label
+          >
+          <div class="col-6">
+            <input
+              class="form-control"
+              id="totalDiscount"
+              name="totalDiscount"
+              [(ngModel)]="totalDiscountVal"
+              #totalDiscount="ngModel"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-12 mt-3" style="text-align: center">
+            <button
+              type="submit"
+              [disabled]="!settingsForm.valid"
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="!isUpdating"
+            >
+              Update Settings
+            </button>
+            <button
+              [disabled]
+              class="btn btn-dark mt-2 m-auto"
+              *ngIf="isUpdating"
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
