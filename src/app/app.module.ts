@@ -38,6 +38,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderDetailComponent } from './account/order-history/order-detail/order-detail.component';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { SettingsComponent } from './admin/settings/settings.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { OrderEditComponent } from './admin/order-edit/order-edit.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { EditProductsComponent } from './admin/edit-products/edit-products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +72,10 @@ import { SettingsComponent } from './admin/settings/settings.component';
     OrderDetailComponent,
     MessagesComponent,
     SettingsComponent,
+    OrdersComponent,
+    OrderEditComponent,
+    AdminProductsComponent,
+    EditProductsComponent,
   ],
   imports: [
     BrowserModule,

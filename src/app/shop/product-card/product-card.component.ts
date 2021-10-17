@@ -4,10 +4,12 @@ import {
   ElementRef,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/shared.service';
+import { EventEmitter } from '@angular/core';
 import { Product } from '../product.model';
 
 @Component({
@@ -19,6 +21,7 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
   @Input() product: Product;
   @Input() index: number;
   @ViewChild('productImg') Img: ElementRef;
+  @Output() onCardClick = new EventEmitter();
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +35,7 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
     else return 'card';
   }
   ngAfterViewInit() {
-    let imagePath: string = '../../../assets/images/products/';
+    let imagePath: string = '';
     const defaultImg = this.product.images.filter(
       (prod) => prod.isDefault === true
     );
@@ -43,6 +46,8 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
   }
 
   ShowDetails() {
-    this.router.navigate(['shop', this.index]);
+    if (this.router.url === '/admin/admin-products')
+      this.router.navigate(['admin/product-edit', this.index]);
+    else this.router.navigate(['shop', this.index]);
   }
 }

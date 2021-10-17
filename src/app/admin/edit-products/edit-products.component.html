@@ -1,0 +1,249 @@
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 col-lg-8">
+        <form #infoForm="ngForm" (ngSubmit)="UpdateInfo(infoForm)" class="mb-5">
+          <div class="form-group row">
+            <label for="name*" class="col-3 col-form-label"
+              >Product Name*</label
+            >
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                #name="ngModel"
+                [(ngModel)]="nameVal"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="description*" class="col-3 col-form-label"
+              >Description*</label
+            >
+            <div class="col-9">
+              <textarea
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                #description="ngModel"
+                [(ngModel)]="descriptionVal"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="type*" class="col-3 col-form-label">Type*</label>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                id="type"
+                name="type"
+                #type="ngModel"
+                [(ngModel)]="typeVal"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="size" class="col-3 col-form-label">Size*</label>
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="size"
+                name="size"
+                [(ngModel)]="sizeVal"
+                #size="ngModel"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="price" class="col-3 col-form-label"
+              >Price in USD*</label
+            >
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                [(ngModel)]="priceVal"
+                #price="ngModel"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="discountPrice" class="col-3 col-form-label"
+              >Discounted Price</label
+            >
+            <div class="col-9">
+              <input
+                type="number"
+                class="form-control"
+                id="discountPrice"
+                name="discountPrice"
+                [(ngModel)]="discountPriceVal"
+                #discountPrice="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="ingredients" class="col-3 col-form-label"
+              >Ingredients*</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="ingredients"
+                name="ingredients"
+                [(ngModel)]="ingredientsVal"
+                #ingredients="ngModel"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="howToUse" class="col-3 col-form-label"
+              >How to Use*</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="howToUse"
+                name="howToUse"
+                [(ngModel)]="howToUseVal"
+                #howToUse="ngModel"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="isOnSale" class="col-3 col-form-label"
+              >Is On Sale</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                type="checkbox"
+                id="isOnSale"
+                name="isOnSale"
+                [(ngModel)]="isOnSaleVal"
+                #isOnSale="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="isNewArrival" class="col-3 col-form-label"
+              >Is New Arrival</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                type="checkbox"
+                id="isNewArrival"
+                name="isNewArrival"
+                [(ngModel)]="isNewArrivalVal"
+                #isNewArrival="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="isBestSeller" class="col-3 col-form-label"
+              >Is Best Seller</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                type="checkbox"
+                id="isBestSeller"
+                name="isBestSeller"
+                [(ngModel)]="isBestSellerVal"
+                #isBestSeller="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="images" class="col-3 col-form-label"
+              >Images Links*<br />
+              (comma separated)
+            </label>
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="images"
+                name="images"
+                [(ngModel)]="imagesVal"
+                #images="ngModel"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-6 mt-3">
+              <button
+                type="submit"
+                [disabled]="!infoForm.valid"
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="!isUpdating"
+              >
+                Save Address
+              </button>
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isUpdating"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template #errorContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <b>Something went wrong. Please try again later! </b>
+      <br />
+      <button
+        type="button"
+        class="btn btn-outline-dark mt-3"
+        (click)="modal.close('Save click')"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>
+</div>

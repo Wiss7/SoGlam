@@ -23,6 +23,10 @@ import { OrderDetailComponent } from './account/order-history/order-detail/order
 import { AdminGuard } from './admin/admin.guard';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { SettingsComponent } from './admin/settings/settings.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { OrderEditComponent } from './admin/order-edit/order-edit.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { EditProductsComponent } from './admin/edit-products/edit-products.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -44,6 +48,27 @@ const routes: Routes = [
         path: 'settings',
         component: SettingsComponent,
         canActivate: [AdminGuard],
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'orderedit',
+        component: OrderEditComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'admin-products',
+        component: AdminProductsComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'product-edit/:id',
+        component: EditProductsComponent,
+        canActivate: [AdminGuard],
+        pathMatch: 'full',
       },
     ],
   },

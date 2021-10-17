@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
@@ -9,14 +8,11 @@ import { ProductService } from './product.service';
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css'],
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
   products: Product[];
   isLoading: Boolean = true;
   productSubscription: Subscription;
-  constructor(
-    private productService: ProductService,
-    private firestore: AngularFirestore
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.productSubscription = this.productService

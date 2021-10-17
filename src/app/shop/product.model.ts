@@ -9,9 +9,9 @@ export class Product {
     public discountPrice: number,
     public ingredients: string,
     public howToUse: string,
-    public isOnSale: Boolean,
-    public isNewArrival: Boolean,
-    public isBestSeller: Boolean,
+    public isOnSale: boolean,
+    public isNewArrival: boolean,
+    public isBestSeller: boolean,
     public images: { name: string; isDefault: boolean }[],
     public feedback: { review: string; stars: number }[],
     public id: string

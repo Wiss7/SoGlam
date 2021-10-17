@@ -1,4 +1,4 @@
-<div [ngClass]="getRoute()" (click)="ShowDetails()">
+<div [ngClass]="getRoute()" (click)="ShowDetails(); onCardClick.emit()">
   <div class="imgContainer">
     <img
       class="card-img-top"
@@ -6,8 +6,8 @@
       alt="Card image cap"
       style="width: 100%"
     />
-    <div class="overlay" (click)="ShowDetails()"></div>
-    <div class="btnView" (click)="ShowDetails()">View</div>
+    <div class="overlay" (click)="ShowDetails(); onCardClick.emit()"></div>
+    <div class="btnView" (click)="ShowDetails(); onCardClick.emit()">View</div>
   </div>
   <div class="card-body">
     <p class="card-text">{{ product.type }}</p>

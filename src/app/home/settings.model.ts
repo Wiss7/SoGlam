@@ -3,6 +3,7 @@ export class Settings {
     public currencyRate: number,
     public discountPct: number,
     public discountFirstOrder: number,
+    public images: string,
     public id?: string
   ) {}
 }

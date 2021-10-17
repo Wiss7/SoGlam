@@ -136,8 +136,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           this.defaultImageName = this.product.images.filter(
             (image) => image.isDefault === true
           )[0].name;
-          this.defaultImagePath =
-            '../../../assets/images/products/' + this.defaultImageName;
+          this.defaultImagePath = this.defaultImageName;
           this.images = this.product.images.filter(
             (image) => image.isDefault === false
           );

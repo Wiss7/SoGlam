@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { SharedService } from 'src/app/shared.service';
 import { AdminService } from '../admin.service';
 
@@ -13,7 +12,7 @@ export class SettingsComponent implements OnInit {
   totalDiscountVal: number = 0;
   firstOrderDiscountVal: number = 0;
   currencyRateVal: number = 0;
-
+  imagesVal: string = '';
   constructor(
     private sharedService: SharedService,
     private adminService: AdminService
@@ -24,6 +23,7 @@ export class SettingsComponent implements OnInit {
     this.totalDiscountVal = this.sharedService.settings[0].discountPct;
     this.firstOrderDiscountVal =
       this.sharedService.settings[0].discountFirstOrder;
+    this.imagesVal = this.sharedService.settings[0].images;
   }
   UpdateSettings() {
     this.isUpdating = true;
@@ -31,7 +31,8 @@ export class SettingsComponent implements OnInit {
       .updateSettings(
         this.currencyRateVal,
         this.firstOrderDiscountVal,
-        this.totalDiscountVal
+        this.totalDiscountVal,
+        this.imagesVal
       )
       .then(
         (res) => {

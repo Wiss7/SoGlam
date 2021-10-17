@@ -91,7 +91,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getImageUrl(index: number) {
-    let imagePath: string = '../../../assets/images/products/';
+    let imagePath: string = '';
     const defaultImg = this.products[index].images.filter(
       (prod) => prod.isDefault === true
     );
