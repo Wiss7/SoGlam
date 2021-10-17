@@ -19,8 +19,7 @@ export class ImageGalleryComponent implements OnInit, AfterViewInit {
   @ViewChild('Image') img: ElementRef;
   constructor(private productService: ProductService) {}
   ngAfterViewInit() {
-    this.img.nativeElement.src =
-      '../../assets/images/products/' + this.selectedImgName;
+    this.img.nativeElement.src = this.selectedImgName;
   }
   ngOnInit() {}
   closeGallery() {
@@ -33,8 +32,7 @@ export class ImageGalleryComponent implements OnInit, AfterViewInit {
     let nextIndex = index + 1;
     if (nextIndex >= this.images.length) nextIndex = 0;
     this.selectedImgName = this.images[nextIndex].name;
-    this.img.nativeElement.src =
-      '../../assets/images/products/' + this.selectedImgName;
+    this.img.nativeElement.src = this.selectedImgName;
   }
   showPrev() {
     const index = this.images.findIndex((image) => {
@@ -43,7 +41,6 @@ export class ImageGalleryComponent implements OnInit, AfterViewInit {
     let prevIndex = index - 1;
     if (prevIndex < 0) prevIndex = this.images.length - 1;
     this.selectedImgName = this.images[prevIndex].name;
-    this.img.nativeElement.src =
-      '../../assets/images/products/' + this.selectedImgName;
+    this.img.nativeElement.src = this.selectedImgName;
   }
 }
