@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Order } from '../checkout/order.model';
 import { SharedService } from '../shared.service';
+import { Product } from '../shop/product.model';
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   constructor(
@@ -43,5 +44,13 @@ export class AdminService {
     return this.firestore
       .doc('Orders/' + order.id)
       .update({ status: order.status });
+  }
+
+  updateProduct(product: Product) {
+    return this.firestore.doc('Products/' + product.id).update(product);
+  }
+
+  addProduct(product: Product) {
+    this.firestore.collection('Products').add(Object.assign({}, product));
   }
 }
