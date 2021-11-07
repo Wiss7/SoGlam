@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm, NgModel } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -28,7 +29,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   index: number;
   selectedImgName: string;
-  defaultImagePath: String;
+  defaultImagePath: string;
   defaultImageName: string;
   images: { name: string; isDefault: boolean }[];
   isGalleryOpen: Boolean = false;
@@ -59,7 +60,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private wishlistService: WishlistService,
     private firebaseAuth: AngularFireAuth,
     private modalService: NgbModal,
-    public sharedService: SharedService
+    public sharedService: SharedService,
+    public sanitizer: DomSanitizer
   ) {
     this.gallerySubscription =
       this.productService.toggleGallerySubject.subscribe((isOpen) => {

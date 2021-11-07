@@ -9,8 +9,9 @@ import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
 import { ProductService } from '../shop/product.service';
 import { Order } from './order.model';
-import { DatePipe } from '@angular/common';
 import { OrderService } from './order.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { shippingRates } from './shipping-rates';
 @Component({
   selector: 'app-cart',
   templateUrl: './checkout.component.html',
@@ -38,7 +39,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private addressService: AddressService,
     private router: Router,
     public sharedService: SharedService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public sanitizer: DomSanitizer
   ) {}
   ngOnInit() {
     this.cartService.getCartItemsList();
@@ -148,7 +150,29 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getShippingFee() {
-    return 2;
+    if (!this.address || this.address.length === 0) return 0;
+
+    let totalWeight: number = 0;
+
+    const addressDet: Address = this.addresslist.find(
+      (a) => (a.id = this.address)
+    )!;
+
+    this.CartItems.forEach((product) => {
+      const index = this.cart.findIndex((item) => {
+        return item.productID === product.id;
+      });
+      const qty = this.cart[index].quantity;
+      totalWeight += product.weight * qty;
+    });
+
+    return totalWeight;
+
+    //  const shippingRate = shippingRates.filter((rate)=> {
+    //   return
+    // });
+
+    //return shippingRate
   }
 
   getGrandTotal() {

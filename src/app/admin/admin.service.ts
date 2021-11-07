@@ -47,10 +47,19 @@ export class AdminService {
   }
 
   updateProduct(product: Product) {
-    return this.firestore.doc('Products/' + product.id).update(product);
+    debugger;
+    return this.firestore
+      .doc('Products/' + product.id)
+      .update(Object.assign({}, product));
   }
 
   addProduct(product: Product) {
-    this.firestore.collection('Products').add(Object.assign({}, product));
+    return this.firestore
+      .collection('Products')
+      .add(Object.assign({}, product));
+  }
+
+  deleteProduct(id: string) {
+    return this.firestore.doc('Products/' + id).delete();
   }
 }

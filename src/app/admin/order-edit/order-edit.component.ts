@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Order } from 'src/app/checkout/order.model';
 import { Product } from 'src/app/shop/product.model';
@@ -20,7 +21,8 @@ export class OrderEditComponent implements OnInit {
   products: Product[] = [];
   constructor(
     public productService: ProductService,
-    public adminService: AdminService
+    public adminService: AdminService,
+    public sanitizer: DomSanitizer
   ) {}
   ngOnDestroy() {
     if (this.productSubscription) this.productSubscription.unsubscribe();

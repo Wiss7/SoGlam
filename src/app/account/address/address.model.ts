@@ -6,6 +6,7 @@ export class Address {
     public lastName: string,
     public phone: string,
     public country: string,
+    public countryCode: string,
     public province: string,
     public city: string,
     public street: string,

@@ -35,8 +35,8 @@ export class AddressComponent implements OnInit, OnDestroy {
   deliverynoteVal: string = '';
   floorVal: string = '';
   countries: {
-    name: String;
-    code: String;
+    name: string;
+    code: string;
   }[] = [];
   isLoading: boolean = true;
   isAddingNew: boolean = false;
@@ -83,6 +83,10 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   UpdateInfo(infoForm: NgForm) {
     const userId = localStorage.getItem('userId') || '';
+    let countryCode: string = '';
+    countryCode = this.countries.filter((country) => {
+      return country.name === this.countryVal;
+    })[0].code;
     const newInfo = new Address(
       userId,
       this.titleVal,
@@ -90,6 +94,7 @@ export class AddressComponent implements OnInit, OnDestroy {
       this.lastnameVal,
       this.phoneVal,
       this.countryVal,
+      countryCode,
       this.provinceVal,
       this.cityVal,
       this.streetVal,

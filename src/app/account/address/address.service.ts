@@ -23,7 +23,7 @@ export class AddressService {
       .snapshotChanges();
   }
 
-  deleteAddress(id: String) {
+  deleteAddress(id: string) {
     return this.firestore.doc('Addresses/' + id).delete();
   }
   editAddress(addr: Address) {

@@ -23,7 +23,7 @@
                   <img
                     (click)="setSelectedImg(image.name)"
                     class="thumbnail-image"
-                    [src]="image.name"
+                    [src]="sanitizer.bypassSecurityTrustResourceUrl(image.name)"
                   />
                 </div>
               </div>
@@ -31,7 +31,9 @@
             <div class="album mt-3">
               <img
                 class="default-image"
-                [src]="defaultImagePath"
+                [src]="
+                  sanitizer.bypassSecurityTrustResourceUrl(defaultImagePath)
+                "
                 (click)="setSelectedImg(defaultImageName)"
               />
             </div>
@@ -247,7 +249,10 @@
   </div>
   <div class="modal-body">
     <div class="album" style="margin: auto; width: 50%">
-      <img class="default-image" [src]="defaultImagePath" />
+      <img
+        class="default-image"
+        [src]="sanitizer.bypassSecurityTrustResourceUrl(defaultImagePath)"
+      />
     </div>
     <h3 style="text-align: center">{{ product.name }}</h3>
     <div>{{ product.description }}</div>

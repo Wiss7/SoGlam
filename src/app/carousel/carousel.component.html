@@ -3,7 +3,7 @@
     <div class="wrapper">
       <img
         routerLink="/shop"
-        [src]="image.trim()"
+        [src]="sanitizer.bypassSecurityTrustResourceUrl(image.trim())"
         alt="Shop So Glam..."
         class="carouselImg"
       />

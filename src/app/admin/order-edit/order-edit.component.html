@@ -29,7 +29,9 @@
               <tr *ngFor="let product of CartItems; let i = index">
                 <td>
                   <img
-                    [src]="getImageUrl(i)"
+                    [src]="
+                      sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))
+                    "
                     alt=""
                     width="70"
                     class="img-responsive rounded shadow-sm"

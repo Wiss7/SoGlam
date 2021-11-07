@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SharedService } from '../shared.service';
 @Component({
@@ -8,7 +9,11 @@ import { SharedService } from '../shared.service';
 })
 export class CarouselComponent implements OnInit {
   images: string[] = [];
-  constructor(config: NgbCarouselConfig, private sharedService: SharedService) {
+  constructor(
+    config: NgbCarouselConfig,
+    private sharedService: SharedService,
+    public sanitizer: DomSanitizer
+  ) {
     config.interval = 2000;
     config.keyboard = true;
     config.pauseOnHover = true;

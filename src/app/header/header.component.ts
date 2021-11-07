@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('sideBar') sideBar: ElementRef;
   @ViewChild('searchBox') searchBox: ElementRef;
   cartCountSubscription: Subscription;
-  className: String = '';
+  className: string = '';
   cartCount: number = 0;
   constructor(
     private cartService: CartService,

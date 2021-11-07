@@ -30,7 +30,7 @@ export class AddresslistComponent implements OnInit, OnDestroy {
       });
   }
 
-  DeleteAddress(id: String) {
+  DeleteAddress(id: string) {
     this.addressService.deleteAddress(id).then((res) => {
       console.log('Success');
     });

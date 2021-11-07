@@ -1,6 +1,5 @@
 export const countries = [
   { name: 'Afghanistan', code: 'AF' },
-  { name: 'land Islands', code: 'AX' },
   { name: 'Albania', code: 'AL' },
   { name: 'Algeria', code: 'DZ' },
   { name: 'American Samoa', code: 'AS' },
@@ -114,7 +113,6 @@ export const countries = [
   { name: 'Kazakhstan', code: 'KZ' },
   { name: 'Kenya', code: 'KE' },
   { name: 'Kiribati', code: 'KI' },
-  { name: 'Korea, Democratic People"S Republic of', code: 'KP' },
   { name: 'Korea, Republic of', code: 'KR' },
   { name: 'Kuwait', code: 'KW' },
   { name: 'Kyrgyzstan', code: 'KG' },

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    public sharedService: SharedService
+    public sharedService: SharedService,
+    public sanitizer: DomSanitizer
   ) {}
   ngOnInit() {
     this.cartService.getCartItemsList();

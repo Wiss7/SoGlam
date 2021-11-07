@@ -72,7 +72,23 @@
                 id="size"
                 name="size"
                 [(ngModel)]="sizeVal"
+                type="number"
                 #size="ngModel"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="size" class="col-3 col-form-label"
+              >Weight (In Grams)*</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                id="weight"
+                name="weight"
+                [(ngModel)]="weightVal"
+                #weight="ngModel"
                 required
               />
             </div>
@@ -210,7 +226,7 @@
                 class="btn btn-dark mt-2 m-auto"
                 *ngIf="!isUpdating"
               >
-                Save Address
+                Save Product
               </button>
               <button
                 [disabled]
@@ -225,33 +241,31 @@
                 Loading...
               </button>
             </div>
+            <div class="col-6 mt-3">
+              <button
+                type="button"
+                (click)="deleteProduct()"
+                class="btn btn-danger mt-2 m-auto"
+                *ngIf="!isDeleting && id != ''"
+              >
+                Delete Product
+              </button>
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isDeleting"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Deleting...
+              </button>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <ng-template #errorContent let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">An Error Has Occurred!</h4>
-      <button
-        type="button"
-        class="close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <b>Something went wrong. Please try again later! </b>
-      <br />
-      <button
-        type="button"
-        class="btn btn-outline-dark mt-3"
-        (click)="modal.close('Save click')"
-      >
-        Close
-      </button>
-    </div>
-  </ng-template>
 </div>

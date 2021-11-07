@@ -21,7 +21,7 @@
         >
           <div class="col-3 col-sm-2">
             <img
-              [src]="getImageUrl(i)"
+              [src]="sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))"
               alt=""
               width="70"
               class="img-responsive rounded shadow-sm"
