@@ -21,12 +21,16 @@ export class AdminService {
     currencyRate: number,
     discountFirstOrder: number,
     discountPct: number,
-    images: string
+    images: string,
+    lebanonShippingFee: number,
+    shippingRateCurrency: number
   ) {
     this.sharedService.settings[0].currencyRate = currencyRate;
     this.sharedService.settings[0].discountFirstOrder = discountFirstOrder;
     this.sharedService.settings[0].discountPct = discountPct;
     this.sharedService.settings[0].images = images;
+    this.sharedService.settings[0].lebanonShippingFee = lebanonShippingFee;
+    this.sharedService.settings[0].shippingRateCurrency = shippingRateCurrency;
     return this.firestore
       .doc('Settings/' + this.sharedService.settings[0].id)
       .update(this.sharedService.settings[0]);

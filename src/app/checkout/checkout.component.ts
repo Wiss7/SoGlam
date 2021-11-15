@@ -27,12 +27,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   cart: CartItem[] = [];
   payment: string = 'Cash on Delivery';
   addressSubscription: Subscription;
+  currencySubscription: Subscription;
   addresslist: Address[] = [];
   address: string;
+  addressDet: Address;
   isAddressEmpty: boolean = false;
   order: Order;
   orders: Order[] = [];
   isCheckingOut: boolean = false;
+  subtotal: number = 0;
+  grandtotal: number = 0;
+  discount: number = 0;
+  shippingfee: number = 0;
+  isShippingAvailable: boolean = true;
+  shippingRates: {
+    country: string;
+    region: string;
+    countryCode: string;
+    weight: string;
+    price: string;
+  }[];
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -43,6 +57,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     public sanitizer: DomSanitizer
   ) {}
   ngOnInit() {
+    this.shippingRates = shippingRates;
     this.cartService.getCartItemsList();
     this.cartSubscription = this.cartService.cartItemsChanged.subscribe(
       (cartItems) => {
@@ -84,7 +99,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                       };
                     });
 
+                    this.getTotalBill();
                     this.isLoading = false;
+                    this.currencySubscription =
+                      this.sharedService.currencyChanged.subscribe((data) => {
+                        this.getTotalBill();
+                      });
                   });
               });
           });
@@ -92,6 +112,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     );
   }
 
+  getTotalBill() {
+    this.getSubtotal();
+    this.getDiscount();
+    this.getShippingFee();
+    this.getGrandTotal();
+  }
   getImageUrl(index: number) {
     let imagePath: string = '';
     const defaultImg = this.products[index].images.filter(
@@ -106,6 +132,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     if (this.productSubscription) this.productSubscription.unsubscribe();
     if (this.cartSubscription) this.cartSubscription.unsubscribe();
     if (this.orderSubscription) this.orderSubscription.unsubscribe();
+    if (this.currencySubscription) this.orderSubscription.unsubscribe();
   }
   getQuantity(productId: string) {
     const index = this.cart.findIndex((item) => {
@@ -124,7 +151,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       else
         subtotal = +subtotal + +(element.price * this.getQuantity(element.id));
     });
-    return subtotal;
+    this.subtotal = subtotal * this.sharedService.currencyRate;
   }
 
   getDiscount() {
@@ -133,56 +160,98 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.sharedService.settings[0].discountFirstOrder >
         this.sharedService.settings[0].discountPct
       )
-        return (
-          (this.getSubtotal() *
-            this.sharedService.settings[0].discountFirstOrder) /
-          100
-        );
+        this.discount =
+          (this.subtotal * this.sharedService.settings[0].discountFirstOrder) /
+          100;
       else
-        return (
-          (this.getSubtotal() * this.sharedService.settings[0].discountPct) /
-          100
-        );
+        this.discount =
+          (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
     } else
-      return (
-        (this.getSubtotal() * this.sharedService.settings[0].discountPct) / 100
-      );
+      this.discount =
+        (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
   }
 
   getShippingFee() {
-    if (!this.address || this.address.length === 0) return 0;
+    if (!this.address || this.address.length === 0) this.shippingfee = 0;
+    else {
+      this.isAddressEmpty = false;
+      this.addressDet = this.addresslist.find((a) => a.id === this.address)!;
+      if (this.addressDet.countryCode === 'LB') {
+        this.isShippingAvailable = true;
+        this.shippingfee =
+          this.sharedService.settings[0].lebanonShippingFee *
+          this.sharedService.currencyShippingRate;
+      } else {
+        let totalWeight: number = 0;
+        this.CartItems.forEach((product) => {
+          const index = this.cart.findIndex((item) => {
+            return item.productID === product.id;
+          });
+          const qty = this.cart[index].quantity;
+          totalWeight += product.weight * qty;
+        });
+        debugger;
+        const weightKG = totalWeight / 1000;
+        const shippingWeight = Math.ceil(weightKG * 2) / 2;
 
-    let totalWeight: number = 0;
-
-    const addressDet: Address = this.addresslist.find(
-      (a) => (a.id = this.address)
-    )!;
-
-    this.CartItems.forEach((product) => {
-      const index = this.cart.findIndex((item) => {
-        return item.productID === product.id;
-      });
-      const qty = this.cart[index].quantity;
-      totalWeight += product.weight * qty;
-    });
-
-    return totalWeight;
-
-    //  const shippingRate = shippingRates.filter((rate)=> {
-    //   return
-    // });
-
-    //return shippingRate
+        const shippingDetail = this.shippingRates.filter((rate) => {
+          return (
+            rate.countryCode === this.addressDet.countryCode &&
+            parseFloat(rate.weight) == shippingWeight
+          );
+        });
+        if (shippingDetail.length === 0) {
+          this.isShippingAvailable = false;
+          this.shippingfee = 0;
+          return;
+        }
+        this.isShippingAvailable = true;
+        let shippingRate: number = parseFloat(shippingDetail[0].price);
+        shippingRate += 3;
+        this.shippingfee =
+          shippingRate * this.sharedService.currencyShippingRate;
+      }
+    }
   }
 
   getGrandTotal() {
     let grandTotal: number = 0;
-    grandTotal =
-      this.getSubtotal() - this.getDiscount() + this.getShippingFee();
+    grandTotal = this.subtotal - this.discount + this.shippingfee;
 
-    return grandTotal;
+    this.grandtotal = grandTotal;
   }
-
+  placeOrderRequest() {
+    if (this.CartItems.length == 0) return;
+    if (this.address && this.address.length > 0) {
+      this.isCheckingOut = true;
+      const addressDet: Address = this.addresslist.find(
+        (a) => (a.id = this.address)
+      )!;
+      this.isAddressEmpty = false;
+      const orderDate = new Date();
+      this.order = new Order(
+        addressDet,
+        localStorage.getItem('userId') || '',
+        'Requesting Shipping Fee',
+        orderDate,
+        'COD',
+        this.shippingfee * this.sharedService.currencyRate,
+        this.subtotal,
+        this.sharedService.userCurrency,
+        this.discount,
+        this.grandtotal,
+        this.cart,
+        ''
+      );
+      this.orderService.placeOrder(this.order).then((res) => {
+        this.cartService.clearCart();
+        this.router.navigate(['ordercomplete']);
+      });
+    } else {
+      this.isAddressEmpty = true;
+      this.isCheckingOut = false;
+    }
+  }
   placeOrder() {
     if (this.CartItems.length == 0) return;
     if (this.address && this.address.length > 0) {
@@ -198,11 +267,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         'In Progress',
         orderDate,
         'COD',
-        this.getShippingFee() * this.sharedService.currencyRate,
-        this.getSubtotal() * this.sharedService.currencyRate,
+        this.shippingfee * this.sharedService.currencyRate,
+        this.subtotal,
         this.sharedService.userCurrency,
-        this.getDiscount() * this.sharedService.currencyRate,
-        this.getGrandTotal() * this.sharedService.currencyRate,
+        this.discount,
+        this.grandtotal,
         this.cart,
         ''
       );

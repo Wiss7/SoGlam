@@ -12,6 +12,8 @@ export class SettingsComponent implements OnInit {
   totalDiscountVal: number = 0;
   firstOrderDiscountVal: number = 0;
   currencyRateVal: number = 0;
+  currencyShippingRateVal: number = 0;
+  shipFeeLebVal: number = 0;
   imagesVal: string = '';
   constructor(
     private sharedService: SharedService,
@@ -24,6 +26,9 @@ export class SettingsComponent implements OnInit {
     this.firstOrderDiscountVal =
       this.sharedService.settings[0].discountFirstOrder;
     this.imagesVal = this.sharedService.settings[0].images;
+    this.shipFeeLebVal = this.sharedService.settings[0].lebanonShippingFee;
+    this.currencyShippingRateVal =
+      this.sharedService.settings[0].shippingRateCurrency;
   }
   UpdateSettings() {
     this.isUpdating = true;
@@ -32,7 +37,9 @@ export class SettingsComponent implements OnInit {
         this.currencyRateVal,
         this.firstOrderDiscountVal,
         this.totalDiscountVal,
-        this.imagesVal
+        this.imagesVal,
+        this.shipFeeLebVal,
+        this.currencyShippingRateVal
       )
       .then(
         (res) => {

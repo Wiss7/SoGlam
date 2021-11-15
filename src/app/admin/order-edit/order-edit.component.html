@@ -64,6 +64,8 @@
         <div class="d-flex align-items-center justify-content-between my-3">
           <h5>Shipped To:</h5>
         </div>
+        <p>{{ order.address.firstName + " " + order.address.lastName }}</p>
+        <p>{{ order.address.phone }}</p>
         <p>{{ order.address.title }}</p>
         <p>
           {{
@@ -130,6 +132,7 @@
               <option>In Progress</option>
               <option>Cancelled</option>
               <option>Completed</option>
+              <option>Requesting Shipping Fee</option>
             </select>
           </h6>
         </div>

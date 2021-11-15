@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { User } from './auth/user.model';
 import { Settings } from './home/settings.model';
 @Injectable({ providedIn: 'root' })
@@ -12,8 +12,10 @@ export class SharedService {
   userSubscription: Subscription;
   userCurrency: string = 'USD';
   currencyRate: number = 1;
+  currencyShippingRate: number = 1;
   isSettingsLoading: boolean = true;
   isCurrencyLoading: boolean = true;
+  currencyChanged = new Subject();
   constructor(
     public firestore: AngularFirestore,
     public firebaseAuth: AngularFireAuth
@@ -47,12 +49,15 @@ export class SharedService {
       localStorage.setItem('userCurrency', 'USD');
       this.userCurrency = 'USD';
       this.currencyRate = 1;
+      this.currencyShippingRate = 1;
     } else {
       this.userCurrency = localStorage.getItem('userCurrency') || 'USD';
       if (this.userCurrency === 'USD') {
         this.currencyRate = 1;
+        this.currencyShippingRate = 1;
       } else {
         this.currencyRate = this.settings[0].currencyRate;
+        this.currencyShippingRate = this.settings[0].shippingRateCurrency;
       }
     }
   }
@@ -62,9 +67,12 @@ export class SharedService {
     this.userCurrency = currency;
     if (this.userCurrency === 'USD') {
       this.currencyRate = 1;
+      this.currencyShippingRate = 1;
     } else {
       this.currencyRate = this.settings[0].currencyRate;
+      this.currencyShippingRate = this.settings[0].shippingRateCurrency;
     }
+    this.currencyChanged.next();
   }
 
   ngOnDestroy() {}
