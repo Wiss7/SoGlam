@@ -244,6 +244,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.grandtotal,
         this.cart,
         email,
+        true,
         ''
       );
       this.orderService.placeOrder(this.order).then((res) => {
@@ -281,6 +282,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.grandtotal,
         this.cart,
         email,
+        true,
         ''
       );
       this.orderService.placeOrder(this.order).then((res) => {

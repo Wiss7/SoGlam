@@ -21,7 +21,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let msg of messages; let i = index">
+              <tr
+                *ngFor="let msg of messages; let i = index"
+                [ngClass]="msg.isNew == true ? 'isNew' : ''"
+              >
                 <td>{{ msg.name }}</td>
                 <td>{{ msg.email }}</td>
                 <td>{{ msg.phone }}</td>

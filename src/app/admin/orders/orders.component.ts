@@ -39,6 +39,11 @@ export class OrdersComponent implements OnInit {
     localStorage.setItem('order', JSON.stringify(this.Orders[index]));
     setTimeout(() => {
       this.router.navigate(['/admin/orderedit']);
+      if (this.Orders[index].isNew) {
+        this.adminService.updateOrderNew(this.Orders[index].id!).then(() => {
+          this.Orders[index].isNew = false;
+        });
+      }
     }, 500);
   }
 

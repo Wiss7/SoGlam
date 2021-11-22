@@ -59,6 +59,11 @@ export class MessagesComponent implements OnInit, OnDestroy {
       return data.id === id;
     })!;
     this.open(this.messageDetailsContent);
+    if (this.selectedMessage.isNew) {
+      this.adminService.updateMessage(this.selectedMessage.id!).then(() => {
+        this.selectedMessage.isNew = false;
+      });
+    }
   }
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });

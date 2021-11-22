@@ -23,7 +23,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of Orders; let i = index">
+              <tr
+                *ngFor="let order of Orders; let i = index"
+                [ngClass]="order.isNew == true ? 'isNew' : ''"
+              >
                 <td>{{ order.id }}</td>
                 <td>
                   {{

@@ -17,6 +17,10 @@ export class AdminService {
     return this.firestore.doc('Messages/' + id).delete();
   }
 
+  updateMessage(messageID: string) {
+    return this.firestore.doc('Messages/' + messageID).update({ isNew: false });
+  }
+
   updateSettings(
     currencyRate: number,
     discountFirstOrder: number,
@@ -50,6 +54,10 @@ export class AdminService {
     return this.firestore
       .doc('Orders/' + order.id)
       .update({ status: order.status });
+  }
+
+  updateOrderNew(orderID: string) {
+    return this.firestore.doc('Orders/' + orderID).update({ isNew: false });
   }
 
   updateProduct(product: Product) {

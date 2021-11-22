@@ -15,6 +15,7 @@ export class Order {
     public grandTotal: number,
     public items: CartItem[],
     public email: string,
+    public isNew: boolean,
     public id?: string
   ) {}
 }
