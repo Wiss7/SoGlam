@@ -1,7 +1,19 @@
 <a class="d-inline ml-1" (click)="scrollLeft()"
   ><span class="material-icons">navigate_before</span></a
 >
-<div #widgetsContent class="custom-slider-main">
+<div
+  #widgetsContent
+  class="custom-slider-main"
+  #elemt
+  (mousedown)="startDragging($event, false, elemt)"
+  (mouseup)="stopDragging($event, false)"
+  (mouseleave)="stopDragging($event, false)"
+  (mousemove)="moveEvent($event, elemt)"
+  (touchstart)="startDragging($event, false, elemt)"
+  (touchend)="stopDragging($event, false)"
+  (touchleave)="stopDragging($event, false)"
+  (touchmove)="moveEvent($event, elemt)"
+>
   <div class="info-box" *ngFor="let product of products; let i = index">
     <app-product-card
       [product]="product"

@@ -3,6 +3,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,6 +18,7 @@ import { ProductService } from '../shop/product.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('sideBar') sideBar: ElementRef;
+  @ViewChild('storeInfo') storeInfo: ElementRef;
   @ViewChild('searchBox') searchBox: ElementRef;
   cartCountSubscription: Subscription;
   className: string = '';
@@ -24,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
   ) {}
   ngOnInit() {
     this.cartCount = this.cartService.getCartItemsListCount();
@@ -36,6 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cartCountSubscription.unsubscribe();
   }
   searchProducts(searchInput: string) {
+    this.ToggleSearchBar();
     searchInput = searchInput.replace(/[^a-zA-Z ]/g, '').trim();
     if (searchInput == '') return;
     this.router.navigate(['search']);
@@ -49,7 +53,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         'active',
         ''
       );
-    else this.sideBar.nativeElement.className = this.className + ' active';
+    else {
+      const element = document.querySelector('.sticky-top')!;
+      if (element !== null && element instanceof HTMLElement) {
+        this.sideBar.nativeElement.className = this.className + ' active';
+        this.renderer.setStyle(this.sideBar.nativeElement, 'top', `0px`);
+      }
+    }
   }
 
   ToggleSearchBar() {
@@ -59,11 +69,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
         'active',
         ''
       );
-    else this.searchBox.nativeElement.className = this.className + ' active';
+    else {
+      const element = document.querySelector('.sticky-top')!;
+      if (element !== null && element instanceof HTMLElement) {
+        this.searchBox.nativeElement.className = this.className + ' active ';
+        this.renderer.setStyle(
+          this.searchBox.nativeElement,
+          'top',
+          `${element.getBoundingClientRect().top}px`
+        );
+      }
+    }
   }
 
   showadmin() {
     const userId = localStorage.getItem('userId') || '';
     return userId === 'oZ6pFWRMKWMbG48SuniMcLut4mt2';
+  }
+
+  toggleInfo() {
+    this.className = this.storeInfo.nativeElement.className;
+    if (this.className.indexOf('active') >= 0)
+      this.storeInfo.nativeElement.className = this.className.replace(
+        'active',
+        ''
+      );
+    else this.storeInfo.nativeElement.className = this.className + ' active';
   }
 }

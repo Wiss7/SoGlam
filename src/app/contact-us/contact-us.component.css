@@ -4,16 +4,17 @@
 
 .info-text {
   margin-top: 0%;
-  width: max-content;
-  display: inline-block;
-  margin-left: 20px;
-  font-size: 24px;
-  font-weight: bold;
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: 600;
   font-family: fangsong;
   position: relative;
   top: -27%;
 }
 
+.info-text a {
+  color: #212529;
+}
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }

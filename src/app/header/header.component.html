@@ -1,37 +1,171 @@
-<nav
-  class="navbar navbar-expand-md navbar-light main-menu"
-  style="box-shadow: none"
->
-  <div class="container-md">
+<div class="sticky-top">
+  <nav
+    class="navbar navbar-expand-md navbar-light main-menu"
+    style="box-shadow: none"
+  >
+    <div class="container-fluid">
+      <button
+        type="button"
+        id="sidebarCollapse"
+        class="btn btn-link d-block d-md-none"
+        (click)="ToggleMobileMenu()"
+      >
+        <span class="material-icons"> menu </span>
+      </button>
+
+      <a class="navbar-brand" routerLink="/" class="d-none d-md-block mr-auto">
+        <img
+          src="../../assets/images/SoGlamLogo.png"
+          alt="So Glam"
+          width="80px"
+          height="80px"
+        />
+        <img
+          src="../../assets/images/SoGlamSlogan.png"
+          alt="So Glam"
+          height="37px"
+          width="138px"
+        />
+      </a>
+      <a class="navbar-brand" class="d-block d-md-none mr-auto logo-link">
+        <img
+          src="../../assets/images/SoGlamLogo.png"
+          alt="So Glam"
+          width="40px"
+          height="40px"
+          class="logo"
+        />
+        <img
+          src="../../assets/images/SoGlamSlogan.png"
+          alt="So Glam"
+          height="24px"
+          width="80px"
+          class="slogan"
+        />
+      </a>
+      <div class="header-icons">
+        <a routerLink="/account/profile">
+          <span class="material-icons md-48"> person </span>
+        </a>
+        <a routerLink="/cart">
+          <span class="material-icons"> shopping_cart </span>
+          <span class="cart-count" *ngIf="cartCount > 0"
+            >({{ cartCount }})</span
+          >
+        </a>
+        <a>
+          <span class="material-icons" routerLink="/wishlist"> favorite </span>
+        </a>
+        <div class="d-inline d-md-none">
+          <a (click)="ToggleSearchBar()">
+            <span class="material-icons"> search </span>
+          </a>
+          <div class="mobile-search-box" #searchBox>
+            <button
+              class="prev-btn btn-transparent"
+              (click)="ToggleSearchBar()"
+            >
+              <span class="material-icons">keyboard_backspace</span>
+            </button>
+            <form class="mobile-search-form">
+              <input
+                type="text"
+                value=""
+                name="search"
+                placeholder="Search"
+                class="search-box-input"
+                #mobileSearchText
+              />
+              <button
+                class="btn-transparent"
+                (click)="searchProducts(mobileSearchText.value)"
+              >
+                <span class="material-icons"> search </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <form class="search-box d-md-inline d-none">
+        <input
+          type="text"
+          value=""
+          name="search"
+          placeholder="Search"
+          #SearchText
+        />
+
+        <button
+          class="search-icon-btn"
+          (click)="searchProducts(SearchText.value)"
+        >
+          <span class="material-icons"> search </span>
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sub-menu sticky-top">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mx-auto">
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/shop">Shop</a>
+          </li>
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link" routerLink="/aboutus">About Us</a>
+          </li>
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link" routerLink="/contactus">Contact Us</a>
+          </li>
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link" routerLink="/admin" *ngIf="showadmin()"
+              >Admin</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- Sidebar -->
+<nav id="sidebar" #sideBar>
+  <div class="sidebar-header">
     <button
       type="button"
       id="sidebarCollapse"
-      class="btn btn-link d-block d-md-none"
+      class="btn btn-link"
       (click)="ToggleMobileMenu()"
     >
       <span class="material-icons"> menu </span>
     </button>
 
-    <a class="navbar-brand" routerLink="/" class="d-none d-md-block mr-auto">
-      <img
-        src="../../assets/images/SoGlamLogo.png"
-        alt="So Glam"
-        width="80px"
-        height="80px"
-      />
-      <img
-        src="../../assets/images/SoGlamSlogan.png"
-        alt="So Glam"
-        height="37px"
-        width="138px"
-      />
-    </a>
-    <a class="navbar-brand" class="d-block d-md-none mr-auto">
+    <a class="navbar-brand" class="mr-auto">
       <img
         src="../../assets/images/SoGlamLogo.png"
         alt="So Glam"
         width="40px"
         height="40px"
+        class="logo"
       />
       <img
         src="../../assets/images/SoGlamSlogan.png"
@@ -40,105 +174,7 @@
         width="80px"
       />
     </a>
-    <div class="header-icons">
-      <a routerLink="/account/profile">
-        <span class="material-icons md-48"> person </span>
-      </a>
-      <a routerLink="/cart">
-        <span class="material-icons"> shopping_cart </span>
-        <span class="cart-count" *ngIf="cartCount > 0">({{ cartCount }})</span>
-      </a>
-      <a>
-        <span class="material-icons" routerLink="/wishlist"> favorite </span>
-      </a>
-      <div class="d-inline d-md-none">
-        <a (click)="ToggleSearchBar()">
-          <span class="material-icons"> search </span>
-        </a>
-        <div class="mobile-search-box" #searchBox>
-          <button class="prev-btn btn-transparent" (click)="ToggleSearchBar()">
-            <span class="material-icons">keyboard_backspace</span>
-          </button>
-          <form class="mobile-search-form">
-            <input
-              type="text"
-              value=""
-              name="search"
-              placeholder="Search"
-              class="search-box-input"
-              #mobileSearchText
-            />
-            <button
-              class="btn-transparent"
-              (click)="searchProducts(mobileSearchText.value)"
-            >
-              <span class="material-icons"> search </span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <form class="search-box d-md-inline d-none">
-      <input
-        type="text"
-        value=""
-        name="search"
-        placeholder="Search"
-        #SearchText
-      />
-
-      <button
-        class="search-icon-btn"
-        (click)="searchProducts(SearchText.value)"
-      >
-        <span class="material-icons"> search </span>
-      </button>
-    </form>
   </div>
-</nav>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sub-menu">
-  <div class="container">
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav mx-auto">
-        <li
-          class="nav-item"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a class="nav-link" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/shop">Shop</a>
-        </li>
-        <li
-          class="nav-item"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a class="nav-link" routerLink="/aboutus">About Us</a>
-        </li>
-        <li
-          class="nav-item"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a class="nav-link" routerLink="/contactus">Contact Us</a>
-        </li>
-        <li
-          class="nav-item"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a class="nav-link" routerLink="/admin" *ngIf="showadmin()">Admin</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Sidebar -->
-<nav id="sidebar" #sideBar>
   <ul class="list-unstyled components links">
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/" (click)="ToggleMobileMenu()"
@@ -189,4 +225,28 @@
       >
     </li>
   </ul>
+  <div class="info" #storeInfo>
+    <a (click)="toggleInfo()"><span class="material-icons">close</span></a>
+    <p>
+      00961 76 73 99 11 <br />BEIRUT, LEBANON<br />
+      WE ARE OPEN FROM MONDAY TILL FRIDAY 9:00 AM TILL 3:00 PM <br />
+      NEED HELP? SO_GLAM@OUTLOOK.COM
+    </p>
+  </div>
+  <div class="store-info">
+    <a href="tel:+961 76 739 911">
+      <span class="material-icons">phone</span>
+    </a>
+    <a href="mailto: so_glam@outlook.com"
+      ><span class="material-icons">email</span></a
+    >
+    <a
+      href="https://www.google.com/maps?q=33.8680241,35.5228798&z=17&hl=en"
+      target="_blank"
+      ><span class="material-icons">location_on</span></a
+    >
+    <a (click)="toggleInfo()"
+      ><span class="material-icons">info_outline</span></a
+    >
+  </div>
 </nav>

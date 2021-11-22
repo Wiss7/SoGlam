@@ -1,12 +1,54 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-6">
-      <span class="material-icons"> email </span>
-      <div class="info-text">so_glam@outlook.com</div>
+    <div class="col-md-6 col-lg-4">
+      <table>
+        <tr>
+          <td>
+            <span class="material-icons"> email </span>
+          </td>
+          <td>
+            <div class="info-text">
+              <a href="mailto: so_glam@outlook.com">so_glam@outlook.com</a>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
-    <div class="col-md-6">
-      <span class="material-icons"> phone </span>
-      <div class="info-text">+961 76 739 911</div>
+    <div class="col-md-6 col-lg-4 order-md-2">
+      <table>
+        <tr>
+          <td>
+            <span class="material-icons"> phone </span>
+          </td>
+          <td>
+            <div class="info-text">
+              <a href="tel:+961 76 739 911">+961 76 739 911</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6 col-lg-4 order-md-1 order-3 order-lg-3">
+      <table>
+        <tr>
+          <td style="vertical-align: top">
+            <span class="material-icons">location_on</span>
+          </td>
+          <td>
+            <div class="info-text">
+              <a
+                href="https://www.google.com/maps?q=33.8680241,35.5228798&z=17&hl=en"
+                target="_blank"
+              >
+                Ain El remmeneh<br />
+                Ghandour Semaan Street<br />
+                next to Residence de la ville<br />
+                Ground level
+              </a>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
   <form #f="ngForm" (ngSubmit)="SendMessage()" class="mt-5 mb-5">

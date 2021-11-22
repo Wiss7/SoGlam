@@ -42,6 +42,7 @@ import { OrdersComponent } from './admin/orders/orders.component';
 import { OrderEditComponent } from './admin/order-edit/order-edit.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { EditProductsComponent } from './admin/edit-products/edit-products.component';
+import { FaqComponent } from './faq/faq.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +77,7 @@ import { EditProductsComponent } from './admin/edit-products/edit-products.compo
     OrderEditComponent,
     AdminProductsComponent,
     EditProductsComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

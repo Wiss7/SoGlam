@@ -25,7 +25,7 @@
 
     <!-- Shopping cart table -->
     <div class="row mb-5">
-      <div class="container-fluid">
+      <div class="container-fluid d-none d-sm-block">
         <div
           class="row cart-row"
           *ngFor="let product of CartItems; let i = index"
@@ -38,17 +38,12 @@
               class="img-responsive rounded shadow-sm"
             />
           </div>
-          <div
-            class="col-12 order-1 order-sm-0 text-left text-sm-center col-sm-3"
-          >
+          <div class="col-12 text-left text-sm-center col-sm-3">
             <h5 class="mb-0">
               <p href="#" class="text-dark d-inline-block align-middle">
                 {{ product.name }}
               </p>
             </h5>
-            <span class="text-muted font-weight-normal font-italic d-block">{{
-              product.type
-            }}</span>
 
             <b *ngIf="!product.isOnSale">{{
               product.price * sharedService.currencyRate +
@@ -98,13 +93,67 @@
             </b>
             <p><small>Item Total</small></p>
           </div>
-          <div class="col-1 col-sm-1">
+          <div class="col-1">
             <a
               (click)="deleteFromCart(product.id)"
               class="text-dark"
               style="cursor: pointer"
               ><i class="material-icons">delete</i></a
             >
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid d-block d-sm-none">
+        <div
+          class="row cart-row"
+          *ngFor="let product of CartItems; let i = index"
+        >
+          <div style="width: 100px">
+            <img
+              [src]="sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))"
+              alt=""
+              width="70"
+              class="img-responsive rounded shadow-sm"
+            />
+          </div>
+          <div style="width: calc(100vw - 140px)">
+            <h5 class="mb-0">
+              <p href="#" class="text-dark d-inline-block align-middle">
+                {{ product.name }}
+              </p>
+            </h5>
+            <div>
+              <b *ngIf="!product.isOnSale">{{
+                product.price * sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}</b>
+              <b *ngIf="product.isOnSale">{{
+                product.discountPrice * sharedService.currencyRate +
+                  " " +
+                  sharedService.userCurrency
+              }}</b>
+            </div>
+            <div style="margin-top: 10px">
+              <input
+                type="number"
+                id="txtQuantity"
+                [value]="getQuantity(product.id)"
+                (change)="updateQuantity(product.id, $any($event.target).value)"
+                onkeydown="return false"
+                min="1"
+                placeholder="Quantity"
+                class="txtquantity"
+                #qty
+              />
+              <a
+                (click)="deleteFromCart(product.id)"
+                class="text-dark"
+                style="cursor: pointer; vertical-align: middle"
+                ><i class="material-icons">delete</i></a
+              >
+            </div>
           </div>
         </div>
       </div>

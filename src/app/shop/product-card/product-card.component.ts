@@ -18,6 +18,10 @@ import { Product } from '../product.model';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit, AfterViewInit {
+  mousePosition = {
+    x: 0,
+    y: 0,
+  };
   @Input() product: Product;
   @Input() index: number;
   @ViewChild('productImg') Img: ElementRef;
@@ -44,10 +48,19 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
 
     this.Img.nativeElement.src = imagePath;
   }
+  mouseDown($event) {
+    this.mousePosition.x = $event.screenX;
+    this.mousePosition.y = $event.screenY;
+  }
 
-  ShowDetails() {
-    if (this.router.url === '/admin/admin-products')
-      this.router.navigate(['admin/product-edit', this.index]);
-    else this.router.navigate(['shop', this.index]);
+  ShowDetails($event) {
+    if (
+      this.mousePosition.x === $event.screenX &&
+      this.mousePosition.y === $event.screenY
+    ) {
+      if (this.router.url === '/admin/admin-products')
+        this.router.navigate(['admin/product-edit', this.index]);
+      else this.router.navigate(['shop', this.index]);
+    }
   }
 }

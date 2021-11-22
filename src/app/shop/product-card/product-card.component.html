@@ -1,4 +1,10 @@
-<div [ngClass]="getRoute()" (click)="ShowDetails(); onCardClick.emit()">
+<div
+  [ngClass]="getRoute()"
+  (click)="ShowDetails($event); onCardClick.emit()"
+  (mousedown)="mouseDown($event)"
+  (touchstart)="mouseDown($event)"
+  style="min-height: 100%"
+>
   <div class="imgContainer">
     <img
       class="card-img-top"
@@ -6,8 +12,20 @@
       alt="Card image cap"
       style="width: 100%"
     />
-    <div class="overlay" (click)="ShowDetails(); onCardClick.emit()"></div>
-    <div class="btnView" (click)="ShowDetails(); onCardClick.emit()">View</div>
+    <div
+      class="overlay"
+      (click)="ShowDetails($event); onCardClick.emit()"
+      (mousedown)="mouseDown($event)"
+      (touchstart)="mouseDown($event)"
+    ></div>
+    <div
+      class="btnView"
+      (click)="ShowDetails($event); onCardClick.emit()"
+      (mousedown)="mouseDown($event)"
+      (touchstart)="mouseDown($event)"
+    >
+      View
+    </div>
   </div>
   <div class="card-body">
     <p class="card-text">{{ product.type }}</p>

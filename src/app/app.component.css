@@ -11,3 +11,33 @@
   cursor: pointer;
   font-weight: 700;
 }
+
+.header-text {
+  width: 100vw;
+  background-color: blueviolet;
+  animation: blinkingText 2s infinite !important;
+  min-height: 30px;
+  padding: 5px 15%;
+  text-align: center;
+  white-space: pre-wrap;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+@keyframes blinkingText {
+  0% {
+    background-color: rgba(197, 140, 200, 0.6);
+  }
+
+  50% {
+    background-color: rgba(197, 140, 200, 0.7);
+  }
+
+  75% {
+    background-color: rgba(197, 140, 200, 0.75);
+  }
+
+  100% {
+    background-color: rgba(197, 140, 200, 1);
+  }
+}

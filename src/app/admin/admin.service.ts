@@ -23,7 +23,8 @@ export class AdminService {
     discountPct: number,
     images: string,
     lebanonShippingFee: number,
-    shippingRateCurrency: number
+    shippingRateCurrency: number,
+    headerText: string
   ) {
     this.sharedService.settings[0].currencyRate = currencyRate;
     this.sharedService.settings[0].discountFirstOrder = discountFirstOrder;
@@ -31,6 +32,7 @@ export class AdminService {
     this.sharedService.settings[0].images = images;
     this.sharedService.settings[0].lebanonShippingFee = lebanonShippingFee;
     this.sharedService.settings[0].shippingRateCurrency = shippingRateCurrency;
+    this.sharedService.settings[0].headerText = headerText;
     return this.firestore
       .doc('Settings/' + this.sharedService.settings[0].id)
       .update(this.sharedService.settings[0]);
@@ -51,7 +53,6 @@ export class AdminService {
   }
 
   updateProduct(product: Product) {
-    debugger;
     return this.firestore
       .doc('Products/' + product.id)
       .update(Object.assign({}, product));

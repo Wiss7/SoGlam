@@ -15,6 +15,7 @@ export class SettingsComponent implements OnInit {
   currencyShippingRateVal: number = 0;
   shipFeeLebVal: number = 0;
   imagesVal: string = '';
+  headerTextVal: string = '';
   constructor(
     private sharedService: SharedService,
     private adminService: AdminService
@@ -29,6 +30,7 @@ export class SettingsComponent implements OnInit {
     this.shipFeeLebVal = this.sharedService.settings[0].lebanonShippingFee;
     this.currencyShippingRateVal =
       this.sharedService.settings[0].shippingRateCurrency;
+    this.headerTextVal = this.sharedService.settings[0].headerText;
   }
   UpdateSettings() {
     this.isUpdating = true;
@@ -39,7 +41,8 @@ export class SettingsComponent implements OnInit {
         this.totalDiscountVal,
         this.imagesVal,
         this.shipFeeLebVal,
-        this.currencyShippingRateVal
+        this.currencyShippingRateVal,
+        this.headerTextVal
       )
       .then(
         (res) => {

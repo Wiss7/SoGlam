@@ -16,7 +16,7 @@
     <div class="row mb-5">
       <div class="col-12">
         <div
-          class="row cart-row"
+          class="row cart-row d-none d-sm-flex"
           *ngFor="let product of CartItems; let i = index"
         >
           <div class="col-3 col-sm-2">
@@ -28,17 +28,13 @@
             />
           </div>
           <div
-            class="col-12 order-1 order-sm-0 text-left text-sm-center col-sm-3"
+            class="col-12 order-1 order-sm-0 text-left text-sm-center col-sm-5"
           >
             <h5 class="mb-0">
               <p href="#" class="text-dark d-inline-block align-middle">
                 {{ product.name }}
               </p>
             </h5>
-            <span class="text-muted font-weight-normal font-italic d-block">{{
-              product.type
-            }}</span>
-
             <b *ngIf="!product.isOnSale">{{
               product.price * sharedService.currencyRate +
                 " " +
@@ -84,6 +80,47 @@
             <p><small>Item Total</small></p>
           </div>
         </div>
+
+        <div class="row cart-row d-block d-sm-none">
+          <div
+            class="row cart-row"
+            *ngFor="let product of CartItems; let i = index"
+          >
+            <div style="width: 100px">
+              <img
+                [src]="sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))"
+                alt=""
+                width="70"
+                class="img-responsive rounded shadow-sm"
+              />
+            </div>
+            <div style="width: calc(100vw - 140px)">
+              <h5 class="mb-0">
+                <p href="#" class="text-dark d-inline-block align-middle">
+                  {{ product.name }}
+                </p>
+              </h5>
+              <div>
+                <b *ngIf="!product.isOnSale">{{
+                  product.price * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}</b>
+                <b *ngIf="product.isOnSale">{{
+                  product.discountPrice * sharedService.currencyRate +
+                    " " +
+                    sharedService.userCurrency
+                }}</b>
+              </div>
+              <div style="margin-top: 10px">
+                Quantity:
+                <b>
+                  {{ getQuantity(product.id) }}
+                </b>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- END -->
@@ -123,6 +160,7 @@
                     {{ address.title }}
                   </option>
                 </select>
+                <br />
                 <span
                   id="rfvAddress"
                   *ngIf="isAddressEmpty"
@@ -130,14 +168,14 @@
                 >
                   Select an address to continue</span
                 >
-              </div>
-
-              <div>
-                <a
-                  class="btn btn-dark"
-                  [routerLink]="['/account', 'address', '0']"
-                  >New Address</a
-                >
+                <br />
+                <div>
+                  <a
+                    class="btn btn-dark"
+                    [routerLink]="['/account', 'address', '0']"
+                    >New Address</a
+                  >
+                </div>
               </div>
             </div>
           </div>

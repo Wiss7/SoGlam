@@ -70,6 +70,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   AddToCart(productId?: string) {
+    debugger;
     if (this.isLoggedIn) {
       this.isAddingCart = true;
       if (!productId) {
@@ -78,9 +79,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       }
       var quantity = this.qty.nativeElement.value;
       this.cartService.addToCartDB(productId, quantity)?.then((res) => {
+        this.isAddingCart = false;
         this.open(this.cartModal);
       });
-      this.isAddingCart = false;
     } else {
       this.isAddingCart = true;
       if (!productId) {

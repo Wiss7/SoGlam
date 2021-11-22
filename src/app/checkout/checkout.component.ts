@@ -190,7 +190,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           const qty = this.cart[index].quantity;
           totalWeight += product.weight * qty;
         });
-        debugger;
         const weightKG = totalWeight / 1000;
         const shippingWeight = Math.ceil(weightKG * 2) / 2;
 
@@ -229,6 +228,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       )!;
       this.isAddressEmpty = false;
       const orderDate = new Date();
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      let email = '';
+      if (user) email = user.email;
       this.order = new Order(
         addressDet,
         localStorage.getItem('userId') || '',
@@ -241,6 +243,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.discount,
         this.grandtotal,
         this.cart,
+        email,
         ''
       );
       this.orderService.placeOrder(this.order).then((res) => {
@@ -254,6 +257,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
   placeOrder() {
     if (this.CartItems.length == 0) return;
+    const user = JSON.parse(localStorage.getItem('user') || '');
+    let email = '';
+    if (user) email = user.email;
+
     if (this.address && this.address.length > 0) {
       this.isCheckingOut = true;
       const addressDet: Address = this.addresslist.find(
@@ -264,7 +271,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.order = new Order(
         addressDet,
         localStorage.getItem('userId') || '',
-        'In Progress',
+        'Pending',
         orderDate,
         'COD',
         this.shippingfee * this.sharedService.currencyRate,
@@ -273,6 +280,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.discount,
         this.grandtotal,
         this.cart,
+        email,
         ''
       );
       this.orderService.placeOrder(this.order).then((res) => {

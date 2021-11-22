@@ -64,7 +64,12 @@
         <div class="d-flex align-items-center justify-content-between my-3">
           <h5>Shipped To:</h5>
         </div>
-        <p>{{ order.address.firstName + " " + order.address.lastName }}</p>
+        <p>
+          <b>{{ order.email }}</b>
+        </p>
+        <p>
+          <b>{{ order.address.firstName + " " + order.address.lastName }}</b>
+        </p>
         <p>{{ order.address.phone }}</p>
         <p>{{ order.address.title }}</p>
         <p>

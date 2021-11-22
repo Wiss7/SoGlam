@@ -1,8 +1,8 @@
 .custom-slider-main {
   display: inline-flex;
   overflow: hidden;
-  scroll-behavior: smooth;
   width: calc(100vw - 130px);
+  cursor: pointer;
 }
 
 .info-box {

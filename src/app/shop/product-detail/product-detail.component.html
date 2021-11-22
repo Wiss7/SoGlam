@@ -111,27 +111,29 @@
             #qty
           />
 
-          <button
-            class="btn btn-dark btn-lg btn-cart"
-            (click)="AddToCart(product.id)"
-            type="button"
-            *ngIf="!isAddingCart"
-          >
-            <span class="material-icons">shopping_cart</span> Add to Cart
-          </button>
-          <button
-            *ngIf="isAddingCart"
-            class="btn btn-dark btn-lg btn-cart"
-            type="button"
-            disabled
-          >
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Loading...
-          </button>
+          <div>
+            <button
+              class="btn btn-dark btn-lg btn-cart"
+              (click)="AddToCart(product.id)"
+              type="button"
+              *ngIf="!isAddingCart"
+            >
+              <span class="material-icons">shopping_cart</span> Add to Cart
+            </button>
+            <button
+              *ngIf="isAddingCart"
+              class="btn btn-dark btn-lg btn-cart"
+              type="button"
+              disabled
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -255,7 +257,6 @@
       />
     </div>
     <h3 style="text-align: center">{{ product.name }}</h3>
-    <div>{{ product.description }}</div>
     <p style="width: 100%" class="price-text" *ngIf="!product.isOnSale">
       {{
         product.price * sharedService.currencyRate +
@@ -286,7 +287,7 @@
       <button
         id="btnCart"
         type="button"
-        class="btn btn-dark"
+        class="btn btn-dark btn-sm"
         routerLink="/cart"
         (click)="modal.dismiss()"
       >
@@ -297,7 +298,7 @@
       <button
         id="btnClose"
         type="button"
-        class="btn btn-dark"
+        class="btn btn-dark btn-sm"
         (click)="modal.dismiss()"
         style="margin: auto"
       >

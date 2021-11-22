@@ -41,6 +41,21 @@
   width: 30%;
 }
 
+.payment-logo {
+  height: 24px;
+  margin: 5px;
+}
+
+.link {
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.close {
+  outline: none;
+}
 @media screen and (max-width: 767px) {
   .mobile-space {
     margin-top: 50px;

@@ -6,6 +6,7 @@ export class Settings {
     public discountPct: number,
     public discountFirstOrder: number,
     public images: string,
+    public headerText: string,
     public id?: string
   ) {}
 }

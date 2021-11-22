@@ -14,6 +14,7 @@ export class Order {
     public discount: number,
     public grandTotal: number,
     public items: CartItem[],
+    public email: string,
     public id?: string
   ) {}
 }

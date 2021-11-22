@@ -8,37 +8,27 @@
 
 <footer>
   <div class="footer-top bg-dark">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-5 col-lg-4">
-          <img
-            class="logo-footer"
-            src="../../assets/images/SoGlamLogo.png"
-            alt="logo-footer"
-          />
-          <div class="slogan">SAFE IN MOTHER NATURE'S HANDS</div>
-          <br />
-          <div class="copyright">
-            © Copyright 2020 So Glam - All Rights Reserved
-          </div>
-        </div>
-        <div class="col-md-5 col-lg-4 offset-lg-1 offset-md-2 mobile-space">
+        <div class="col-md-4 mobile-space">
           <h4 style="margin-bottom: 20px">Quick Links</h4>
           <p><a routerLink="/">Home</a></p>
           <p><a routerLink="/shop">Shop</a></p>
           <p><a routerLink="/aboutus">About Us</a></p>
-          <p><a routerLink="/contactus">Contact Us</a></p>
+          <p><a (click)="open(PPContent)" class="link">Privacy Policy</a></p>
+          <p><a (click)="open(RPContent)" class="link">Refund Policy</a></p>
+          <p><a (click)="open(TOSContent)" class="link">Terms of Service</a></p>
         </div>
 
         <div
           class="
-            col-12 col-lg-3
-            mb-5
+            col-12 col-md-4
             footer-social
             wow
             fadeInUp
             animated
             mobile-space
+            mb-4
           "
           style="visibility: visible; animation-name: fadeInUp"
         >
@@ -65,7 +55,352 @@
             ></span>
           </a>
         </div>
+
+        <div class="col-md-4 mobile-space mb-3">
+          <img
+            class="logo-footer"
+            src="../../assets/images/SoGlamLogo.png"
+            alt="logo-footer"
+          />
+          <div class="slogan">SAFE IN MOTHER NATURE'S HANDS</div>
+          <br />
+          <div class="copyright">
+            © Copyright 2020 So Glam - All Rights Reserved
+          </div>
+          <div>
+            <img src="https://i.ibb.co/T0FD0CP/visa.png" class="payment-logo" />
+            <img
+              src="https://i.ibb.co/M5X82k2/mastercard.png"
+              class="payment-logo"
+            />
+            <img
+              src="https://i.ibb.co/FbHg3D0/maestro.png"
+              class="payment-logo"
+            />
+            <img
+              src="https://i.ibb.co/Fn0HQGb/america-express.jpg"
+              class="payment-logo"
+            />
+            <img
+              src="https://i.ibb.co/G2DdWhw/discover.png"
+              class="payment-logo"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </footer>
+
+<ng-template #RPContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Refund Policy</h4>
+    <br />
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>Returns</h6>
+    <p>
+      Our policy lasts 30 days. If 30 days have gone by since your purchase,
+      unfortunately we can’t offer you a refund or exchange.
+    </p>
+
+    <h6>Refunds (if applicable)</h6>
+    <p>
+      Once your return is received and inspected, we will send you an email to
+      notify you that we have received your returned item. We will also notify
+      you of the approval or rejection of your refund.<br />
+      If you are approved, then your refund will be processed, and a credit will
+      automatically be applied to your credit card or original method of
+      payment, within a certain amount of days.
+    </p>
+    <h6>Late or missing refunds (if applicable)</h6>
+    <p>
+      If you haven’t received a refund yet, first check your bank account
+      again.<br />
+      Then contact your credit card company, it may take some time before your
+      refund is officially posted.<br />
+      Next contact your bank. There is often some processing time before a
+      refund is posted.<br />
+      If you’ve done all of this and you still have not received your refund
+      yet, please contact us at so_glam@outlook.com
+    </p>
+    <h6>Sale items (if applicable)</h6>
+    <p>
+      Only regular priced items may be refunded, unfortunately sale items cannot
+      be refunded.
+    </p>
+
+    <h6>Exchanges (if applicable)</h6>
+    <p>
+      We only replace items if they are defective or damaged. If you need to
+      exchange it for the same item, send us an email at so_glam@outlook.com
+    </p>
+    <h6>Gifts</h6>
+    <p>
+      If the item was marked as a gift when purchased and shipped directly to
+      you, you’ll receive a gift credit for the value of your return. Once the
+      returned item is received, a gift certificate will be mailed to you.
+      <br />
+      If the item wasn’t marked as a gift when purchased, or the gift giver had
+      the order shipped to themselves to give to you later, we will send a
+      refund to the gift giver and he will find out about your return.
+    </p>
+    <h6>Shipping</h6>
+    <p>
+      To return your product, you should mail your product to: Beirut, Lebanon.
+      Ain El remmeneh, Ghandour Semaan Street next to Residence de la ville,
+      Ground level <br />
+
+      You will be responsible for paying for your own shipping costs for
+      returning your item. Shipping costs are non-refundable. If you receive a
+      refund, the cost of return shipping will be deducted from your refund.<br />
+
+      Depending on where you live, the time it may take for your exchanged
+      product to reach you, may vary.<br />
+
+      If you are shipping an item over $25, you should consider using a
+      trackable shipping service or purchasing shipping insurance. We don’t
+      guarantee that we will receive your returned item.<br />
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #PPContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Privacy Policy</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b
+      >You have been registered successfully, please check your email for
+      validation link</b
+    >
+    <br />
+  </div>
+</ng-template>
+
+<ng-template #TOSContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Terms of Service</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      We want to give you the best possible shopping experience and we pride
+      ourselves on delivering high quality handmade beauty products and
+      excellent customer service.
+      <br /><br />
+      Please take a moment to read our Terms of Service carefully before using
+      our website. They will take you through everything from ordering and
+      paying online to further details about us. By accessing or using any part
+      of our site, you agree to be bound by these Terms of Service. If you do
+      not agree to all the terms and conditions of this agreement, then
+      unfortunately you may not access the website or use any of our services.
+    </p>
+
+    <h6>SECTION 1 - ONLINE STORE TERMS</h6>
+    <p>
+      By agreeing to these Terms of Service, you agree that you are 18 years old
+      or older. <br />
+      You may not use our products for any illegal or unauthorized purpose nor
+      may you violate any laws in your jurisdiction (including copyright laws).
+      <br />A violation of any of the Terms will unfortunately result in an
+      immediate termination of your Services.
+    </p>
+    <h6>SECTION 2 - GENERAL CONDITIONS</h6>
+    <p>
+      We reserve the right to refuse service to anyone for any reason at any
+      time.<br />
+      You agree not to reproduce, copy, sell or exploit any part of the Service,
+      use of the Service or any contact on the website through which the service
+      is provided, without express written permission by us.
+    </p>
+    <h6>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION</h6>
+    <p>
+      Please note that we are constantly updating our website to improve the
+      experience for you, our customers. The material on this site is provided
+      for general information only and should not be used as the sole basis for
+      making decisions without consulting primary sources of information. Any
+      reliance on the information on our site is at your own risk.
+    </p>
+    <h6>SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES</h6>
+    <p>
+      On occasion, we may need to change the prices of some of our products.
+      Please not that the prices of our products are subject to change without
+      notice.<br />
+      We reserve the right to modify or discontinue our products without notice
+      at any time.
+    </p>
+    <h6>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</h6>
+    <p>
+      Some of our products may be available exclusively online through our
+      website. We may have limited quantities of these products and they are
+      subject to return or exchange only according to our Returns Policy.<br />
+      We have made every effort to display as accurately as possible the colours
+      and images of our products that appear within our store. However, we of
+      course cannot guarantee that your computer monitor's display of any colour
+      will be accurate.<br />
+      We reserve the right to limit the sales of our products to any person.<br />
+      Unfortunately we cannot guarantee that the quality of any products
+      purchased by you will meet your expectations.
+    </p>
+    <h6>SECTION 6 - ACCURACY OFBILLING AND ACCOUNT INFORMATION</h6>
+    <p>
+      On occasion, we may refuse an order you place with us. We may limit
+      quantities purchased per person, per household or per order. In the event
+      that we make a change to or cancel an order, we will attempt to notify you
+      by contacting the email and/or phone number provided at the time the order
+      was made. We reserve the right to limit or prohibit orders that, in our
+      sole judgment, appear to be placed by dealers, resellers or
+      distributors.<br />
+      You agree to provide current, complete and accurate purchase and account
+      information for all purchases made on our store. You agree to promptly
+      update your account and other information, so that we can complete your
+      transactions and contact you as needed. <br />For more details, please
+      review our Returns Policy.
+    </p>
+    <h6>SECTION 7 - USER COMMENTS AND FEEDBACK</h6>
+    <p></p>
+    If you send creative ideas, suggestions or other materials to us, you agree
+    that we may, edit, copy, publish, distribute, translate and use in any
+    medium any comments that you forward to us. We are under no obligation to
+    maintain any comments in confidence, to pay compensation for any comments or
+    to respond to any comments. <br />
+    We may edit or remove content that we consider to be unlawful, offensive,
+    threatening, libelous, defamatory, pornographic, obscene or otherwise
+    objectionable or violates any party’s intellectual property or these Terms
+    of Service. <br />
+    You agree that your comments will not violate any right of any third-party.
+    You also agree that your comments will not contain libelous or otherwise
+    unlawful, abusive or obscene material, or contain any computer virus or
+    other malware that could in any way affect the operation of the Service or
+    any related website. You may not use a false e-mail address, pretend to be
+    someone other than yourself, or otherwise mislead us or third-parties as to
+    the origin of any comments. You are solely responsible for any comments you
+    make and their accuracy. We take no responsibility and assume no liability
+    for any comments posted by you or any third-party.
+
+    <h6>SECTION 8 - PERSONAL INFORMATION</h6>
+    <p>
+      Your submission of personal information through the store is governed by
+      our Privacy Policy.Please view our Privacy Policy.
+    </p>
+    <h6>SECTION 9 - ERRORS AND INACCURACIES</h6>
+    <p>
+      Occasionally there may be information on our site that contains
+      typographical errors, inaccuracies or omission. We reserve the right to
+      correct any errors and to update information or cancel orders if any
+      information is inaccurate at any time without prior notice. However, we
+      have no obligation to amend information on our site or on any related
+      website, except as required by law.
+    </p>
+    <h6>SECTION 10 - PROHIBITED USES</h6>
+    <p>
+      In addition to other prohibitions as previously mentioned, you are
+      prohibited from using our site or its content: (a) for any unlawful
+      purpose; (b) to solicit others to perform or participate in any unlawful
+      acts; (c) to violate any international, federal, provincial or state
+      regulations, rules, laws, or local ordinances; (d) to infringe upon or
+      violate our intellectual property rights or the intellectual property
+      rights of others; (e) to harass, abuse, insult, harm, defame, slander,
+      disparage, intimidate, or discriminate based on gender, sexual
+      orientation, religion, ethnicity, race, age, national origin, or
+      disability; (f) to submit false or misleading information; (g) to upload
+      or transmit viruses or any other type of malicious code that will or may
+      be used in any way that will affect the functionality or operation of the
+      Service or of any related website, other websites, or the Internet; (h) to
+      collect or track the personal information of others; (i) to spam, phish,
+      pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral
+      purpose; or (k) to interfere with the security features of the Service or
+      any related website, other websites, or the Internet. We reserve the right
+      to terminate your use of the Service or any related website for violating
+      any of the prohibited uses.
+    </p>
+    <h6>SECTION 11 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</h6>
+    <p>
+      We unfortunately cannot guarantee that your use of our service will be
+      uninterrupted, timely, secure or error-free.<br />
+      You agree that we may remove our site for indefinite periods of time or
+      cancel the service at any time, without notice to you.<br />
+      You expressly agree that your use of the service is at your sole risk. The
+      service and all products are provided 'as is' and 'as available' for your
+      use.<br />
+      In no case shall Soglam, our directors, employees, contractors, interns,
+      suppliers, service providers or licensors be liable for any injury, loss,
+      claim, arising from your use of any of the service or any products
+      procured using the service, or for any other claim related in any way to
+      your use of the service or any product. Because some states or
+      jurisdictions do not allow the exclusion or the limitation of liability
+      for consequential or incidental damages, in such states or jurisdictions,
+      our liability shall be limited to the maximum extent permitted by law.
+    </p>
+
+    <h6>SECTION 12 - INDEMNIFICATION</h6>
+    <p>
+      You agree to indemnify, defend and hold harmless Soglam and our parent,
+      subsidiaries, affiliates, partners, officers, directors, agents,
+      contractors, licensors, service providers, subcontractors, suppliers,
+      interns and employees, harmless from any claim or demand, made by any
+      third-party due to your breach of these Terms of Service or the documents
+      they incorporate by reference, or your violation of any law or the rights
+      of a third-party.
+    </p>
+    <h6>SECTION 13 - SEVERABILITY</h6>
+    <p>
+      In the event that any part of these Terms of Service is determined to be
+      unlawful or void, such provision shall be enforceable to the fullest
+      extent permitted by law, and the unenforceable portion shall be severed
+      from these Terms of Service.
+    </p>
+    <h6>SECTION 14 - TERMINATION</h6>
+    <p>
+      These Terms of Service are effective unless terminated by either you or
+      us. You may terminate these Terms of Service at any time by notifying us
+      that you no longer wish to use our Services, or when you stop using our
+      site.<br />
+      If we suspect that you have failed to comply with our Terms of Service, we
+      also may terminate this agreement at any time without notice and you will
+      remain liable for all amounts due up to and including the date of
+      termination; and may deny you access to our Services.
+    </p>
+    <h6>SECTION 15 - ENTIRE AGREEMENT</h6>
+    <p>
+      If we should fail to enforce any part of these Terms of Service, this
+      should not be considered a waiver of this section.<br />
+      These Terms of Service and any policies posted by us on our site
+      constitutes the entire agreement and understanding between you and us and
+      govern your use of the Service.<br />
+      Any ambiguity in the interpretation of our Terms of Service shall not be
+      construed against the drafting party.
+    </p>
+    <h6>SECTION 18 - CHANGES TO TERMS OF SERVICE</h6>
+    <p>
+      We may amend these terms from time to time. If we do, we will replace
+      these terms on our website with our new terms. SECTION 19 - CONTACT
+      INFORMATION Questions about the Terms of Service should be sent to us at
+      so_glam@outlook.com
+    </p>
+  </div>
+</ng-template>
