@@ -124,7 +124,7 @@
   }
 
   #sidebar.active {
-    left: -100% !important;
+    left: -120% !important;
   }
 }
 
@@ -136,7 +136,7 @@
 #sidebar {
   background: #fff;
   top: 81px;
-  left: -100%;
+  left: -120%;
   bottom: 0;
   overflow: auto;
   position: fixed;
@@ -251,11 +251,12 @@ ul.social-icons {
   position: fixed;
   bottom: 51px;
   max-width: 100vw;
+  width: 100vw;
   display: block;
 }
 
 .info span {
-  margin-left: 80vw;
+  margin-left: 85vw;
   display: block;
   color: white;
 }

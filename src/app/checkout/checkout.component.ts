@@ -40,6 +40,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   discount: number = 0;
   shippingfee: number = 0;
   isShippingAvailable: boolean = true;
+  paymentEnabled: boolean = true;
   shippingRates: {
     country: string;
     region: string;
@@ -155,17 +156,28 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getDiscount() {
+    const disc =
+      (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
     if (this.orders.length == 0) {
-      if (
-        this.sharedService.settings[0].discountFirstOrder >
-        this.sharedService.settings[0].discountPct
-      )
+      const subt = this.subtotal / this.sharedService.currencyRate;
+      if (subt <= 25) {
+        if (
+          this.sharedService.settings[0].discountFirstOrder *
+            this.sharedService.currencyRate >
+          disc
+        )
+          this.discount =
+            this.sharedService.settings[0].discountFirstOrder *
+            this.sharedService.currencyRate;
+        else
+          this.discount =
+            (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
+      } else {
         this.discount =
-          (this.subtotal * this.sharedService.settings[0].discountFirstOrder) /
-          100;
-      else
-        this.discount =
-          (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
+          (this.subtotal * this.sharedService.settings[0].discountPct) / 100 +
+          this.sharedService.settings[0].discountFirstOrder *
+            this.sharedService.currencyRate;
+      }
     } else
       this.discount =
         (this.subtotal * this.sharedService.settings[0].discountPct) / 100;
@@ -177,11 +189,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.isAddressEmpty = false;
       this.addressDet = this.addresslist.find((a) => a.id === this.address)!;
       if (this.addressDet.countryCode === 'LB') {
+        this.paymentEnabled = true;
         this.isShippingAvailable = true;
         this.shippingfee =
           this.sharedService.settings[0].lebanonShippingFee *
           this.sharedService.currencyShippingRate;
       } else {
+        this.payment = 'Credit Card';
+        this.paymentEnabled = false;
         let totalWeight: number = 0;
         this.CartItems.forEach((product) => {
           const index = this.cart.findIndex((item) => {
@@ -236,7 +251,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         localStorage.getItem('userId') || '',
         'Requesting Shipping Fee',
         orderDate,
-        'COD',
+        this.payment == 'Cash On Delivery' ? 'COD' : 'CC',
         this.shippingfee * this.sharedService.currencyRate,
         this.subtotal,
         this.sharedService.userCurrency,
@@ -269,12 +284,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       )!;
       this.isAddressEmpty = false;
       const orderDate = new Date();
+      if (addressDet.countryCode != 'LB') this.payment = 'Credit Card';
+
       this.order = new Order(
         addressDet,
         localStorage.getItem('userId') || '',
         'Pending',
         orderDate,
-        'COD',
+        this.payment == 'Cash On Delivery' ? 'COD' : 'CC',
         this.shippingfee * this.sharedService.currencyRate,
         this.subtotal,
         this.sharedService.userCurrency,

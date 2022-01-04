@@ -15,6 +15,8 @@ export class SharedService {
   currencyShippingRate: number = 1;
   isSettingsLoading: boolean = true;
   isCurrencyLoading: boolean = true;
+  isLoggedIn: boolean = false;
+  isDiscountShown: boolean = false;
   currencyChanged = new Subject();
   constructor(
     public firestore: AngularFirestore,
@@ -36,12 +38,6 @@ export class SharedService {
         this.getUserCurrency();
         this.isSettingsLoading = false;
       });
-  }
-  getUserInfo() {
-    const userId = localStorage.getItem('userId') || '';
-    return this.firestore
-      .collection('Users', (ref) => ref.where('userId', '==', userId))
-      .snapshotChanges();
   }
 
   getUserCurrency() {
@@ -74,6 +70,4 @@ export class SharedService {
     }
     this.currencyChanged.next();
   }
-
-  ngOnDestroy() {}
 }

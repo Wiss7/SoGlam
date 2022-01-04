@@ -6,3 +6,11 @@
 .section {
   padding-bottom: 75px;
 }
+
+.popup-img {
+  max-width: 100%;
+  width: 80vw;
+}
+.close {
+  outline: none;
+}

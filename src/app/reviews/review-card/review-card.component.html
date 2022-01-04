@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ review.user.displayName }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      {{ review.reviewDate.toDate().toLocaleDateString() }}
+    </h6>
+    <h5 class="card-title">
+      <ngb-rating
+        [max]="5"
+        [readonly]="true"
+        [rate]="review.stars"
+        style="font-size: 30px; color: #ffd700"
+      ></ngb-rating>
+    </h5>
+    <p class="card-text">{{ review.description }}</p>
+  </div>
+</div>

@@ -102,4 +102,19 @@ export class CartComponent implements OnInit, OnDestroy {
   clearCart() {
     this.cartService.clearCart();
   }
+
+  increaseQuantity(id: string) {
+    let quantity = this.getQuantity(id);
+    if (quantity < 100) {
+      quantity = +quantity + 1;
+      this.updateQuantity(id, quantity);
+    }
+  }
+  decreaseQuantity(id: string) {
+    let quantity = this.getQuantity(id);
+    if (quantity > 1) {
+      quantity = +quantity - 1;
+      this.updateQuantity(id, quantity);
+    }
+  }
 }

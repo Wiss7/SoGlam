@@ -138,6 +138,13 @@
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
           >
+            <a class="nav-link" routerLink="/reviews">Reviews</a>
+          </li>
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <a class="nav-link" routerLink="/admin" *ngIf="showadmin()"
               >Admin</a
             >
@@ -213,6 +220,11 @@
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/contactus" (click)="ToggleMobileMenu()"
         ><span class="material-icons"> contact_mail </span> Contact Us</a
+      >
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/reviews" (click)="ToggleMobileMenu()"
+        ><span class="material-icons"> feedback </span> Reviews</a
       >
     </li>
     <li

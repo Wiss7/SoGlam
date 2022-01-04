@@ -34,3 +34,18 @@
     <app-faq></app-faq>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <img src="../../assets/images/firstorder.png" class="popup-img" />
+    <br />
+  </div>
+</ng-template>

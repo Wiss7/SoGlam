@@ -57,9 +57,15 @@
             }}</b>
           </div>
 
-          <div class="col-4 col-sm-2">
+          <div class="col-4 col-sm-3">
+            <button
+              type="button"
+              class="btnQty"
+              (click)="decreaseQuantity(product.id)"
+            >
+              -
+            </button>
             <input
-              type="number"
               id="txtQuantity"
               [value]="getQuantity(product.id)"
               (change)="updateQuantity(product.id, $any($event.target).value)"
@@ -69,6 +75,13 @@
               class="txtquantity"
               #qty
             />
+            <button
+              type="button"
+              class="btnQty"
+              (click)="increaseQuantity(product.id)"
+            >
+              +
+            </button>
             <p><small>Quantity</small></p>
           </div>
 
@@ -109,7 +122,7 @@
           class="row cart-row"
           *ngFor="let product of CartItems; let i = index"
         >
-          <div style="width: 100px">
+          <div style="width: 90px">
             <img
               [src]="sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))"
               alt=""
@@ -136,8 +149,15 @@
               }}</b>
             </div>
             <div style="margin-top: 10px">
+              <button
+                type="button"
+                class="btnQty"
+                (click)="decreaseQuantity(product.id)"
+              >
+                -
+              </button>
               <input
-                type="number"
+                type="text"
                 id="txtQuantity"
                 [value]="getQuantity(product.id)"
                 (change)="updateQuantity(product.id, $any($event.target).value)"
@@ -147,6 +167,13 @@
                 class="txtquantity"
                 #qty
               />
+              <button
+                type="button"
+                class="btnQty"
+                (click)="increaseQuantity(product.id)"
+              >
+                +
+              </button>
               <a
                 (click)="deleteFromCart(product.id)"
                 class="text-dark"

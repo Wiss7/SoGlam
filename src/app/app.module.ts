@@ -43,6 +43,8 @@ import { OrderEditComponent } from './admin/order-edit/order-edit.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { EditProductsComponent } from './admin/edit-products/edit-products.component';
 import { FaqComponent } from './faq/faq.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewCardComponent } from './reviews/review-card/review-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +80,8 @@ import { FaqComponent } from './faq/faq.component';
     AdminProductsComponent,
     EditProductsComponent,
     FaqComponent,
+    ReviewsComponent,
+    ReviewCardComponent,
   ],
   imports: [
     BrowserModule,

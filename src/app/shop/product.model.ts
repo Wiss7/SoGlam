@@ -15,6 +15,9 @@ export class Product {
     public isBestSeller: boolean,
     public images: { name: string; isDefault: boolean }[],
     public feedback: { review: string; stars: number }[],
+    public formulation: string,
+    public ingredientCallouts: string,
+    public isSoldOut: boolean,
     public id: string
   ) {}
 }

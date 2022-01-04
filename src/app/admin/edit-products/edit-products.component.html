@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="type*" class="col-3 col-form-label">Type*</label>
+            <label for="type*" class="col-3 col-form-label">Category*</label>
             <div class="col-9">
               <input
                 type="text"
@@ -126,7 +126,7 @@
           </div>
           <div class="form-group row">
             <label for="ingredients" class="col-3 col-form-label"
-              >Ingredients*</label
+              >Highlighted Ingredients*</label
             >
             <div class="col-9">
               <textarea
@@ -139,10 +139,39 @@
               ></textarea>
             </div>
           </div>
-
+          <div class="form-group row">
+            <label for="formulation" class="col-3 col-form-label"
+              >Formulation*</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="formulation"
+                name="formulation"
+                [(ngModel)]="formulationVal"
+                #formulation="ngModel"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="ingredientCallouts" class="col-3 col-form-label"
+              >Ingredient Callouts*</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="ingredientCallouts"
+                name="ingredientCallouts"
+                [(ngModel)]="ingredientCalloutsVal"
+                #ingredientCallouts="ngModel"
+                required
+              ></textarea>
+            </div>
+          </div>
           <div class="form-group row">
             <label for="howToUse" class="col-3 col-form-label"
-              >How to Use*</label
+              >What Else You Need To Know*</label
             >
             <div class="col-9">
               <textarea
@@ -162,7 +191,6 @@
             >
             <div class="col-9">
               <input
-                class="form-control"
                 type="checkbox"
                 id="isOnSale"
                 name="isOnSale"
@@ -177,7 +205,6 @@
             >
             <div class="col-9">
               <input
-                class="form-control"
                 type="checkbox"
                 id="isNewArrival"
                 name="isNewArrival"
@@ -192,12 +219,25 @@
             >
             <div class="col-9">
               <input
-                class="form-control"
                 type="checkbox"
                 id="isBestSeller"
                 name="isBestSeller"
                 [(ngModel)]="isBestSellerVal"
                 #isBestSeller="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="isSoldOut" class="col-3 col-form-label"
+              >Is Sold Out</label
+            >
+            <div class="col-9">
+              <input
+                type="checkbox"
+                id="isSoldOut"
+                name="isSoldOut"
+                [(ngModel)]="isSoldOutVal"
+                #isSoldOut="ngModel"
               />
             </div>
           </div>

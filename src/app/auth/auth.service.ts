@@ -37,7 +37,7 @@ export class AuthService {
   ) {
     return this.firebaseAuth.currentUser.then((user) => {
       if (user) {
-        user.updateProfile({ displayName: firstName });
+        user.updateProfile({ displayName: firstName + ' ' + lastName });
         this.AddUserInfo(userId, email, firstName, lastName, phone);
         user.sendEmailVerification();
       }

@@ -23,6 +23,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
             id: e.payload.doc.id,
           };
         });
+        this.products.sort((a, b) => {
+          return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
+        });
         this.isLoading = false;
       });
   }

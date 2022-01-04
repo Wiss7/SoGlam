@@ -81,12 +81,12 @@
           </div>
         </div>
 
-        <div class="row cart-row d-block d-sm-none">
+        <div class="container-fluid d-block d-sm-none">
           <div
             class="row cart-row"
             *ngFor="let product of CartItems; let i = index"
           >
-            <div style="width: 100px">
+            <div style="width: 90px">
               <img
                 [src]="sanitizer.bypassSecurityTrustResourceUrl(getImageUrl(i))"
                 alt=""
@@ -94,7 +94,7 @@
                 class="img-responsive rounded shadow-sm"
               />
             </div>
-            <div style="width: calc(100vw - 140px)">
+            <div style="width: calc(100vw - 170px)">
               <h5 class="mb-0">
                 <p href="#" class="text-dark d-inline-block align-middle">
                   {{ product.name }}
@@ -130,6 +130,7 @@
           <b> Payment Method </b> <br /><br />
           <label>
             <input
+              [disabled]="!paymentEnabled"
               type="radio"
               [(ngModel)]="payment"
               value="Cash on Delivery"
@@ -137,7 +138,12 @@
             Cash on Delivery </label
           ><br />
           <label>
-            <input type="radio" [(ngModel)]="payment" value="Credit Card" />
+            <input
+              type="radio"
+              [(ngModel)]="payment"
+              value="Credit Card"
+              [disabled]="!paymentEnabled"
+            />
             Credit Card </label
           ><br /><br /><br />
           <b>Select an address</b><br />

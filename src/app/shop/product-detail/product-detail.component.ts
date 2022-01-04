@@ -70,7 +70,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   AddToCart(productId?: string) {
-    debugger;
     if (this.isLoggedIn) {
       this.isAddingCart = true;
       if (!productId) {
@@ -94,7 +93,24 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       this.open(this.cartModal);
     }
   }
+  decreaseQuantity() {
+    if (this.qty.nativeElement.value > 1)
+      this.qty.nativeElement.value = +this.qty.nativeElement.value - 1;
+  }
 
+  increaseQuantity() {
+    if (this.qty.nativeElement.value < 100)
+      this.qty.nativeElement.value = +this.qty.nativeElement.value + 1;
+  }
+
+  checkQuantity() {
+    if (this.qty.nativeElement.value <= 0) this.qty.nativeElement.value = 1;
+    if (this.qty.nativeElement.value > 100) this.qty.nativeElement.value = 100;
+  }
+  checkNumber($event) {
+    if (!isFinite($event.key)) return false;
+    return true;
+  }
   AddToWishlist() {
     if (this.isLoggedIn) {
       const userId = localStorage.getItem('userId') || '';

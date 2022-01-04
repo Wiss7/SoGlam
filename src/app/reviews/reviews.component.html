@@ -1,0 +1,207 @@
+<div
+  *ngIf="isLoading"
+  style="text-align: center; margin-top: 200px; margin-bottom: 200px"
+>
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div class="container-fluid mb-5">
+    <div class="row mt-5">
+      <div class="col-12">
+        <p class="title">What are our Customers Saying?</p>
+        <p class="sub-title">Everything to love about SoGlam</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-dark" (click)="writeReview()">
+          <i
+            class="material-icons"
+            style="vertical-align: middle; margin-right: 2px"
+            >edit</i
+          ><span style="vertical-align: middle">Write a Review</span>
+        </button>
+      </div>
+    </div>
+    <div class="row mt-5" *ngIf="reviews.length > 0">
+      <div
+        *ngFor="let review of reviews; let i = index"
+        class="col-12 mb-5 col-md-6 offset-md-3 mt-3 text-center"
+      >
+        <app-review-card [review]="review"></app-review-card>
+      </div>
+    </div>
+    <div
+      class="row mt-5 ml-3 mb-5"
+      *ngIf="reviews.length === 0"
+      style="text-align: center; color: #666666"
+    >
+      <div class="col-12">
+        <h2>There are no reviews yet.</h2>
+      </div>
+    </div>
+
+    <ng-template #reviewModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Write a Review</h4>
+        <button
+          id="btn-close"
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #reviewForm="ngForm" (ngSubmit)="SubmitReview(reviewForm)">
+          <div class="form-group row">
+            <label class="col-12 col-form-label name-label">{{
+              loggedInName
+            }}</label>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">
+              <ngb-rating
+                [max]="5"
+                [resettable]="true"
+                [(rate)]="currentRating"
+                style="font-size: 30px; color: #ffd700"
+              ></ngb-rating>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">
+              <textarea
+                class="form-control"
+                ngModel
+                #reviewDesc="ngModel"
+                name="review"
+                maxlength="500"
+                required
+                placeholder="Let others know what you think about SoGlam"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12 mt-3" style="text-align: left">
+              <button
+                type="submit"
+                [disabled]="!reviewForm.valid || currentRating === 0"
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="!isSubmitting"
+              >
+                Submit Your Review
+              </button>
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isSubmitting"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+    <ng-template #signInModal let-modal>
+      <div class="modal-header">
+        <p class="modal-title" id="modal-basic-title">Sign In</p>
+        <button
+          id="closeModal"
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #signinForm="ngForm" (ngSubmit)="SignIn(signinForm)" class="mb-5">
+          <div class="form-group row">
+            <label for="email" class="col-2 col-form-label">Email</label>
+            <div class="col-10">
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                ngModel
+                #email="ngModel"
+                required
+                email
+              />
+              <span *ngIf="!isUserVerified" style="color: red; font-size: 16px">
+                please verify your email to login
+              </span>
+              <span *ngIf="isWrongEmail" style="color: red; font-size: 16px">
+                Email is not registered
+              </span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password" class="col-2 col-form-label">Password</label>
+            <div class="col-10">
+              <input
+                class="form-control"
+                id="password"
+                name="password"
+                type="password"
+                ngModel
+                #password="ngModel"
+                required
+                password
+              />
+              <span *ngIf="isWrongPassword" style="color: red; font-size: 16px">
+                Incorrect Password
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-12 mt-3" style="text-align: left">
+              <button
+                type="submit"
+                [disabled]="!signinForm.valid"
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="!isSigningIn"
+              >
+                Sign in
+              </button>
+              <button
+                [disabled]
+                class="btn btn-dark mt-2 m-auto"
+                *ngIf="isSigningIn"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12 m-auto" style="cursor: pointer; font-size: 16px">
+              Don't have an account?
+              <a routerLink="/auth" class="ml-2" (click)="modal.dismiss()">
+                Register
+              </a>
+            </div>
+          </div>
+        </form>
+
+        <br />
+      </div>
+    </ng-template>
+  </div>
+</div>

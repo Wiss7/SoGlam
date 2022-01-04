@@ -1,5 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { Order } from '../checkout/order.model';
+import { OrderService } from '../checkout/order.service';
+import { SharedService } from '../shared.service';
 import { Product } from '../shop/product.model';
 import { ProductService } from '../shop/product.service';
 
@@ -15,7 +25,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   saleProducts: Product[] = [];
   isLoading: Boolean = true;
   subscription: Subscription;
-  constructor(private productService: ProductService) {}
+  orderSubscription: Subscription;
+  orders: Order[] = [];
+  @ViewChild('content') content: ElementRef;
+  constructor(
+    private modalService: NgbModal,
+    private productService: ProductService,
+    private sharedService: SharedService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
     if (this.products.length === 0)
@@ -28,6 +46,9 @@ export class HomeComponent implements OnInit, OnDestroy {
               id: e.payload.doc.id,
             };
           });
+          this.products.sort((a, b) => {
+            return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
+          });
           this.bestSellerProducts = this.products
             .filter((product) => product.isBestSeller === true)
             .slice();
@@ -38,7 +59,41 @@ export class HomeComponent implements OnInit, OnDestroy {
             .filter((product) => product.isOnSale === true)
             .slice();
         });
+
     this.isLoading = false;
+    if (this.sharedService.isLoggedIn) {
+      this.orderSubscription = this.orderService
+        .getOrders()
+        .subscribe((data) => {
+          this.orders = data.map((e) => {
+            return {
+              ...(e.payload.doc.data() as Order),
+              id: e.payload.doc.id,
+            };
+          });
+          if (this.orders.length === 0 && !this.sharedService.isDiscountShown) {
+            setTimeout(() => {
+              this.sharedService.isDiscountShown = true;
+              this.modalService.open(this.content, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                windowClass: 'discount-modal',
+              });
+            }, 100);
+          }
+        });
+    } else {
+      setTimeout(() => {
+        if (!this.sharedService.isDiscountShown) {
+          this.sharedService.isDiscountShown = true;
+          this.modalService.open(this.content, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'lg',
+            windowClass: 'discount-modal',
+          });
+        }
+      }, 500);
+    }
   }
   ngOnDestroy() {
     if (this.subscription) this.subscription.unsubscribe;
