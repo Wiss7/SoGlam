@@ -189,7 +189,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.isAddressEmpty = false;
       this.addressDet = this.addresslist.find((a) => a.id === this.address)!;
       if (this.addressDet.countryCode === 'LB') {
-        this.paymentEnabled = true;
+        this.payment = 'Cash on Delivery';
+        this.paymentEnabled = false;
         this.isShippingAvailable = true;
         this.shippingfee =
           this.sharedService.settings[0].lebanonShippingFee *
@@ -251,7 +252,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         localStorage.getItem('userId') || '',
         'Requesting Shipping Fee',
         orderDate,
-        this.payment == 'Cash On Delivery' ? 'COD' : 'CC',
+        this.payment == 'Cash on Delivery' ? 'COD' : 'CC',
         this.shippingfee * this.sharedService.currencyRate,
         this.subtotal,
         this.sharedService.userCurrency,
@@ -284,6 +285,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       )!;
       this.isAddressEmpty = false;
       const orderDate = new Date();
+      if (addressDet.countryCode == 'LB') {
+        this.payment = 'Cash on Delivery';
+        this.paymentEnabled = false;
+      }
       if (addressDet.countryCode != 'LB') this.payment = 'Credit Card';
 
       this.order = new Order(
@@ -291,7 +296,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         localStorage.getItem('userId') || '',
         'Pending',
         orderDate,
-        this.payment == 'Cash On Delivery' ? 'COD' : 'CC',
+        this.payment == 'Cash on Delivery' ? 'COD' : 'CC',
         this.shippingfee * this.sharedService.currencyRate,
         this.subtotal,
         this.sharedService.userCurrency,

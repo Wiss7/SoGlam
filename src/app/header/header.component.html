@@ -145,7 +145,7 @@
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link" routerLink="/admin" *ngIf="showadmin()"
+            <a class="nav-link" routerLink="/admin/orders" *ngIf="showadmin()"
               >Admin</a
             >
           </li>
@@ -232,7 +232,7 @@
       [routerLinkActiveOptions]="{ exact: true }"
       *ngIf="showadmin()"
     >
-      <a routerLink="/admin" (click)="ToggleMobileMenu()"
+      <a routerLink="/admin/orders" (click)="ToggleMobileMenu()"
         ><span class="material-icons"> lock </span> Admin</a
       >
     </li>

@@ -126,7 +126,7 @@
     <!-- END -->
     <div class="row mb-5">
       <div class="col-12" style="padding-left: 3%">
-        <div *ngIf="isShippingAvailable">
+        <div *ngIf="isShippingAvailable && address">
           <b> Payment Method </b> <br /><br />
           <label>
             <input
@@ -146,8 +146,8 @@
             />
             Credit Card </label
           ><br /><br /><br />
-          <b>Select an address</b><br />
         </div>
+        <b>Select an address</b><br />
         <div class="row">
           <div class="col-lg-6 col-xl-4">
             <div class="d-flex align-items-center justify-content-between my-3">
@@ -186,13 +186,24 @@
             </div>
           </div>
         </div>
+
+        <div
+          class="row"
+          *ngIf="payment == 'Credit Card' && isShippingAvailable"
+        >
+          <div class="col-12">
+            <span class="text-danger"
+              >Online payment is not available right now. Place an order and we
+              will contact you soon</span
+            >
+          </div>
+        </div>
         <div class="row" *ngIf="!isShippingAvailable">
           <div class="col-12">
-            <p class="text-danger">
+            <span class="text-danger">
               Shipping information is not available for your country. Place an
-              order request and we will be in contact with you as soon as
-              possible!
-            </p>
+              order request and we will contact you as soon as possible!
+            </span>
           </div>
         </div>
         <br />
@@ -232,7 +243,7 @@
                 (click)="placeOrder()"
                 *ngIf="!isCheckingOut && isShippingAvailable"
               >
-                Checkout
+                Place order
               </a>
               <a
                 class="btn btn-large btn-dark btn-dark-hover"
