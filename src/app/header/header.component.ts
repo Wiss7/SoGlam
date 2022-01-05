@@ -84,7 +84,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   showadmin() {
     const userId = localStorage.getItem('userId') || '';
-    return userId === 'oZ6pFWRMKWMbG48SuniMcLut4mt2';
+    return userId === 'kdmHwzO7mqVS8UgEGBFY3xUdwjt1';
   }
 
   toggleInfo() {

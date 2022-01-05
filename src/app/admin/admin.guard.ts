@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
   ): boolean | Observable<boolean> | Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.firebaseAuth.onAuthStateChanged((user) => {
-        if (user && user.uid == 'oZ6pFWRMKWMbG48SuniMcLut4mt2') {
+        if (user && user.uid == 'kdmHwzO7mqVS8UgEGBFY3xUdwjt1') {
           resolve(true);
         } else {
           this.router.navigate(['home'], {
