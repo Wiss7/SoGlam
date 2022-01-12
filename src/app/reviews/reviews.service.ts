@@ -14,4 +14,8 @@ export class ReviewsService {
   getReviews() {
     return this.firestore.collection('Reviews').snapshotChanges();
   }
+
+  deleteReviews(id: string) {
+    return this.firestore.doc('Reviews/' + id).delete();
+  }
 }

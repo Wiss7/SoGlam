@@ -1,4 +1,14 @@
 <div class="card">
+  <div *ngIf="isAdmin()">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="DeleteReview(review.id)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="card-body">
     <h5 class="card-title">{{ review.user.displayName }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">

@@ -8,6 +8,7 @@ p {
 .default-image {
   width: 100%;
   cursor: pointer;
+  max-height: 450px;
 }
 .gallery-thumbnail-wrapper .thumbnail-column {
   padding: 0;

@@ -10,7 +10,7 @@
       <div class="col-12 col-lg-5">
         <div style="width: 100%" class="mt-5">
           <div class="d-flex flex-lg-row">
-            <div class="album-thumbnails">
+            <div class="album-thumbnails" *ngIf="images.length > 1">
               <div
                 class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
               >
@@ -41,25 +41,58 @@
           <h1>{{ product.name }}</h1>
           <p class="ml-1">{{ product.type }}</p>
           <br />
-          <h4>What It Is</h4>
-          <p>{{ product.description }}</p>
+          <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
+          <button type="button" class="btnQty" (click)="decreaseQuantity()">
+            -
+          </button>
+          <input
+            type="text"
+            id="txtQuantity"
+            value="1"
+            min="1"
+            placeholder="Quantity"
+            class="txtquantity text-center"
+            (change)="checkQuantity()"
+            onkeydown="return false"
+            #qty
+          />
+          <button type="button" class="btnQty" (click)="increaseQuantity()">
+            +
+          </button>
           <br />
-          <h4>Formulation</h4>
-          <p>{{ product.formulation }}</p>
           <br />
-          <h4>Weight</h4>
-          <p>{{ product.weight + " grams" }}</p>
-          <br />
-          <h4>How to Use</h4>
-          <p>{{ product.howToUse }}</p>
-          <br />
-          <div
-            *ngIf="product.whatElseToKnow && product.whatElseToKnow.length > 0"
-          >
-            <h4>What Else You Need To Know</h4>
-            <p>{{ product.whatElseToKnow }}</p>
-            <br />
+          <div>
+            <button
+              class="btn btn-dark btn-lg btn-cart"
+              (click)="AddToCart(product.id)"
+              type="button"
+              *ngIf="!isAddingCart"
+              style="width: 100%"
+              [disabled]="product.isSoldOut"
+            >
+              <span class="material-icons">shopping_cart</span> Add to Cart
+            </button>
+            <button
+              *ngIf="isAddingCart"
+              class="btn btn-dark btn-lg btn-cart"
+              type="button"
+              style="width: 100%"
+              disabled
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
           </div>
+          <p *ngIf="product.isSoldOut" class="text-danger">
+            Sorry, This item is sold out. Check again later
+          </p>
+          <br />
+          <br />
+
           <div
             *ngIf="product.isOnSale"
             style="width: 60%; display: inline-block"
@@ -87,7 +120,7 @@
             }}
           </p>
           <button
-            class="btn btn-sm btn-cart btn-wishlist"
+            class="btn btn-sm btn-wishlist"
             (click)="AddToWishlist()"
             *ngIf="!isInWishlist || !isLoggedIn"
           >
@@ -95,7 +128,7 @@
             Add to Wishlist
           </button>
           <button
-            class="btn btn-sm btn-cart btn-wishlist"
+            class="btn btn-sm btn-wishlist"
             (click)="RemoveFromWishlist()"
             *ngIf="isInWishlist && isLoggedIn"
             type="button"
@@ -103,53 +136,31 @@
             <span class="material-icons" style="color: #000">favorite</span>
             Remove from Wishlist
           </button>
-          <hr />
-          <br /><br />
-          <label for="txtQuantity" style="margin-right: 10px"> Quantity</label>
-          <button type="button" class="btnQty" (click)="decreaseQuantity()">
-            -
-          </button>
-          <input
-            type="text"
-            id="txtQuantity"
-            value="1"
-            min="1"
-            placeholder="Quantity"
-            class="txtquantity text-center"
-            (change)="checkQuantity()"
-            onkeydown="return false"
-            #qty
-          />
-          <button type="button" class="btnQty" (click)="increaseQuantity()">
-            +
-          </button>
-          <div *ngIf="!product.isSoldOut">
-            <button
-              class="btn btn-dark btn-lg btn-cart"
-              (click)="AddToCart(product.id)"
-              type="button"
-              *ngIf="!isAddingCart"
-            >
-              <span class="material-icons">shopping_cart</span> Add to Cart
-            </button>
-            <button
-              *ngIf="isAddingCart"
-              class="btn btn-dark btn-lg btn-cart"
-              type="button"
-              disabled
-            >
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              Loading...
-            </button>
-          </div>
-
-          <p *ngIf="product.isSoldOut" class="text-danger">
-            Sorry, This item is sold out. Check again later
-          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <hr />
+        <br /><br />
+        <h4>What It Is</h4>
+        <p>{{ product.description }}</p>
+        <br />
+        <h4>Formulation</h4>
+        <p>{{ product.formulation }}</p>
+        <br />
+        <h4>Weight</h4>
+        <p>{{ product.weight + " grams" }}</p>
+        <br />
+        <h4>How to Use</h4>
+        <p>{{ product.howToUse }}</p>
+        <br />
+        <div
+          *ngIf="product.whatElseToKnow && product.whatElseToKnow.length > 0"
+        >
+          <h4>What Else You Need To Know</h4>
+          <p>{{ product.whatElseToKnow }}</p>
+          <br />
         </div>
       </div>
     </div>
