@@ -151,6 +151,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
               id: e.payload.doc.id,
             };
           });
+          this.products.sort((a, b) => {
+            return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
+          });
           this.product = this.products[this.index];
           this.defaultImageName = this.product.images.filter(
             (image) => image.isDefault === true

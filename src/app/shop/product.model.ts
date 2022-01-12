@@ -8,7 +8,7 @@ export class Product {
     public price: number,
     public discount: number,
     public discountPrice: number,
-    public ingredients: string,
+    public whatElseToKnow: string,
     public howToUse: string,
     public isOnSale: boolean,
     public isNewArrival: boolean,
@@ -16,8 +16,8 @@ export class Product {
     public images: { name: string; isDefault: boolean }[],
     public feedback: { review: string; stars: number }[],
     public formulation: string,
-    public ingredientCallouts: string,
     public isSoldOut: boolean,
+    public relatedProducts: string,
     public id: string
   ) {}
 }

@@ -47,7 +47,7 @@ export class ProductService implements OnDestroy {
       return (
         element.name.toLowerCase().indexOf(searchInput.toLowerCase()) >= 0 ||
         element.type.toLowerCase().indexOf(searchInput.toLowerCase()) >= 0 ||
-        element.ingredients.toLowerCase().indexOf(searchInput.toLowerCase()) >=
+        element.formulation.toLowerCase().indexOf(searchInput.toLowerCase()) >=
           0
       );
     };

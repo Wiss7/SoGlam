@@ -20,7 +20,6 @@
 .logo-footer {
   height: 80px;
   width: 80px;
-  margin-bottom: 10px;
 }
 
 .slogan {
@@ -34,6 +33,8 @@
   font-size: 12px;
   text-align: center;
   font-style: italic;
+  color: #c58cc8;
+  margin-bottom: 15px;
 }
 
 .iconify {

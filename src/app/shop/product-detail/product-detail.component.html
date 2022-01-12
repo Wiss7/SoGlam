@@ -12,12 +12,7 @@
           <div class="d-flex flex-lg-row">
             <div class="album-thumbnails">
               <div
-                class="
-                  gallery-thumbnail-wrapper
-                  d-flex
-                  flex-row flex-lg-column flex-wrap
-                  align-items-center
-                "
+                class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
               >
                 <div class="thumbnail-column" *ngFor="let image of images">
                   <img
@@ -52,18 +47,19 @@
           <h4>Formulation</h4>
           <p>{{ product.formulation }}</p>
           <br />
-          <h4>Highlighted Ingredients</h4>
-          <p>{{ product.ingredients }}</p>
-          <br />
           <h4>Weight</h4>
           <p>{{ product.weight + " grams" }}</p>
           <br />
-          <h4>Ingredient Callouts</h4>
-          <p>{{ product.ingredientCallouts }}</p>
-          <br />
-          <h4>What Else You Need To Know</h4>
+          <h4>How to Use</h4>
           <p>{{ product.howToUse }}</p>
           <br />
+          <div
+            *ngIf="product.whatElseToKnow && product.whatElseToKnow.length > 0"
+          >
+            <h4>What Else You Need To Know</h4>
+            <p>{{ product.whatElseToKnow }}</p>
+            <br />
+          </div>
           <div
             *ngIf="product.isOnSale"
             style="width: 60%; display: inline-block"

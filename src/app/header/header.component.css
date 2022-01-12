@@ -202,6 +202,7 @@ ul.social-icons {
 }
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255);
+  font-weight: 500;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,

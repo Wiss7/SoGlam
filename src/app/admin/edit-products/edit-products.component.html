@@ -125,21 +125,6 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="ingredients" class="col-3 col-form-label"
-              >Highlighted Ingredients*</label
-            >
-            <div class="col-9">
-              <textarea
-                class="form-control"
-                id="ingredients"
-                name="ingredients"
-                [(ngModel)]="ingredientsVal"
-                #ingredients="ngModel"
-                required
-              ></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="formulation" class="col-3 col-form-label"
               >Formulation*</label
             >
@@ -155,23 +140,8 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="ingredientCallouts" class="col-3 col-form-label"
-              >Ingredient Callouts*</label
-            >
-            <div class="col-9">
-              <textarea
-                class="form-control"
-                id="ingredientCallouts"
-                name="ingredientCallouts"
-                [(ngModel)]="ingredientCalloutsVal"
-                #ingredientCallouts="ngModel"
-                required
-              ></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="howToUse" class="col-3 col-form-label"
-              >What Else You Need To Know*</label
+              >How To Use*</label
             >
             <div class="col-9">
               <textarea
@@ -181,6 +151,21 @@
                 [(ngModel)]="howToUseVal"
                 #howToUse="ngModel"
                 required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ingredients" class="col-3 col-form-label"
+              >What Else You Need To Know</label
+            >
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="whatElseToKnow"
+                name="whatElseToKnow"
+                [(ngModel)]="whatElseToKnowVal"
+                #whatElseToKnow="ngModel"
               ></textarea>
             </div>
           </div>
@@ -254,6 +239,22 @@
                 [(ngModel)]="imagesVal"
                 #images="ngModel"
                 required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="relatedProducts" class="col-3 col-form-label"
+              >Related Products<br />
+              (comma separated)
+            </label>
+            <div class="col-9">
+              <textarea
+                class="form-control"
+                id="relatedProducts"
+                name="relatedProducts"
+                [(ngModel)]="relatedProductsVal"
+                #relatedProducts="ngModel"
               ></textarea>
             </div>
           </div>

@@ -26,9 +26,9 @@ export class EditProductsComponent implements OnInit {
   isSoldOutVal: boolean = false;
   isOnSaleVal: boolean = false;
   howToUseVal: string = '';
+  whatElseToKnowVal: string = '';
   formulationVal: string = '';
-  ingredientCalloutsVal: string = '';
-  ingredientsVal: string = '';
+  relatedProductsVal: string = '';
   isDeleting: boolean = false;
   updateProduct: Product;
   constructor(
@@ -63,10 +63,10 @@ export class EditProductsComponent implements OnInit {
       this.isNewArrivalVal = product.isNewArrival;
       this.isSoldOutVal = product.isSoldOut;
       this.isOnSaleVal = product.isOnSale;
-      this.ingredientsVal = product.ingredients;
+      this.whatElseToKnowVal = product.whatElseToKnow;
       this.howToUseVal = product.howToUse;
       this.formulationVal = product.formulation;
-      this.ingredientCalloutsVal = product.ingredientCallouts;
+      this.relatedProductsVal = product.relatedProducts;
       this.isLoading = false;
       product.images.forEach((img) => {
         this.imagesVal = this.imagesVal + img.name + ', ';
@@ -87,7 +87,7 @@ export class EditProductsComponent implements OnInit {
       this.priceVal,
       0,
       this.discountPriceVal,
-      this.ingredientsVal,
+      this.whatElseToKnowVal,
       this.howToUseVal,
       this.isOnSaleVal,
       this.isNewArrivalVal,
@@ -95,8 +95,8 @@ export class EditProductsComponent implements OnInit {
       [],
       [],
       this.formulationVal,
-      this.ingredientCalloutsVal,
       this.isSoldOutVal,
+      this.relatedProductsVal,
       this.id
     );
     imagesNames.forEach((img) => {

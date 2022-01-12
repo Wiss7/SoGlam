@@ -232,7 +232,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   getGrandTotal() {
     let grandTotal: number = 0;
     grandTotal = this.subtotal - this.discount + this.shippingfee;
-
+    if (grandTotal < 0) grandTotal = 0;
     this.grandtotal = grandTotal;
   }
   placeOrderRequest() {
