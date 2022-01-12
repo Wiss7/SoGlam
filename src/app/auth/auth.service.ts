@@ -86,6 +86,18 @@ export class AuthService {
       .snapshotChanges();
   }
   updateUserInfo(newInfo: User) {
+    this.firebaseAuth.currentUser.then((user) => {
+      if (user) {
+        user
+          .updateProfile({
+            displayName: newInfo.firstName + ' ' + newInfo.lastName,
+          })
+          .then(() => {
+            localStorage.setItem('user', JSON.stringify(user));
+          });
+      }
+    });
+
     return this.firestore
       .doc('Users/' + newInfo.id)
       .update(Object.assign({}, newInfo));

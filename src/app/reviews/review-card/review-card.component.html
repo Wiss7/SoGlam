@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" style="min-height: 100%">
   <div *ngIf="isAdmin()">
     <button
       type="button"
@@ -10,7 +10,17 @@
     </button>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{ review.user.displayName }}</h5>
+    <div
+      class="quote-icon-wrapper flex align-center justify-center spacer-x-auto"
+    >
+      <i class="material-icons dp48">format_quote</i>
+    </div>
+    <!-- <div class="initial-div">
+        {{ review.user.displayName.substring(0, 1) }}
+      </div> -->
+    <h5 class="card-title" style="display: inline-block">
+      {{ review.user.displayName }}
+    </h5>
     <h6 class="card-subtitle mb-2 text-muted">
       {{ review.reviewDate.toDate().toLocaleDateString() }}
     </h6>
@@ -22,6 +32,27 @@
         style="font-size: 30px; color: #c58cc8"
       ></ngb-rating>
     </h5>
-    <p class="card-text">{{ review.description }}</p>
+    <p class="card-text">
+      {{ getDescription() }}
+      <a
+        *ngIf="this.review.description.length > 200"
+        (click)="ReadMore(this.review.description)"
+        class="readmore"
+        >read more</a
+      >
+    </p>
   </div>
 </div>
+
+<ng-template #readAllReview let-modal>
+  <div class="modal-body">
+    <p style="overflow-wrap: break-word">{{ currentReview }}</p>
+    <button
+      type="button"
+      class="btn btn-outline-dark mt-3 float-right"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

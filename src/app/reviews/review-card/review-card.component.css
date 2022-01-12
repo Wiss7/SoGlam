@@ -6,3 +6,48 @@
 .close {
   margin: 10px;
 }
+
+.quote-icon-wrapper {
+  background-color: #c58cc8;
+  width: 60px;
+  height: 60px;
+  border-radius: 20%;
+  color: white;
+  position: absolute;
+  right: 10%;
+  text-align: center;
+}
+
+.quote-icon-wrapper i {
+  margin-top: 12px;
+  font-size: 40px;
+}
+
+.card-text {
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.card-body {
+  text-align: left;
+  padding-left: 30px;
+}
+.initial-div {
+  text-transform: uppercase;
+  background-color: #c58cc8;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  display: inline-flex;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.readmore {
+  color: #c58cc8;
+  cursor: pointer;
+  text-decoration: underline;
+}

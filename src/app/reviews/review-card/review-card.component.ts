@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Review } from '../review.model';
 import { ReviewsService } from '../reviews.service';
 
@@ -9,8 +10,12 @@ import { ReviewsService } from '../reviews.service';
 })
 export class ReviewCardComponent implements OnInit {
   @Input('review') review: Review;
-
-  constructor(public reviewService: ReviewsService) {}
+  @ViewChild('readAllReview') resetPasswordContent: ElementRef;
+  currentReview: string = '';
+  constructor(
+    public reviewService: ReviewsService,
+    public modalService: NgbModal
+  ) {}
 
   ngOnInit() {}
 
@@ -30,5 +35,19 @@ export class ReviewCardComponent implements OnInit {
   isAdmin() {
     const userId = localStorage.getItem('userId') || '';
     return userId === 'kdmHwzO7mqVS8UgEGBFY3xUdwjt1';
+  }
+
+  getDescription() {
+    if (this.review.description.length <= 200) return this.review.description;
+    return this.review.description.substring(0, 200) + '...';
+  }
+
+  ReadMore(review: string) {
+    this.currentReview = review;
+    this.open(this.resetPasswordContent);
+  }
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 }
