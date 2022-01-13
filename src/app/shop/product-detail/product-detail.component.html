@@ -10,7 +10,7 @@
       <div class="col-12 col-lg-5">
         <div style="width: 100%" class="mt-5">
           <div class="d-flex flex-lg-row">
-            <div class="album-thumbnails" *ngIf="images.length > 1">
+            <div class="album-thumbnails" *ngIf="images.length > 0">
               <div
                 class="gallery-thumbnail-wrapper d-flex flex-row flex-lg-column flex-wrap align-items-center"
               >
@@ -161,6 +161,14 @@
           <h4>What Else You Need To Know</h4>
           <p>{{ product.whatElseToKnow }}</p>
           <br />
+          <br />
+          <div *ngIf="relatedProducts.length > 0">
+            <h3 style="padding-bottom: 50px">Frequently Bought With</h3>
+            <app-multi-item-carousel
+              [products]="relatedProducts"
+              [allProducts]="products"
+            ></app-multi-item-carousel>
+          </div>
         </div>
       </div>
     </div>

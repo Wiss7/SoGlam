@@ -1,12 +1,13 @@
 .custom-slider-main {
   display: inline-flex;
   overflow: hidden;
-  width: calc(100vw - 130px);
+  width: calc(100% - 130px);
   cursor: pointer;
 }
 
 .info-box {
   margin-right: 50px;
+  width: 250px;
 }
 
 .material-icons {

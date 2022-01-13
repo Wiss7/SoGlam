@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/shared.service';
 import { EventEmitter } from '@angular/core';
 import { Product } from '../product.model';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
   selector: 'app-product-card',
@@ -34,7 +35,11 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {}
   getRoute() {
-    if (this.router.url === '/home' || this.router.url === '/')
+    if (
+      this.router.url === '/home' ||
+      this.router.url === '/' ||
+      this.route.component === ProductDetailComponent
+    )
       return 'homecard card';
     else return 'card';
   }

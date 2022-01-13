@@ -27,6 +27,7 @@ import { ProductService } from '../product.service';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   product: Product;
   products: Product[] = [];
+  relatedProducts: Product[] = [];
   index: number;
   selectedImgName: string;
   defaultImagePath: string;
@@ -162,6 +163,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           this.images = this.product.images.filter(
             (image) => image.isDefault === false
           );
+          var similarIds = this.product.relatedProducts
+            .split(',')
+            .map((element) => {
+              return element.trim();
+            });
+          this.relatedProducts = this.products
+            .filter((product) => similarIds.includes(product.id))
+            .slice();
           this.isLoading = false;
         });
 
