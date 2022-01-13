@@ -1,9 +1,9 @@
-<a class="d-inline ml-1" (click)="scrollLeft()"
+<a class="d-inline ml-1" (click)="scrollLeft()" *ngIf="showArrows"
   ><span class="material-icons">navigate_before</span></a
 >
 <div
   #widgetsContent
-  class="custom-slider-main"
+  [ngClass]="showArrows ? 'custom-slider-main' : 'custom-slider-main margin-65'"
   #elemt
   (mousedown)="startDragging($event, false, elemt)"
   (mouseup)="stopDragging($event, false)"
@@ -21,6 +21,9 @@
     ></app-product-card>
   </div>
 </div>
-<a class="material-icons d-inline mr-1" (click)="scrollRight()"
+<a
+  class="material-icons d-inline mr-1"
+  (click)="scrollRight()"
+  *ngIf="showArrows"
   >navigate_next</a
 >

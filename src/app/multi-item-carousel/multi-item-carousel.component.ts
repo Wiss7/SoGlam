@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Product } from '../shop/product.model';
 
 @Component({
@@ -6,12 +14,13 @@ import { Product } from '../shop/product.model';
   templateUrl: './multi-item-carousel.component.html',
   styleUrls: ['./multi-item-carousel.component.css'],
 })
-export class MultiItemCarouselComponent implements OnInit {
+export class MultiItemCarouselComponent implements OnInit, AfterViewInit {
   mouseDown = false;
+  showArrows = true;
   startX: any;
   scrollX: any;
   slider = document.querySelector<HTMLElement>('.parent');
-  @ViewChild('widgetsContent') widgetsContent: ElementRef;
+  @ViewChild('elemt') widgetsContent: ElementRef;
   @Input() products: Product[];
   @Input() allProducts: Product[];
 
@@ -23,6 +32,12 @@ export class MultiItemCarouselComponent implements OnInit {
 
     this.startX = pageX - el.offsetLeft;
     this.scrollX = el.scrollLeft;
+  }
+
+  isShowArrows() {
+    this.showArrows =
+      this.widgetsContent.nativeElement.scrollWidth >
+      this.widgetsContent.nativeElement.clientWidth;
   }
   stopDragging(e, flag) {
     this.mouseDown = false;
@@ -58,5 +73,14 @@ export class MultiItemCarouselComponent implements OnInit {
   }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit() {
+    this.isShowArrows();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.isShowArrows();
+  }
+
+  ngOnInit() {}
 }

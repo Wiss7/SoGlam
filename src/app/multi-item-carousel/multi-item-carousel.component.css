@@ -5,9 +5,12 @@
   cursor: pointer;
 }
 
+.margin-65 {
+  margin-left: 65px;
+}
+
 .info-box {
   margin-right: 50px;
-  width: 250px;
 }
 
 .material-icons {
