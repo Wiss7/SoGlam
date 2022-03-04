@@ -98,26 +98,14 @@
             style="width: 60%; display: inline-block"
           >
             <p class="old-price-text">
-              {{
-                product.price * sharedService.currencyRate +
-                  " " +
-                  sharedService.userCurrency
-              }}
+              {{ getPrice() }}
             </p>
             <p class="price-text">
-              {{
-                product.discountPrice * sharedService.currencyRate +
-                  " " +
-                  sharedService.userCurrency
-              }}
+              {{ getDiscountPrice() }}
             </p>
           </div>
           <p class="price-text" *ngIf="!product.isOnSale">
-            {{
-              product.price * sharedService.currencyRate +
-                " " +
-                sharedService.userCurrency
-            }}
+            {{ getPrice() }}
           </p>
           <button
             class="btn btn-sm btn-wishlist"

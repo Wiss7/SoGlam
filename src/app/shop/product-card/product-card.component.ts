@@ -58,6 +58,43 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
     this.mousePosition.y = $event.screenY;
   }
 
+  getDiscountPrice() {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(
+            this.product.discountPrice * this.sharedService.currencyRate * 100
+          ) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return (
+        this.product.discountPrice * this.sharedService.currencyRate +
+        ' ' +
+        this.sharedService.userCurrency
+      );
+    }
+  }
+  getPrice() {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(
+            this.product.price * this.sharedService.currencyRate * 100
+          ) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return (
+        this.product.price * this.sharedService.currencyRate +
+        ' ' +
+        this.sharedService.userCurrency
+      );
+    }
+  }
+
   ShowDetails($event) {
     if (
       this.mousePosition.x === $event.screenX &&

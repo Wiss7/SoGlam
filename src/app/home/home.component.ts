@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Order } from '../checkout/order.model';
@@ -32,7 +33,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private productService: ProductService,
     private sharedService: SharedService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,28 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
 
     this.isLoading = false;
-    if (this.sharedService.isLoggedIn) {
-      this.orderSubscription = this.orderService
-        .getOrders()
-        .subscribe((data) => {
-          this.orders = data.map((e) => {
-            return {
-              ...(e.payload.doc.data() as Order),
-              id: e.payload.doc.id,
-            };
-          });
-          if (this.orders.length === 0 && !this.sharedService.isDiscountShown) {
-            setTimeout(() => {
-              this.sharedService.isDiscountShown = true;
-              this.modalService.open(this.content, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
-                windowClass: 'discount-modal',
-              });
-            }, 100);
-          }
-        });
-    } else {
+    if (!this.sharedService.isLoggedIn) {
       setTimeout(() => {
         if (!this.sharedService.isDiscountShown) {
           this.sharedService.isDiscountShown = true;
@@ -94,6 +75,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }, 500);
     }
+  }
+  goToSignUp() {
+    this.router.navigate(['/account/profile']);
   }
   ngOnDestroy() {
     if (this.subscription) this.subscription.unsubscribe;

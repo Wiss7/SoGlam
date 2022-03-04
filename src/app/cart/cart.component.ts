@@ -117,4 +117,17 @@ export class CartComponent implements OnInit, OnDestroy {
       this.updateQuantity(id, quantity);
     }
   }
+
+  formatCurrency(price: number) {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(price * this.sharedService.currencyRate * 100) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return price + ' ' + this.sharedService.userCurrency;
+    }
+  }
 }

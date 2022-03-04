@@ -208,6 +208,44 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.selectedImgName = name;
     this.isGalleryOpen = true;
   }
+
+  getDiscountPrice() {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(
+            this.product.discountPrice * this.sharedService.currencyRate * 100
+          ) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return (
+        this.product.discountPrice * this.sharedService.currencyRate +
+        ' ' +
+        this.sharedService.userCurrency
+      );
+    }
+  }
+  getPrice() {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(
+            this.product.price * this.sharedService.currencyRate * 100
+          ) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return (
+        this.product.price * this.sharedService.currencyRate +
+        ' ' +
+        this.sharedService.userCurrency
+      );
+    }
+  }
+
   ngOnDestroy() {
     if (this.gallerySubscription) this.gallerySubscription.unsubscribe();
     if (this.wishlistSubscription) this.wishlistSubscription.unsubscribe();
@@ -217,6 +255,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
+
   SignIn(form: NgForm) {
     this.isSigningIn = true;
     this.authService.SignIn(form.value.email, form.value.password).then(

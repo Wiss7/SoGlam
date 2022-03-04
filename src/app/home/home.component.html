@@ -46,7 +46,12 @@
     >
       <span aria-hidden="true">&times;</span>
     </button>
-    <img src="../../assets/images/firstorder.png" class="popup-img" />
+    <img
+      src="../../assets/images/firstorder.png"
+      class="popup-img"
+      style="cursor: pointer"
+      (click)="goToSignUp(); modal.dismiss('Cross click')"
+    />
     <br />
   </div>
 </ng-template>

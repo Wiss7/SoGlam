@@ -316,4 +316,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.isCheckingOut = false;
     }
   }
+  formatCurrency(price: number) {
+    if (this.sharedService.userCurrency == 'USD') {
+      return (
+        '$ ' +
+        (
+          Math.round(price * this.sharedService.currencyRate * 100) / 100
+        ).toFixed(2)
+      );
+    } else {
+      return price + ' ' + this.sharedService.userCurrency;
+    }
+  }
 }

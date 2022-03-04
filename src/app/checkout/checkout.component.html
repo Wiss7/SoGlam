@@ -36,14 +36,10 @@
               </p>
             </h5>
             <b *ngIf="!product.isOnSale">{{
-              product.price * sharedService.currencyRate +
-                " " +
-                sharedService.userCurrency
+              formatCurrency(product.price * sharedService.currencyRate)
             }}</b>
             <b *ngIf="product.isOnSale">{{
-              product.discountPrice * sharedService.currencyRate +
-                " " +
-                sharedService.userCurrency
+              formatCurrency(product.discountPrice * sharedService.currencyRate)
             }}</b>
           </div>
 
@@ -61,20 +57,20 @@
           <div class="col-4 col-sm-3">
             <b *ngIf="!product.isOnSale">
               {{
-                product.price *
-                  getQuantity(product.id) *
-                  sharedService.currencyRate +
-                  " " +
-                  sharedService.userCurrency
+                formatCurrency(
+                  product.price *
+                    getQuantity(product.id) *
+                    sharedService.currencyRate
+                )
               }}
             </b>
             <b *ngIf="product.isOnSale">
               {{
-                product.discountPrice *
-                  getQuantity(product.id) *
-                  sharedService.currencyRate +
-                  " " +
-                  sharedService.userCurrency
+                formatCurrency(
+                  product.discountPrice *
+                    getQuantity(product.id) *
+                    sharedService.currencyRate
+                )
               }}
             </b>
             <p><small>Item Total</small></p>
@@ -102,14 +98,12 @@
               </h5>
               <div>
                 <b *ngIf="!product.isOnSale">{{
-                  product.price * sharedService.currencyRate +
-                    " " +
-                    sharedService.userCurrency
+                  formatCurrency(product.price * sharedService.currencyRate)
                 }}</b>
                 <b *ngIf="product.isOnSale">{{
-                  product.discountPrice * sharedService.currencyRate +
-                    " " +
-                    sharedService.userCurrency
+                  formatCurrency(
+                    product.discountPrice * sharedService.currencyRate
+                  )
                 }}</b>
               </div>
               <div style="margin-top: 10px">
@@ -157,7 +151,7 @@
                   name="address"
                   [(ngModel)]="address"
                   (change)="getTotalBill()"
-                  style="height: 38px"
+                  style="height: 38px; min-width: 120px"
                 >
                   <option
                     *ngFor="let address of addresslist"
@@ -212,26 +206,26 @@
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Subtotal</h5>
               <h6 class="my-0">
-                {{ subtotal + " " + sharedService.userCurrency }}
+                {{ formatCurrency(subtotal) }}
               </h6>
             </div>
 
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Discount</h5>
               <h6 class="my-0">
-                {{ discount + " " + sharedService.userCurrency }}
+                {{ formatCurrency(discount) }}
               </h6>
             </div>
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Shipping Fee</h5>
               <h6 class="my-0">
-                {{ shippingfee + " " + sharedService.userCurrency }}
+                {{ formatCurrency(shippingfee) }}
               </h6>
             </div>
             <div class="d-flex align-items-center justify-content-between my-3">
               <h5 class="my-0">Grand Total</h5>
               <h6 class="my-0">
-                {{ grandtotal + " " + sharedService.userCurrency }}
+                {{ formatCurrency(grandtotal) }}
               </h6>
             </div>
             <br />
