@@ -1,5 +1,7 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -14,7 +16,7 @@ import { Product } from '../shop/product.model';
   templateUrl: './multi-item-carousel.component.html',
   styleUrls: ['./multi-item-carousel.component.css'],
 })
-export class MultiItemCarouselComponent implements OnInit, AfterViewInit {
+export class MultiItemCarouselComponent implements OnInit, AfterViewChecked {
   mouseDown = false;
   showArrows = true;
   startX: any;
@@ -71,12 +73,12 @@ export class MultiItemCarouselComponent implements OnInit, AfterViewInit {
   getIndex(product: Product) {
     return this.allProducts.findIndex((x) => x.id === product.id);
   }
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.isShowArrows();
+    this.cdr.detectChanges();
   }
-
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.isShowArrows();

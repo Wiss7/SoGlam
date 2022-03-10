@@ -45,6 +45,9 @@ import { EditProductsComponent } from './admin/edit-products/edit-products.compo
 import { FaqComponent } from './faq/faq.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewCardComponent } from './reviews/review-card/review-card.component';
+import { filterByCategory } from './shop/filter-by-category.pipe';
+import { HomeCategoriesComponent } from './home-categories/home-categories.component';
+import { ShopCategoryComponent } from './shop-category/shop-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +85,9 @@ import { ReviewCardComponent } from './reviews/review-card/review-card.component
     FaqComponent,
     ReviewsComponent,
     ReviewCardComponent,
+    filterByCategory,
+    HomeCategoriesComponent,
+    ShopCategoryComponent,
   ],
   imports: [
     BrowserModule,

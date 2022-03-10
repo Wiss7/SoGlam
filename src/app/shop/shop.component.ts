@@ -10,6 +10,7 @@ import { ProductService } from './product.service';
 })
 export class ShopComponent implements OnInit, OnDestroy {
   products: Product[];
+  categories: any[];
   isLoading: Boolean = true;
   productSubscription: Subscription;
   constructor(private productService: ProductService) {}
@@ -26,6 +27,10 @@ export class ShopComponent implements OnInit, OnDestroy {
         });
         this.products.sort((a, b) => {
           return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
+        });
+        this.categories = [...new Set(this.products.map((p) => p.type.trim()))];
+        this.categories.sort((a, b) => {
+          return a.localeCompare(b);
         });
         this.isLoading = false;
       });

@@ -1,12 +1,15 @@
-<ngb-carousel *ngIf="images" [showNavigationArrows]="false">
-  <ng-template ngbSlide *ngFor="let image of images">
+<ngb-carousel *ngIf="videos" [showNavigationArrows]="false">
+  <ng-template ngbSlide *ngFor="let video of videos">
     <div class="wrapper">
-      <img
-        routerLink="/shop"
-        [src]="sanitizer.bypassSecurityTrustResourceUrl(image.trim())"
-        alt="Shop So Glam..."
+      <video
+        autoplay="true"
+        muted="muted"
+        loop
+        oncanplay="this.play()"
         class="carouselImg"
-      />
+      >
+        <source [src]="video" type="video/mp4" alt="Shop So Glam..." />
+      </video>
     </div>
     <div class="carousel-caption">
       <a routerLink="/shop" style="color: #fff; text-decoration: underline"
