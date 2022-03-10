@@ -18,6 +18,7 @@ export class EditProductsComponent implements OnInit {
   sizeVal: number = 0;
   weightVal: number = 0;
   typeVal: string = '';
+  sectionVal: string = '';
   descriptionVal: string = '';
   nameVal: string = '';
   imagesVal: string = '';
@@ -57,6 +58,7 @@ export class EditProductsComponent implements OnInit {
       this.sizeVal = product.size;
       this.weightVal = product.weight;
       this.typeVal = product.type;
+      this.sectionVal = product.section;
       this.descriptionVal = product.description;
       this.nameVal = product.name;
       this.isBestSellerVal = product.isBestSeller;
@@ -81,6 +83,7 @@ export class EditProductsComponent implements OnInit {
     this.updateProduct = new Product(
       this.nameVal,
       this.descriptionVal,
+      this.sectionVal,
       this.typeVal,
       this.sizeVal,
       this.weightVal,

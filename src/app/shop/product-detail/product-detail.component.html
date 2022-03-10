@@ -134,14 +134,18 @@
         <h4>What It Is</h4>
         <p>{{ product.description }}</p>
         <br />
-        <h4>Formulation</h4>
-        <p>{{ product.formulation }}</p>
+        <div *ngIf="product.formulation && product.formulation.length > 0">
+          <h4>Formulation</h4>
+          <p>{{ product.formulation }}</p>
+        </div>
         <br />
         <h4>Weight</h4>
         <p>{{ product.weight + " grams" }}</p>
         <br />
-        <h4>How to Use</h4>
-        <p>{{ product.howToUse }}</p>
+        <div *ngIf="product.howToUse && product.howToUse.length > 0">
+          <h4>How to Use</h4>
+          <p>{{ product.howToUse }}</p>
+        </div>
         <br />
         <div
           *ngIf="product.whatElseToKnow && product.whatElseToKnow.length > 0"

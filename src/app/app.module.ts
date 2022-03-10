@@ -48,6 +48,7 @@ import { ReviewCardComponent } from './reviews/review-card/review-card.component
 import { filterByCategory } from './shop/filter-by-category.pipe';
 import { HomeCategoriesComponent } from './home-categories/home-categories.component';
 import { ShopCategoryComponent } from './shop-category/shop-category.component';
+import { filterBySection } from './shop-category/fiter-by-section.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +87,7 @@ import { ShopCategoryComponent } from './shop-category/shop-category.component';
     ReviewsComponent,
     ReviewCardComponent,
     filterByCategory,
+    filterBySection,
     HomeCategoriesComponent,
     ShopCategoryComponent,
   ],

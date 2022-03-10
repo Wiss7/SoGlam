@@ -1,11 +1,12 @@
 <div class="row">
   <div class="col-sm-12 col-md-6 col-lg-4">
     <video
+      muted="true"
       autoplay="true"
-      muted="muted"
       loop
-      oncanplay="this.play()"
+      oncanplay="this.muted=true;this.play()"
       class="imgCategory"
+      (click)="viewCategory('HairNails')"
     >
       <source
         src="../../assets/images/HairNails.mp4"
@@ -16,11 +17,12 @@
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4">
     <video
-      autoplay="true"
-      muted="muted"
+      autoplay
+      muted
       loop
-      oncanplay="this.play()"
+      oncanplay="this.muted=true;this.play()"
       class="imgCategory"
+      (click)="viewCategory('FaceLips')"
     >
       <source
         src="../../assets/images/FaceLips.mp4"
@@ -31,11 +33,12 @@
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4">
     <video
-      autoplay="true"
-      muted="muted"
+      autoplay
+      muted
       loop
-      oncanplay="this.play()"
+      oncanplay="this.muted=true;this.play()"
       class="imgCategory"
+      (click)="viewCategory('BathBody')"
     >
       <source
         src="../../assets/images/BathBody.mp4"

@@ -101,7 +101,6 @@ export class ProductCardComponent implements OnInit, AfterViewInit {
       this.mousePosition.y === $event.screenY
     ) {
       let index = 0;
-      debugger;
       if (this.router.url === '/admin/admin-products')
         this.router.navigate(['admin/product-edit', this.index]);
       else this.router.navigate(['shop', this.index]);

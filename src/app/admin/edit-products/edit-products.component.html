@@ -50,6 +50,23 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="type*" class="col-3 col-form-label">Section*</label>
+            <div class="col-9">
+              <select
+                id="section"
+                name="section"
+                [(ngModel)]="sectionVal"
+                #status="ngModel"
+                class="form-control"
+                required
+              >
+                <option>Face & Lips</option>
+                <option>Hair & Nails</option>
+                <option>Bath & Body</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="type*" class="col-3 col-form-label">Category*</label>
             <div class="col-9">
               <input
@@ -126,7 +143,7 @@
           </div>
           <div class="form-group row">
             <label for="formulation" class="col-3 col-form-label"
-              >Formulation*</label
+              >Formulation</label
             >
             <div class="col-9">
               <textarea
@@ -135,13 +152,12 @@
                 name="formulation"
                 [(ngModel)]="formulationVal"
                 #formulation="ngModel"
-                required
               ></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="howToUse" class="col-3 col-form-label"
-              >How To Use*</label
+              >How To Use</label
             >
             <div class="col-9">
               <textarea
@@ -150,7 +166,6 @@
                 name="howToUse"
                 [(ngModel)]="howToUseVal"
                 #howToUse="ngModel"
-                required
               ></textarea>
             </div>
           </div>

@@ -28,11 +28,13 @@ import { OrderEditComponent } from './admin/order-edit/order-edit.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { EditProductsComponent } from './admin/edit-products/edit-products.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ShopCategoryComponent } from './shop-category/shop-category.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'shop/:id', component: ProductDetailComponent },
+  { path: 'shop/section/:section', component: ShopCategoryComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent },
   {

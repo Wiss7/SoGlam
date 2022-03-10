@@ -5,7 +5,7 @@
         autoplay="true"
         muted="muted"
         loop
-        oncanplay="this.play()"
+        oncanplay="this.muted=true;this.play()"
         class="carouselImg"
       >
         <source [src]="video" type="video/mp4" alt="Shop So Glam..." />
