@@ -9,6 +9,7 @@ export class ProductService implements OnDestroy {
   searchProductsSubject = new ReplaySubject<{
     products: Product[];
     input: string;
+    allproducts: Product[];
   }>(1);
   searchSubscription: Subscription;
   constructor(private firestore: AngularFirestore) {}
@@ -34,10 +35,14 @@ export class ProductService implements OnDestroy {
             id: e.payload.doc.id,
           };
         });
+        this.products.sort((a, b) => {
+          return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
+        });
         searchedProd = this.products.filter(this.search(searchInput)).slice();
         this.searchProductsSubject.next({
           products: searchedProd,
           input: searchInput,
+          allproducts: this.products,
         });
       });
   }

@@ -163,14 +163,16 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           this.images = this.product.images.filter(
             (image) => image.isDefault === false
           );
-          var similarIds = this.product.relatedProducts
-            .split(',')
-            .map((element) => {
-              return element.trim();
-            });
-          this.relatedProducts = this.products
-            .filter((product) => similarIds.includes(product.id))
-            .slice();
+          if (this.product.relatedProducts) {
+            var similarIds = this.product.relatedProducts
+              .split(',')
+              .map((element) => {
+                return element.trim();
+              });
+            this.relatedProducts = this.products
+              .filter((product) => similarIds.includes(product.id))
+              .slice();
+          }
           this.isLoading = false;
         });
 

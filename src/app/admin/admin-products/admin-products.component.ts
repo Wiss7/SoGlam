@@ -37,4 +37,8 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.productSubscription) this.productSubscription.unsubscribe();
   }
+
+  getIndex(product: Product) {
+    return this.products.findIndex((x) => x.id === product.id);
+  }
 }

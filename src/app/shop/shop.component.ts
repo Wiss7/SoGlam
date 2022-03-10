@@ -36,6 +36,10 @@ export class ShopComponent implements OnInit, OnDestroy {
       });
   }
 
+  getIndex(product: Product) {
+    return this.products.findIndex((x) => x.id === product.id);
+  }
+
   ngOnDestroy() {
     if (this.productSubscription) this.productSubscription.unsubscribe();
   }

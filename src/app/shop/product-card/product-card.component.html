@@ -1,6 +1,6 @@
 <div
   [ngClass]="getRoute()"
-  (click)="ShowDetails($event); onCardClick.emit()"
+  (click)="ShowDetails($event, product.id); onCardClick.emit()"
   (mousedown)="mouseDown($event)"
   (touchstart)="mouseDown($event)"
   style="min-height: 100%"
@@ -14,13 +14,13 @@
     />
     <div
       class="overlay"
-      (click)="ShowDetails($event); onCardClick.emit()"
+      (click)="ShowDetails($event, product.id); onCardClick.emit()"
       (mousedown)="mouseDown($event)"
       (touchstart)="mouseDown($event)"
     ></div>
     <div
       class="btnView"
-      (click)="ShowDetails($event); onCardClick.emit()"
+      (click)="ShowDetails($event, product.id); onCardClick.emit()"
       (mousedown)="mouseDown($event)"
       (touchstart)="mouseDown($event)"
     >

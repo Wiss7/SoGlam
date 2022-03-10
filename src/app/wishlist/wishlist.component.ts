@@ -57,6 +57,9 @@ export class WishlistComponent implements OnInit, OnDestroy {
           });
       });
   }
+  getIndex(product: Product) {
+    return this.products.findIndex((x) => x.id === product.id);
+  }
   ngOnDestroy() {
     this.productSubscription.unsubscribe();
     this.wishlistSubscription.unsubscribe();

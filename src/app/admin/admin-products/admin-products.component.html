@@ -25,7 +25,7 @@
       >
         <app-product-card
           [product]="product"
-          [index]="i"
+          [index]="getIndex(product)"
           (onCardClick)="SaveCookie(i)"
         ></app-product-card>
       </div>
